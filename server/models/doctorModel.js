@@ -31,7 +31,13 @@ const doctorSchema = new mongoose.Schema({
   },
   specialization: {
     type: [String],
-    required: [true, 'Specialization of Doctor is required.'],
+    validate: {
+      validator: function (value) {
+        // Custom validator function to check if the array is not empty
+        return value && value.length > 0;
+      },
+      message: 'At least one specialization is required.',
+    },
   },
   password: {
     type: String,

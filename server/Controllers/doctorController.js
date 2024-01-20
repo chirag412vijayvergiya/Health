@@ -7,12 +7,7 @@ const Doctor = require('../models/doctorModel');
 //   fs.readFileSync(`${__dirname}/../dev-data/data/doctor.json`),
 // );
 exports.getAllUsers = factory.getAll(Doctor);
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!',
-  });
-};
+exports.getUser = factory.getOne(Doctor);
 exports.createUser = factory.createOne(Doctor);
 exports.updateUser = (req, res) => {
   res.status(500).json({

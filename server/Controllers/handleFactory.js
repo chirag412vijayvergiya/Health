@@ -12,6 +12,8 @@ exports.createOne = (Model) =>
     });
   });
 
+// ******************************************************************************* //
+
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.find();
@@ -24,6 +26,25 @@ exports.getAll = (Model) =>
     });
   });
 
+// ******************************************************************************* //
+
+exports.getOne = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Model.findById(req.params.id);
+
+    if (!doc) {
+      return next(new AppError('No document find with that ID', 404));
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: doc,
+      },
+    });
+  });
+
+// ******************************************************************************* //
 //Route.delete() requires a callback function but got a [object Undefined
 // exports.deleteOne = (Model) => { // because of this {} this is not running
 //   catchAsync(async (req, res, next) => {
@@ -52,3 +73,5 @@ exports.deleteOne = (Model) =>
       data: null,
     });
   });
+
+// ********************************************************************************* //
