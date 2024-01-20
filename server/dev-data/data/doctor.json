@@ -11,6 +11,11 @@
     "MedicalLicenseNo": 49321,
     "specialization": ["Cardiology", "Orthopedics", "Neurology"],
     "phone": "1234567891",
+    "patients": [
+      "5c8a1dfa2f8fb814b56fa181",
+      "5c8a1ec62f8fb814b56fa183",
+      "5c8a20d32f8fb814b56fa187"
+    ],
     "password": "$2a$12$Q0grHjH9PXc6SxivC8m12.2mZJ9BbKcgFpwSG4Y1ZEII8HJVzWeyS"
   },
   {

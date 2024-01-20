@@ -57,6 +57,8 @@ const patientSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  InsuranceProviderCompany: String,
+  PolicyNumber: Number,
 });
 
 //Will make virtual fees, option
