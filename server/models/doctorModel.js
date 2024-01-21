@@ -63,16 +63,16 @@ const doctorSchema = new mongoose.Schema(
       select: false,
     },
   },
-  {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  },
+  // {
+  //   toJSON: { virtuals: true },
+  //   toObject: { virtuals: true },
+  // },
 );
 
 doctorSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'patients',
-    select: 'name email gender BloodGroup InsuranceProviderCompany',
+    select: 'name email gender BloodGroup',
   });
 
   next();

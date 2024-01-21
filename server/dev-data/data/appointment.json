@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "5c8a34ed14eb5c17645c9108",
+    "disease": "Fever",
+    "status": "scheduled",
+    "doctor": "5c8a1d5b0190b214360dc057",
+    "patient": "5c8a1dfa2f8fb814b56fa181"
+  },
+  {
+    "_id": "5c8a355b14eb5c17645c9109",
+    "disease": "Headache",
+    "status": "completed",
+    "doctor": "5c8a1f292f8fb814b56fa184",
+    "patient": "5c8a20d32f8fb814b56fa187"
+  },
+  {
+    "_id": "5c8a359914eb5c17645c910a",
+    "disease": "Body Pain",
+    "status": "scheduled",
+    "doctor": "5c8a1f4e2f8fb814b56fa185",
+    "patient": "5c8a201e2f8fb814b56fa186"
+  },
+  {
+    "_id": "5c8a35b614eb5c17645c910b",
+    "disease": "Cancer",
+    "status": "completed",
+    "doctor": "5c8a21d02f8fb814b56fa189",
+    "patient": "5c8a1e1a2f8fb814b56fa182"
+  },
+  {
+    "_id": "5c8a364c14eb5c17645c910c",
+    "disease": "Fracture",
+    "status": "cancelled",
+    "doctor": "5c8a21f22f8fb814b56fa18a",
+    "patient": "5c8a1ec62f8fb814b56fa183"
+  }
+]

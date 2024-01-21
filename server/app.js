@@ -5,6 +5,7 @@ const AppError = require('./utils/AppError');
 //const userRoute = require('./Routes/userRoute');
 const doctorRoute = require('./Routes/doctorRoute');
 const patientRoute = require('./Routes/patientRoute');
+const appointmentRoute = require('./Routes/appointmentRoute');
 
 const app = express();
 
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 app.use('/api/v1/patient', patientRoute);
 app.use('/api/v1/doctor', doctorRoute);
+app.use('/api/v1/appointment', appointmentRoute);
 
 //For other route which we have not defned!
 app.all('*', (req, res, next) => {
