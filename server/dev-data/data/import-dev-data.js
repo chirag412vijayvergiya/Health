@@ -2,7 +2,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 // const Doctor = require('../../models/doctorModel');
-const Patient = require('../../models/patientModel');
+// const Patient = require('../../models/patientModel');
 const Appointment = require('../../models/appointmentModel');
 
 dotenv.config({ path: './config.env' });
