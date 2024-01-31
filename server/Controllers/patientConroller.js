@@ -1,5 +1,5 @@
-const factory = require('./handleFactory');
 const patient = require('../models/patientModel');
+const factory = require('./handleFactory');
 
 exports.getAllUsers = factory.getAll(patient);
 exports.getUser = factory.getOne(patient);

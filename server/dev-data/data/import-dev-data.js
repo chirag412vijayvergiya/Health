@@ -8,6 +8,8 @@ const Appointment = require('../../models/appointmentModel');
 dotenv.config({ path: './config.env' });
 //console.log(process.env);
 
+// ******************************************************************************* //
+//connect to database
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD,
@@ -19,6 +21,9 @@ mongoose
   })
   .then(() => console.log('DB connection successful!'));
 
+// ******************************************************************************* //
+// Read Files
+
 // const doctors = JSON.parse(
 //   fs.readFileSync(`${__dirname}/doctor.json`, 'utf-8'),
 // );
@@ -28,6 +33,8 @@ mongoose
 const appointments = JSON.parse(
   fs.readFileSync(`${__dirname}/appointment.json`, 'utf-8'),
 );
+
+// ******************************************************************************* //
 
 const importData = async () => {
   try {
@@ -41,6 +48,8 @@ const importData = async () => {
   }
 };
 
+// ******************************************************************************* //
+
 const deleteData = async () => {
   try {
     await Appointment.deleteMany();
@@ -50,6 +59,8 @@ const deleteData = async () => {
   }
   process.exit();
 };
+
+// ******************************************************************************* //
 
 if (process.argv[2] === '--import') {
   importData();
