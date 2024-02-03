@@ -2,6 +2,8 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const User = require('../models/patientModel');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/AppError');
+const { promisify } = require('util');
 
 // ******************************************************************************* //
 
@@ -57,3 +59,45 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 // ******************************************************************************* //
+// For logging in
+exports.login = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  //check if email or password exist
+  if (!email || !password) {
+    return next(new AppError('Please provide email or password', 400));
+  }
+
+  //Check if user exist and password is correct
+  // It query to find a document where the email field matches the specified the value
+  const user = await User.findOne({ email }).select('+password');
+
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(new AppError('Incorrect email or password'));
+  }
+  // 3) If everything ok, send token to client
+  createSendToken(user, 200, res);
+});
+
+// ******************************************************************************* //
+
+exports.protect = catchAsync(async (req, res, next) => {
+  // 1) Getting token and check of it's there
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return next(
+      new AppError('You are not logged in! Please log in to get access.', 401),
+    );
+  }
+
+  //Verification token
+  // promisify converts callback-based functions into promise-based functions.
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+});
