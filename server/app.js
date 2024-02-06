@@ -11,6 +11,7 @@ const AppError = require('./utils/AppError');
 const doctorRoute = require('./Routes/doctorRoute');
 const patientRoute = require('./Routes/patientRoute');
 const appointmentRoute = require('./Routes/appointmentRoute');
+const GlobalErrorHandler = require('./Controllers/errorController');
 
 const app = express();
 // ******************************************************************************* //
@@ -78,4 +79,5 @@ app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
+app.use(GlobalErrorHandler);
 module.exports = app;
