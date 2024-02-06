@@ -2,7 +2,7 @@ const patient = require('../models/patientModel');
 const factory = require('./handleFactory');
 
 exports.getAllUsers = factory.getAll(patient);
-exports.getUser = factory.getOne(patient);
+exports.getUser = factory.getOne(patient, { path: 'appointment' });
 exports.createUser = factory.createOne(patient);
 exports.updateUser = (req, res) => {
   res.status(500).json({

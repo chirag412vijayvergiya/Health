@@ -32,27 +32,26 @@ const appointmentSchema = new mongoose.Schema(
     },
   },
   {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    toJSON: { virtuals: true }, // By this we ensure that virtual properties are included when i
+    toObject: { virtuals: true }, //convert a Mongoose document to either JSON or JavaScript object.
   },
 );
-appointmentSchema.index({ patient: 1, doctor: 1 }, { unique: true });
+appointmentSchema.index({ patient: 1, doctor: 1 });
+
+// ******************************************************************************* //
 
 appointmentSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'patient',
-    select: ['name', 'photo', 'gender', 'BloodGroup'],
+    select: 'name photo', // This will show ( populate ) the name and photo
+  }).populate({
+    path: 'doctor',
+    select: 'name photo', // This will show ( populate ) the name and photo
   });
   next();
 });
 
-// appointmentSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'doctor',
-//     select: '-patients',
-//   });
-//   next();
-// });
+// ******************************************************************************* //
 
 const Appointments = mongoose.model('Appointments', appointmentSchema);
 

@@ -3,78 +3,93 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
-const patientSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please tell us your name!'],
-  },
-  email: {
-    type: String,
-    required: [true, 'Please provide your email'],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide your email'],
-  },
-  gender: {
-    type: String,
-  },
-  photo: {
-    type: String,
-    default: 'default.jpg',
-  },
-  role: {
-    type: String,
-    default: 'patient',
-  },
-  password: {
-    type: String,
-    required: [true, 'Please provide a password'],
-    minlength: 8,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function (el) {
-        return el === this.password;
+const patientSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please tell us your name!'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Please provide your email'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide your email'],
+    },
+    gender: {
+      type: String,
+    },
+    photo: {
+      type: String,
+      default: 'default.jpg',
+    },
+    role: {
+      type: String,
+      default: ['patient'],
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide a password'],
+      minlength: 8,
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        // This only works on CREATE and SAVE!!!
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Passwords are not the same!',
       },
-      message: 'Passwords are not the same!',
     },
-  },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  FeePaid: {
-    type: String,
-    enum: ['paid', 'Unpaid', 'pending'],
-  },
-  BillDate: {
-    type: Date,
-    default: Date.now(),
-    // We can use a custom getter to format the date when retrieving from the database
-    get: function (value) {
-      return value.toLocaleDateString('en-IN'); //Indian date
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    FeePaid: {
+      type: String,
+      enum: ['paid', 'Unpaid', 'pending'],
     },
-  },
-  BloodGroup: {
-    type: String,
-    required: [true, 'Please provide your BloodGroup'],
-    uppercase: true,
-  },
-  phone: {
-    type: String,
-    required: [true, 'Please provide your Mobile Number'],
-  },
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
+    BillDate: {
+      type: Date,
+      default: Date.now(),
+      // We can use a custom getter to format the date when retrieving from the database
+      get: function (value) {
+        return value.toLocaleDateString('en-IN'); //Indian date
+      },
+    },
+    BloodGroup: {
+      type: String,
+      required: [true, 'Please provide your BloodGroup'],
+      uppercase: true,
+    },
+    phone: {
+      type: String,
+      required: [true, 'Please provide your Mobile Number'],
+    },
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
 
-  InsuranceProviderCompany: String,
-  PolicyNumber: Number,
+    InsuranceProviderCompany: String,
+    PolicyNumber: Number,
+  },
+  {
+    toJSON: { virtuals: true }, // By this we ensure that virtual properties are included when i
+    toObject: { virtuals: true }, //convert a Mongoose document to either JSON or JavaScript object.
+  },
+);
+
+// ******************************************************************************* //
+
+// Virtual populate(Means this will not store in database for high quality)
+patientSchema.virtual('appointment', {
+  ref: 'Appointments', // Name of Schema
+  foreignField: 'patient', // In foreign feild (Appointments Schema) the id is store in patient attribute
+  localField: '_id', // In this schema id is store as _id by monoose (so both must be equal for connecting)
 });
 
 // ******************************************************************************* //

@@ -1,12 +1,18 @@
 const express = require('express');
 const appointmentController = require('../Controllers/appointmentContoller');
+const authController = require('../Controllers/authController');
 
 const router = express.Router();
 
+router.use(authController.protectdoctor);
 router
   .route('/')
   .get(appointmentController.getAllAppointments)
-  .post(appointmentController.createAppointment);
+  .post(
+    authController.restrictTo('doctor'),
+    appointmentController.setPatientDoctorIDs,
+    appointmentController.createAppointment,
+  );
 
 router
   .route('/:id')

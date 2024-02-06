@@ -47,7 +47,20 @@ const doctorSchema = new mongoose.Schema(
       minlength: 8,
       select: false,
     },
-    //   passwordChangedAt: Date,
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        // This only works on CREATE and SAVE!!!
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Passwords are not the same!',
+      },
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
     BloodGroup: {
       type: String,
       required: [true, 'Please provide your BloodGroup'],
@@ -57,18 +70,28 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide your Mobile Number'],
     },
-    patients: [{ type: mongoose.Schema.ObjectId, ref: 'Patient' }],
     active: {
       type: Boolean,
       default: true,
       select: false,
     },
   },
-  // {
-  //   toJSON: { virtuals: true },
-  //   toObject: { virtuals: true },
-  // },
+  {
+    toJSON: { virtuals: true }, // By this we ensure that virtual properties are included when i
+    toObject: { virtuals: true }, //convert a Mongoose document to either JSON or JavaScript object.
+  },
 );
+
+// ******************************************************************************* //
+
+// Virtual populate(Means this will not store in database for high quality)
+doctorSchema.virtual('appointment', {
+  ref: 'Appointments', // Name of Schema
+  foreignField: 'doctor', // In foreign feild (Appointments Schema) the id is store in doctor attribute
+  localField: '_id', // In this schema id is store as _id by monoose (so both must be equal for connecting)
+});
+
+// ******************************************************************************* //
 
 // Set the Password when password will actually modified
 doctorSchema.pre('save', async function (next) {
@@ -105,14 +128,6 @@ doctorSchema.pre(/^find/, function (next) {
 
 // ******************************************************************************* //
 
-doctorSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'patients',
-    select: 'name email gender BloodGroup',
-  });
-
-  next();
-});
 // This is the method that will check whether user credentials is correct or not (It will not save in the databases).
 doctorSchema.methods.correctPassword = async function (
   candidatePassword,
