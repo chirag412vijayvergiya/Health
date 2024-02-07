@@ -1,8 +1,15 @@
 const express = require('express');
 const userController = require('../Controllers/doctorController');
 const authController = require('../Controllers/authController');
+const reviewRouter = require('./reviewRoute');
 
 const router = express.Router();
+
+// POST /doctor/234fad4/reviews
+// GET /doctor/234fad4/reviews
+
+// It is because I am grabing doctorId from doctor route.
+router.use('/:doctorId/reviews', reviewRouter);
 
 // ******************************************************************************* //
 

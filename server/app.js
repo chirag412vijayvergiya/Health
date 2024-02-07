@@ -8,9 +8,10 @@ const AppError = require('./utils/AppError');
 
 //
 //const userRoute = require('./Routes/userRoute');
-const doctorRoute = require('./Routes/doctorRoute');
-const patientRoute = require('./Routes/patientRoute');
-const appointmentRoute = require('./Routes/appointmentRoute');
+const doctorRouter = require('./Routes/doctorRoute');
+const patientRouter = require('./Routes/patientRoute');
+const appointmentRouter = require('./Routes/appointmentRoute');
+const reviewRouter = require('./Routes/reviewRoute');
 const GlobalErrorHandler = require('./Controllers/errorController');
 
 const app = express();
@@ -70,9 +71,10 @@ app.use(xss());
 //   next();
 // });
 
-app.use('/api/v1/patient', patientRoute);
-app.use('/api/v1/doctor', doctorRoute);
-app.use('/api/v1/appointment', appointmentRoute);
+app.use('/api/v1/patient', patientRouter);
+app.use('/api/v1/doctor', doctorRouter);
+app.use('/api/v1/appointment', appointmentRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 //For other route which we have not defned!
 app.all('*', (req, res, next) => {
