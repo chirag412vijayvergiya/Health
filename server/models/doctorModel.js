@@ -90,6 +90,7 @@ const doctorSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true }, // By this we ensure that virtual properties are included when i
     toObject: { virtuals: true }, //convert a Mongoose document to either JSON or JavaScript object.
+    id: false,
   },
 );
 
@@ -100,6 +101,12 @@ doctorSchema.virtual('appointment', {
   ref: 'Appointments', // Name of Schema
   foreignField: 'doctor', // In foreign feild (Appointments Schema) the id is store in doctor attribute
   localField: '_id', // In this schema id is store as _id by monoose (so both must be equal for connecting)
+});
+
+doctorSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'doctor',
+  localField: '_id',
 });
 
 // ******************************************************************************* //

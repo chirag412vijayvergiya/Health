@@ -30,6 +30,7 @@ const reviewSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+    id: false,
   },
 );
 
@@ -52,61 +53,51 @@ reviewSchema.pre(/^find/, function (next) {
 });
 
 reviewSchema.statics.calcAverageRatings = async function (doctorId) {
-  // stats is array of
+  console.log(doctorId);
   const stats = await this.aggregate([
     {
       $match: { doctor: doctorId },
     },
     {
       $group: {
-        _id: '$doctor', // group the document by the doctor field
-        nRating: { $sum: 1 }, // Calculating the total no of ratings
-        avgRating: { $avg: '$rating' }, // Calculate the average rating for each doctor group by averaging the field within each group
+        _id: '$doctor',
+        nRating: { $sum: 1 },
+        avgRating: { $avg: '$rating' },
       },
     },
   ]);
-  //   console.log(stats);
+  console.log(stats);
   if (stats.length > 0) {
     await Doctor.findByIdAndUpdate(doctorId, {
-      // Update ratingsQunatity and ratingsAverage
       ratingsQuantity: stats[0].nRating,
       ratingsAverage: stats[0].avgRating,
     });
   } else {
     await Doctor.findByIdAndUpdate(doctorId, {
-      // if no doctor then doctor update use default things
       ratingsQuantity: 0,
       ratingsAverage: 4.5,
     });
   }
 };
 
-// ******************************************************************************* //
-
-//The post-save middleware calculates average ratings for a doctor after a review is saved.
 reviewSchema.post('save', function () {
-  //call model constructor function (class)
+  console.log(this.doctor._id);
   this.constructor.calcAverageRatings(this.doctor);
 });
 
-// ******************************************************************************* //
-
-// This pre middleware is triggered before any query that starts with findOneAnd.
+//findByIdAndUpdate
+//findByIdAndDelete
+/*
 reviewSchema.pre(/^findOneAnd/, async function (next) {
   this.r = await this.findOne();
-  //this.findOne() is used to execute the query and retrieve the document that matches the query conditions.
-  //this.r stored the retrieved document
   // console.log(this.r);
   next();
 });
-
-// ******************************************************************************* //
-
-// This pre middleware is triggered after any query that starts with findOneAnd.
-reviewSchema.post(/^findOneAnd/, async function () {
-  await this.r.constructor.calcAverageRatings(this.r.doctor);
+*/
+// In post query middleware we got doc parameter which is nothing but the executed document
+reviewSchema.post(/^findOneAnd/, async (doc) => {
+  if (doc) await doc.constructor.calcAverageRatings(doc.doctor);
 });
-
 // ******************************************************************************* //
 
 const Review = mongoose.model('Review', reviewSchema);
