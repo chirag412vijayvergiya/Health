@@ -90,7 +90,6 @@ const doctorSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true }, // By this we ensure that virtual properties are included when i
     toObject: { virtuals: true }, //convert a Mongoose document to either JSON or JavaScript object.
-    id: false,
   },
 );
 

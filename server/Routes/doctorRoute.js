@@ -1,6 +1,7 @@
 const express = require('express');
-const userController = require('../Controllers/doctorController');
+const doctorController = require('../Controllers/doctorController');
 const authController = require('../Controllers/authController');
+const currentUserController = require('../Controllers/currentUserController');
 const reviewRouter = require('./reviewRoute');
 
 const router = express.Router();
@@ -25,23 +26,38 @@ router.patch('/resetPassword/:token', authController.resetPasswordDoctor);
 
 // ******************************************************************************* //
 
+router.use(authController.protectdoctor);
+router.patch('/updateMyPassword', authController.updatePasswordDoctor);
+
+// ******************************************************************************* //
+
+router.get('/me', currentUserController.getMe, doctorController.getUser);
+router.delete(
+  '/deleteMe',
+  authController.protectdoctor,
+  doctorController.deleteMe,
+);
 router.patch(
-  '/updateMyPassword',
-  authController.protectpatient,
-  authController.updatePasswordDoctor,
+  '/updateMe',
+  currentUserController.uploadUserPhoto,
+  currentUserController.resizeUserPhoto,
+  doctorController.updateMe,
 );
 
 // ******************************************************************************* //
 
+router.use(authController.restrictTo('admin'));
+
 router
   .route('/')
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+  .get(doctorController.getAllUsers)
+  .post(doctorController.createUser);
 
 router
   .route('/:id')
-  .get(userController.getUser)
-  .delete(userController.deleteUser);
+  .get(doctorController.getUser)
+  .delete(doctorController.deleteUser)
+  .patch(doctorController.updateUser);
 // router.get('/', userController.getAllUsers);
 
 module.exports = router;
