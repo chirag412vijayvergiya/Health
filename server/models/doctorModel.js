@@ -41,6 +41,10 @@ const doctorSchema = new mongoose.Schema(
         message: 'At least one specialization is required.',
       },
     },
+    fees: {
+      type: Number,
+      required: [true, 'A doctor must have a starting fees'],
+    },
     password: {
       type: String,
       required: [true, 'Please provide a password'],
