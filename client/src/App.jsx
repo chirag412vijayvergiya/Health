@@ -1,7 +1,9 @@
+import AppLayout from './ui/AppLayout';
+
 function App() {
   return (
     <div>
-      <h1 className="text-xl text-yellow-400 font-semibold">Hello World</h1>
+      <AppLayout />
     </div>
   );
 }
