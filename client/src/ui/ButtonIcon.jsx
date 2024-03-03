@@ -1,8 +1,8 @@
 function ButtonIcon({ children, onClick }) {
   return (
     <div
-      className="cursor-pointer rounded border-none bg-transparent p-2.5
-      transition duration-200 ease-in-out hover:bg-gray-200"
+      className="outline-2px h-9 w-9 cursor-pointer rounded border-none
+       bg-transparent p-2.5 transition  duration-200 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-400"
       onClick={onClick}
     >
       {children}

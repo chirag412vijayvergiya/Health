@@ -5,10 +5,10 @@ import DarkModeToggle from '../DarkModeToggle';
 function HeaderMenu() {
   return (
     <div>
-      <ul className="flex items-center gap-2">
+      <ul className="flex h-[45px] w-[95%] items-center gap-2">
         <li>
           <ButtonIcon>
-            <HiOutlineUser />
+            <HiOutlineUser className=" h-[1.3rem] w-[1.3rem] stroke-brand-600" />
           </ButtonIcon>
         </li>
         <li>
@@ -16,7 +16,7 @@ function HeaderMenu() {
         </li>
         <li>
           <ButtonIcon>
-            <HiOutlineUser />
+            <HiOutlineUser className="h-[1.3rem] w-[1.3rem] stroke-brand-600 " />
           </ButtonIcon>
         </li>
       </ul>
