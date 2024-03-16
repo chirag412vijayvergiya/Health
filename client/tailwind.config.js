@@ -59,10 +59,20 @@ export default {
         md: '7px',
         lg: '9px',
       },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+        serif: ['Merriweather', 'serif'],
+      },
       boxShadow: {
         sm: '0 1px 2px rgba(0, 0, 0, 0.04)',
         md: '0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06)',
         lg: '0 2.4rem 3.2rem rgba(0, 0, 0, 0.12)',
+      },
+      gridTemplateColumns: {
+        16: '3fr 2fr',
+
+        // Complex site-specific column configuration
+        footer: '200px minmax(900px, 1fr) 100px',
       },
     },
   },
