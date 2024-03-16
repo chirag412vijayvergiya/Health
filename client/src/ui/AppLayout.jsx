@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 
 function AppLayout() {
   return (
-    <div className="font-sans">
+    <div className="font-sans dark:bg-grey-900">
       {/* <Header />
       <Sidebar /> */}
       <HomePage />

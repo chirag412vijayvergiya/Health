@@ -1,7 +1,7 @@
 function HeaderAll() {
   return (
     <div>
-      <ul className="ml-15 flex h-[45px] list-none items-center dark:text-white">
+      <ul className="ml-20 flex h-[45px] list-none items-center dark:text-white">
         <li className="mx-8">
           <a href="#">Features</a>
         </li>

@@ -4,7 +4,7 @@ import Hero from '../ui/HomePage/Hero';
 
 function HomePage() {
   return (
-    <div>
+    <div className="overflow-x: auto; overflow-y: unset;">
       <Header />
     </div>
   );

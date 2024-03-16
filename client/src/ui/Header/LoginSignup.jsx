@@ -3,7 +3,7 @@ import DarkModeToggle from '../DarkModeToggle';
 function LoginSignup() {
   return (
     <div>
-      <ul className="flex h-[45px] list-none items-center dark:text-white">
+      <ul className="mr-3 flex h-[45px] list-none items-center dark:text-white">
         <li className="mx-2">
           <DarkModeToggle />
         </li>
