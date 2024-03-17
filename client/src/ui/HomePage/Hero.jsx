@@ -61,7 +61,7 @@ function Hero() {
     </div>
 */
     //
-    <div className="mt-[90px] min-h-[calc(100vh-90px)] bg-grey-100  sm:mt-[30px] sm:min-h-[calc(100vh-30px)]">
+    <div className="mt-[90px] min-h-[calc(100vh-90px)] bg-grey-100  sm:mt-[30px] sm:min-h-[calc(100vh-30px)] ">
       <div className="min-w-screen relative z-[10] flex w-full overflow-hidden bg-white dark:bg-slate-900 md:min-h-[100vh]">
         <div className="rotate-150 absolute left-0 top-0 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
         <div className="absolute bottom-0 right-0 z-[100] h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
@@ -74,7 +74,7 @@ function Hero() {
               </button>
               <div className="space-y-2">
                 <h1 className="text-center text-3xl font-bold sm:text-4xl lg:text-left xl:text-5xl">
-                  <span className="text-grey-800 dark:text-grey-50 ">
+                  <span className="leading-[1.2] text-grey-800  dark:text-grey-50">
                     Empowering Wellness,
                   </span>
                   <br></br>
