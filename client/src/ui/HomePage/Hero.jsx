@@ -1,4 +1,5 @@
-import ButtonIcon from '../ButtonIcon';
+import Button from '../Button';
+import ButtonIcon from '../DarkModeIcon';
 import styles from './HomePageStyle';
 import { IoIosArrowForward } from 'react-icons/io';
 function Hero() {
@@ -90,9 +91,7 @@ function Hero() {
               </div>
               <div className="flex items-center justify-center gap-x-4 lg:justify-start">
                 <a href="#">
-                  <button className="p-small flex items-center justify-center rounded-full bg-indigo-400  px-6 py-2 font-medium  text-grey-50 dark:bg-indigo-500 ">
-                    Join Now
-                  </button>
+                  <Button type="primary">Join Now</Button>
                 </a>
               </div>
             </div>

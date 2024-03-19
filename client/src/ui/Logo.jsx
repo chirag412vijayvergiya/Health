@@ -5,7 +5,7 @@ function Logo() {
 
   const src = isDarkMode ? '/logo-dark-1.jpeg' : '/logo-light.jpeg';
   return (
-    <div className="flex items-center justify-center gap-x-3 font-serif">
+    <div className="flex cursor-pointer items-center justify-center gap-x-3 font-serif">
       <img src={src} alt="jeeven-Logo" className=" h-[30px] pl-6" />
       <p className="hidden gap-1 text-2xl font-semibold uppercase md:inline">
         <span className="text-black dark:text-white">jee</span>

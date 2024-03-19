@@ -1,3 +1,4 @@
+import Button from '../Button';
 import DarkModeToggle from '../DarkModeToggle';
 
 function LoginSignup() {
@@ -9,16 +10,12 @@ function LoginSignup() {
         </li>
         <li className="mx-2">
           <a href="#">
-            <button className="p-small flex items-center justify-center rounded-full bg-indigo-400  px-6 py-2 font-medium  text-grey-50 dark:bg-indigo-500 ">
-              Login
-            </button>
+            <Button type="primary">Login</Button>
           </a>
         </li>
         <li className="mx-2">
           <a href="#">
-            <button className="p-small flex items-center justify-center rounded-full  bg-slate-800 px-6 py-2 font-medium  text-grey-50 dark:bg-grey-200 dark:text-slate-800 ">
-              Sign up
-            </button>
+            <Button type="secondary">Sign up</Button>
           </a>
         </li>
       </ul>

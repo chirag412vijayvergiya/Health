@@ -1,5 +1,5 @@
 import { HiOutlineUser } from 'react-icons/hi2';
-import ButtonIcon from '../ButtonIcon';
+import ButtonIcon from '../DarkModeIcon';
 import DarkModeToggle from '../DarkModeToggle';
 
 function HeaderMenu() {
