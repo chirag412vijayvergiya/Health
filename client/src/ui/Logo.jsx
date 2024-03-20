@@ -9,7 +9,7 @@ function Logo() {
       <img src={src} alt="jeeven-Logo" className=" h-[30px] pl-6" />
       <p className="hidden gap-1 text-2xl font-semibold uppercase md:inline">
         <span className="text-black dark:text-white">jee</span>
-        <span className="text-indigo-500">ven</span>
+        <span className="text-indigo-500">van</span>
       </p>
     </div>
   );

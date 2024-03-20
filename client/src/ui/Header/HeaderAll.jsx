@@ -16,12 +16,12 @@ function HeaderAll() {
 
         <li className="mx-8">
           <Link
-            to="Operations-section"
+            to="testimonial-section"
             smooth={true}
             duration={500}
             className="cursor-pointer"
           >
-            Operations
+            Testimonials
           </Link>
         </li>
         <li className="mx-8">
@@ -31,7 +31,7 @@ function HeaderAll() {
             duration={500}
             className="cursor-pointer"
           >
-            Reviews
+            About Us
           </Link>
         </li>
       </ul>
