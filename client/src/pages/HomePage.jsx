@@ -1,8 +1,8 @@
 import styles from '../ui/HomePage/HomePageStyle';
 import Header from '../ui/Header/Header';
 import Hero from '../ui/HomePage/Hero';
-import Features from '../ui/HomePage/Features';
-import Testimonials from '../ui/HomePage/Testimonials';
+import Features from '../ui/HomePage/Features/Features';
+import Testimonials from '../ui/HomePage/Testimonials/Testimonials';
 
 function HomePage() {
   return (

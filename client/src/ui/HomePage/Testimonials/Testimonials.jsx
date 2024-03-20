@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
+import PersonalTestimonial from './PersonalTestimonial';
 function Testimonials() {
   const slides = [
     {
-      content: <h1>Slide 1 Content</h1>,
+      content: <PersonalTestimonial />,
     },
     {
       content: <h1>Slide 2 Content</h1>,
@@ -38,7 +39,7 @@ function Testimonials() {
         <div className="mx-auto h-full w-11/12 max-w-4xl space-y-14 py-10 text-left md:py-20 md:text-center">
           <div className="rotate-150 absolute left-0 top-0 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
           <div className="absolute bottom-0 right-0 z-[100] h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
-          <div className="mx-auto max-w-[900px]">
+          <div className="mx-auto max-w-[1000px]">
             <p className="text-md font-semibold uppercase text-indigo-400">
               Patient-Centered Excellence, Doctor-Driven Care!
             </p>
@@ -47,8 +48,8 @@ function Testimonials() {
               Hospital Care
             </h2>
           </div>
-          <div className="mx-auto max-w-2xl">
-            <div className="group relative mx-auto h-[400px] w-full max-w-[900px] px-4 py-16">
+          <div className="mx-auto max-w-4xl">
+            <div className="group relative mx-auto h-[400px] w-full max-w-[1500px] px-4 py-6">
               <div className="h-full w-full rounded-2xl bg-cover bg-center duration-500">
                 {slides[currentIndex].content}
               </div>

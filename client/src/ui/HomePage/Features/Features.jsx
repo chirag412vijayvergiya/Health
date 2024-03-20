@@ -1,6 +1,6 @@
 import { FaAmbulance } from 'react-icons/fa';
 import FacilityFeatures from './FacilityFeatures';
-import Button from '../Button';
+import Button from '../../Button';
 function Features() {
   return (
     <div id="features-section">
