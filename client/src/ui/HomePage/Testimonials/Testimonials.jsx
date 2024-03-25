@@ -1,78 +1,135 @@
 import { useState } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
-import { RxDotFilled } from 'react-icons/rx';
 import PersonalTestimonial from './PersonalTestimonial';
-function Testimonials() {
-  const slides = [
-    {
-      content: <PersonalTestimonial />,
-    },
-    {
-      content: <h1>Slide 2 Content</h1>,
-    },
-    {
-      content: <h1>Slide 3 Content</h1>,
-    },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
+function Test() {
+  const [currentTestimonial, setCurrentTestimonial] = useState(1);
+  const [count, setCount] = useState(0);
 
   const prevSlide = () => {
-    const isLastSlide = currentIndex === 0;
-    const newIndex = isLastSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+    const prevIndex =
+      currentTestimonial === 1
+        ? testimonials.length - 2
+        : currentTestimonial - 1;
+    setCurrentTestimonial(prevIndex);
+    setCount(count - 1);
   };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
+    const nextIndex =
+      currentTestimonial === testimonials.length - 2
+        ? 1
+        : currentTestimonial + 1;
+    setCurrentTestimonial(nextIndex);
+    setCount(count + 1);
   };
 
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
-  };
+  const testimonials = [
+    {
+      name: 'Chirag Vijayvergiya',
+      date: '4 months ago',
+      quote: 'Finally free from old-school banks',
+      message:
+        'Suspendisse potenti. Integer finibus purus quis ipsum facilisis, at venenatis ligula semper. Nulla facilisi. Proin sed metus id nunc lacinia convallis.',
+      rating: 5,
+    },
+    {
+      name: 'John Doe',
+      date: '2 weeks ago',
+      quote: 'Finally free from old-school banks',
+      message:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis neque nec nisl pharetra pretium. Donec auctor velit ut ligula malesuada condimentum.',
+      rating: 5,
+    },
+    {
+      name: 'Jane Smith',
+      date: '1 year ago',
+      quote: 'Finally free from old-school banks',
+      message:
+        'Suspendisse potenti. Integer finibus purus quis ipsum facilisis, at venenatis ligula semper. Nulla facilisi. Proin sed metus id nunc lacinia convallis.',
+      rating: 1,
+    },
+    {
+      name: 'Hello',
+      date: '2 weeks ago',
+      quote: 'Finally free from old-school banks',
+      message:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis neque nec nisl pharetra pretium. Donec auctor velit ut ligula malesuada condimentum.',
+      rating: 4,
+    },
+    {
+      name: 'Chirag Vijay',
+      date: '4 months ago',
+      quote: 'Finally free from old-school banks',
+      message:
+        'Suspendisse potenti. Integer finibus purus quis ipsum facilisis, at venenatis ligula semper. Nulla facilisi. Proin sed metus id nunc lacinia convallis.',
+      rating: 2,
+    },
+    {
+      name: 'Hello',
+      date: '2 weeks ago',
+      quote: 'Finally free from old-school banks',
+      message:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis neque nec nisl pharetra pretium. Donec auctor velit ut ligula malesuada condimentum.',
+      rating: 3,
+    },
+  ];
+
+  const visibleTestimonials = [
+    testimonials[
+      (currentTestimonial - 1 + testimonials.length) % testimonials.length
+    ],
+    testimonials[currentTestimonial],
+    testimonials[(currentTestimonial + 1) % testimonials.length],
+  ];
 
   return (
     <div id="testimonial-section">
-      <div className="min-w-screen relative z-10 flex overflow-hidden bg-grey-50 bg-cover bg-no-repeat dark:bg-gray-900">
-        <div className="mx-auto h-full w-11/12 max-w-4xl space-y-14 py-10 text-left md:py-20 md:text-center">
-          <div className="rotate-150 absolute left-0 top-0 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
-          <div className="absolute bottom-0 right-0 z-[100] h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
-          <div className="mx-auto max-w-[1000px]">
-            <p className="text-md font-semibold uppercase text-indigo-400">
-              Patient-Centered Excellence, Doctor-Driven Care!
-            </p>
-            <h2 className="my-3 text-xl font-semibold text-grey-900 dark:text-grey-50 md:text-2xl xl:text-3xl">
-              Elevate Patient Health, Empower Doctor Expertise, Illuminate
-              Hospital Care
-            </h2>
-          </div>
-          <div className="mx-auto max-w-4xl">
-            <div className="group relative mx-auto h-[400px] w-full max-w-[1500px] px-4 py-6">
-              <div className="h-full w-full rounded-2xl bg-cover bg-center duration-500">
-                {slides[currentIndex].content}
+      <div className="min-w-screen relative z-[10] flex min-h-[calc(100vh-4.5rem)] overflow-hidden bg-grey-50 dark:bg-grey-900">
+        <div className="flex-1">
+          <div className="mx-auto mb-10 h-full w-11/12 max-w-[1200px] space-y-[50px] py-20">
+            <div className="rotate-150 absolute left-0 top-0 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
+            <div className="absolute bottom-0 right-0 z-[100] h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
+            <div className="flex flex-col gap-2 sm:items-center">
+              <p className="text-md font-semibold uppercase text-indigo-400">
+                Patient-Centered Excellence, Doctor-Driven Care!
+              </p>
+              <h2 className="mb-5 mt-4 text-xl font-semibold text-grey-900 dark:text-grey-50 md:text-2xl xl:text-3xl">
+                Elevate Patient Health, Empower Doctor Expertise, Illuminate
+                Hospital Care
+              </h2>
+            </div>
+            <div className="mb-14 flex justify-center gap-3">
+              <div className="flex items-center">
+                <button
+                  className=" justify-center gap-3 rounded-full bg-blue-400 px-4 pl-3 font-semibold text-white hover:bg-blue-500"
+                  onClick={prevSlide}
+                  style={{ width: '40px', height: '40px' }}
+                >
+                  <BsChevronCompactLeft className="stroke-2" />
+                </button>
               </div>
-              {/* Left Arrow */}
-              <div className="absolute left-5 top-1/2 hidden -translate-y-1/2 transform cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block">
-                <BsChevronCompactLeft onClick={prevSlide} size={30} />
-              </div>
-              {/* Right Arrow */}
-              <div className="absolute right-5 top-1/2 hidden -translate-y-1/2 transform cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block">
-                <BsChevronCompactRight onClick={nextSlide} size={30} />
-              </div>
-              <div className="absolute bottom-4 left-0 right-0 mx-auto flex justify-center py-2">
-                {slides.map((slide, slideIndex) => (
-                  <div
-                    key={slideIndex}
-                    onClick={() => goToSlide(slideIndex)}
-                    className="mx-1 cursor-pointer text-2xl"
-                  >
-                    <RxDotFilled
-                      color={currentIndex === slideIndex ? '#007bff' : '#000'} // Change the color based on active slide
-                    />
-                  </div>
-                ))}
+
+              {visibleTestimonials.map((testimonial, index) => (
+                <PersonalTestimonial
+                  key={index}
+                  name={testimonial.name}
+                  date={testimonial.date}
+                  quote={testimonial.quote}
+                  message={testimonial.message}
+                  index={index}
+                  currentSlide={currentTestimonial}
+                  type={index === 1 ? 'middle' : index < 1 ? 'left' : 'right'}
+                  rating={testimonial.rating}
+                />
+              ))}
+              <div className="flex items-center">
+                <button
+                  className="justify-center gap-3 rounded-full bg-blue-400 px-4 pr-3 font-semibold text-white hover:bg-blue-500"
+                  style={{ width: '40px', height: '40px' }}
+                  onClick={nextSlide}
+                >
+                  <BsChevronCompactRight className="stroke-2" />
+                </button>
               </div>
             </div>
           </div>
@@ -82,4 +139,4 @@ function Testimonials() {
   );
 }
 
-export default Testimonials;
+export default Test;

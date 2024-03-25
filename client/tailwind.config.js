@@ -6,6 +6,29 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        bounce: 'bounce 15s infinite',
+        ping: 'ping 5s cubic-bezier(0, 0, 0.2, 1) infinite',
+      },
+      keyframes: {
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateX(-4%)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'translateX(4%)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 1, 1)',
+          },
+        },
+        ping: {
+          '75%, 100%': {
+            transform: 'scale(1.1)',
+            opacity: 0.2,
+          },
+        },
+      },
       colors: {
         // Grey
         'grey-0': '#fff',

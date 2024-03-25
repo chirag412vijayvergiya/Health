@@ -11,7 +11,7 @@ function Header() {
   return (
     <div>
       <div className="fixed inset-x-0 top-0 z-[1000] flex min-h-[5.7rem] items-center justify-between border-solid bg-gray-50 shadow-md shadow-gray-200 dark:bg-gray-900  dark:shadow-gray-900   md:min-h-[4.5rem]">
-        <Logo />
+        <Logo type="header" />
         <HeaderAll />
         {isLogin ? <HeaderMenu /> : <LoginSignup />}
       </div>

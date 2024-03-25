@@ -26,7 +26,7 @@ function HeaderAll() {
         </li>
         <li className="mx-8">
           <Link
-            to="Reviews-section"
+            to="about-us"
             smooth={true}
             duration={500}
             className="cursor-pointer"
