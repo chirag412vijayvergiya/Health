@@ -1,5 +1,6 @@
 import Button from '../Button';
 import DarkModeToggle from '../DarkModeToggle';
+import HeaderMobile from './HeaderMobile';
 
 function LoginSignup() {
   return (
@@ -8,15 +9,18 @@ function LoginSignup() {
         <li className="mx-2">
           <DarkModeToggle />
         </li>
-        <li className="mx-2">
+        <li className="mx-2 hidden sm:block">
           <a href="#">
             <Button type="primary">Login</Button>
           </a>
         </li>
-        <li className="mx-2">
+        {/* <li className="mx-2 hidden sm:block">
           <a href="#">
             <Button type="secondary">Sign up</Button>
           </a>
+        </li> */}
+        <li className="mx-2 md:hidden">
+          <HeaderMobile />
         </li>
       </ul>
     </div>
