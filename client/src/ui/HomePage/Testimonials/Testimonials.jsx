@@ -46,7 +46,7 @@ function Test() {
       quote: 'Finally free from old-school banks',
       message:
         'Suspendisse potenti. Integer finibus purus quis ipsum facilisis, at venenatis ligula semper. Nulla facilisi. Proin sed metus id nunc lacinia convallis.',
-      rating: 1,
+      rating: 4,
     },
     {
       name: 'Hello',

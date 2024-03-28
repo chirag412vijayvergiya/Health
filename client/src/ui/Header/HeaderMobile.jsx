@@ -37,9 +37,9 @@ function HeaderMobile() {
           <div className="my-6 flex justify-center">
             {' '}
             {/* Center the login button */}
-            <a href="#">
+            <Link to="/login">
               <Button type="primary">Login</Button>
-            </a>
+            </Link>
           </div>
         </div>
       )}

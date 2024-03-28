@@ -1,4 +1,5 @@
 import { useDarkMode } from '../Context/DarkModeContext';
+import { Link } from 'react-router-dom';
 
 function Logo({ type }) {
   const { isDarkMode } = useDarkMode();
@@ -18,7 +19,7 @@ function Logo({ type }) {
   };
 
   return (
-    <a href="\" className="flex items-center justify-center gap-x-3">
+    <Link to="/" className="flex items-center justify-center gap-x-3">
       <img
         src={styles[type].src}
         alt="jeeven-Logo"
@@ -29,7 +30,7 @@ function Logo({ type }) {
         <span className={styles[type].span}>jee</span>
         <span className="text-indigo-500">van</span>
       </p>
-    </a>
+    </Link>
   );
 }
 

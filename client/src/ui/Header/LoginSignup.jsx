@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import Button from '../Button';
 import DarkModeToggle from '../DarkModeToggle';
 import HeaderMobile from './HeaderMobile';
+import Header from './Header';
 
 function LoginSignup() {
   return (
@@ -10,9 +12,9 @@ function LoginSignup() {
           <DarkModeToggle />
         </li>
         <li className="mx-2 hidden sm:block">
-          <a href="#">
+          <Link to="/login">
             <Button type="primary">Login</Button>
-          </a>
+          </Link>
         </li>
         {/* <li className="mx-2 hidden sm:block">
           <a href="#">
