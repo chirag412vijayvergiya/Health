@@ -9,7 +9,7 @@ function Hero() {
       className="mt-[90px] min-h-[calc(100vh-90px)] bg-grey-50  dark:bg-slate-900 sm:mt-[10px] sm:min-h-[calc(100vh-90px)] "
     >
       <div className="min-w-screen relative z-[10] flex w-full overflow-hidden md:min-h-[100vh]">
-        <div className="rotate-150 absolute left-0 top-0 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
+        <div className="rotate-150 absolute -left-11 top-0 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
         <div className="absolute bottom-0 right-0 z-[100] h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
         <div className="flex-1">
           <div className="mx-auto flex w-11/12 max-w-[1200px] flex-col items-center justify-between gap-[50px] py-10 sm:py-[5rem] md:h-full lg:flex-row lg:gap-6 lg:py-0">
