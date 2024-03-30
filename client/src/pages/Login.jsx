@@ -1,6 +1,6 @@
 import MainHeader from '../ui/Header/MainHeader';
-import DoctorAuth from '../ui/LoginSignUp/Doctors/DoctorAuth';
-import PatientAuth from '../ui/LoginSignUp/Patients/PatientAuth';
+import DoctorAuth from '../ui/authentication/Doctors/DoctorAuth';
+import PatientAuth from '../ui/authentication/Patients/PatientAuth';
 
 function Login() {
   return (

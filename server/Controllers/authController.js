@@ -53,8 +53,8 @@ const signup = async (req, res, model, next) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    phone: req.body.phone,
-    BloodGroup: req.body.BloodGroup,
+    // phone: req.body.phone,
+    // BloodGroup: req.body.BloodGroup,
   });
 
   createSendToken(newUser, 201, res);

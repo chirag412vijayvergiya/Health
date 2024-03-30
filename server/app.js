@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const AppError = require('./utils/AppError');
+const cors = require('cors');
 
 //
 //const userRoute = require('./Routes/userRoute');
@@ -15,6 +16,12 @@ const reviewRouter = require('./Routes/reviewRoute');
 const GlobalErrorHandler = require('./Controllers/errorController');
 
 const app = express();
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    // Additional options...
+  }),
+);
 // ******************************************************************************* //
 
 // GLOBAL MIDDLEWARES

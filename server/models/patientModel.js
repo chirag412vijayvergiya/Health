@@ -25,7 +25,7 @@ const patientSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: ['patient'],
+      default: 'patient',
     },
     password: {
       type: String,
@@ -61,12 +61,12 @@ const patientSchema = new mongoose.Schema(
     },
     BloodGroup: {
       type: String,
-      required: [true, 'Please provide your BloodGroup'],
+      // required: [true, 'Please provide your BloodGroup'],
       uppercase: true,
     },
     phone: {
       type: String,
-      required: [true, 'Please provide your Mobile Number'],
+      // required: [true, 'Please provide your Mobile Number'],
     },
     active: {
       type: Boolean,
