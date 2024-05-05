@@ -23,9 +23,9 @@ function DarkModeProvider({ children }) {
   );
 
   function toggleDarkMode() {
-    console.log(isDarkMode);
+    // console.log(isDarkMode);
     setIsDarkMode((isDark) => !isDark);
-    console.log(isDarkMode);
+    // console.log(isDarkMode);
   }
 
   return (
@@ -38,10 +38,9 @@ function DarkModeProvider({ children }) {
 // Custom Hook
 function useDarkMode() {
   const context = useContext(DarkModeContext);
-  console.log(context);
+  // console.log(context);
   if (context === undefined)
     throw new Error('DarkModeContext was used outside of DarkModeProvider');
   return context;
 }
-
 export { DarkModeProvider, useDarkMode };

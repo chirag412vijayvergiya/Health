@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import Button from '../Button';
-import DarkModeToggle from '../DarkModeToggle';
+import Button from '../../Button';
+import DarkModeToggle from '../../DarkModeToggle';
 import HeaderMobile from './HeaderMobile';
-import Header from './Header';
 
 function LoginSignup() {
   return (

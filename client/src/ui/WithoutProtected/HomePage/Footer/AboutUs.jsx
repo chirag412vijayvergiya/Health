@@ -1,4 +1,4 @@
-import Logo from '../../Logo';
+import Logo from '../../../Logo';
 import { MdEmail } from 'react-icons/md';
 function AboutUs() {
   return (

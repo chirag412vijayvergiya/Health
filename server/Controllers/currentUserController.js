@@ -89,6 +89,7 @@ exports.getMe = (req, res, next) => {
   //   console.log(req.user.id);
   req.params.id = req.user.id;
   //   console.log(req.params.id);
+  console.log(req.params.id);
   next();
 };
 

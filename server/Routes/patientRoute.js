@@ -36,6 +36,7 @@ router.get(
   currentUserController.getMe,
   patientController.getUser,
 );
+
 router.delete(
   '/deleteMe',
   authController.protectpatient,

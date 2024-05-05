@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { routes } from './Routes';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
@@ -9,7 +10,11 @@ function HeaderAll() {
   const scroller = Scroll.scroller;
   const goToPageAndScroll = async (selector) => {
     try {
-      await navigate('/');
+      console.log(path);
+      console.log(location);
+      console.log('selector:', selector);
+      console.log('navigate:', navigate);
+      await navigate('/home');
       await scroller.scrollTo(selector, {
         duration: 500,
         smooth: true,
@@ -20,10 +25,11 @@ function HeaderAll() {
       console.error('Error navigating or scrolling:', err);
     }
   };
+
   return (
     <div id="headerAll">
       <ul className="ml-18 hidden h-[45px] list-none items-center dark:text-white md:flex">
-        {location === ''
+        {location === 'home'
           ? routes.map((route) => (
               <li key={route.title} className="mx-8">
                 <ScrollLink

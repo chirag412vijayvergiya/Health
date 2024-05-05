@@ -4,7 +4,7 @@ export function useLocalStorageState(initialState, key) {
   // If there is stored value in localstorage corresponding to that "key" then it will set the (value) of storedValue other wise it will set initialState value
   const [value, setValue] = useState(function () {
     const storedValue = localStorage.getItem(key);
-    console.log(storedValue);
+    // console.log(storedValue);
     return storedValue ? JSON.parse(storedValue) : initialState;
   });
 

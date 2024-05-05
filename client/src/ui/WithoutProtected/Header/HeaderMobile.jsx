@@ -5,7 +5,7 @@ import { routes } from './Routes';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import * as Scroll from 'react-scroll';
-import Button from '../Button';
+import Button from '../../Button';
 function HeaderMobile() {
   const [isOpen, setOpen] = useState(false);
   const path = useLocation().pathname;
@@ -14,7 +14,7 @@ function HeaderMobile() {
   const scroller = Scroll.scroller;
   const goToPageAndScroll = async (selector) => {
     try {
-      await navigate('/');
+      await navigate('/home');
       await scroller.scrollTo(selector, {
         duration: 500,
         smooth: true,

@@ -1,6 +1,4 @@
-import Button from '../Button';
-import ButtonIcon from '../DarkModeIcon';
-import styles from './HomePageStyle';
+import Button from '../../Button';
 import { IoIosArrowForward } from 'react-icons/io';
 function Hero() {
   return (

@@ -43,6 +43,7 @@ function PersonalTestimonial({
                 <img
                   className="aspect-square h-full w-full rounded-full border object-cover"
                   src="/logo-light.jpeg"
+                  alt="user"
                 />
               </span>
             </a>

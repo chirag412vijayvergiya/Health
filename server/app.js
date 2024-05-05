@@ -6,7 +6,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const AppError = require('./utils/AppError');
 const cors = require('cors');
-
+// const session = require('express-session');
+const cookieParser = require('cookie-parser');
 //
 //const userRoute = require('./Routes/userRoute');
 const doctorRouter = require('./Routes/doctorRoute');
@@ -16,12 +17,19 @@ const reviewRouter = require('./Routes/reviewRoute');
 const GlobalErrorHandler = require('./Controllers/errorController');
 
 const app = express();
+
+// Use express-session middleware
+
 app.use(
   cors({
     origin: 'http://localhost:5173',
-    // Additional options...
+    credentials: true,
   }),
 );
+
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+
 // ******************************************************************************* //
 
 // GLOBAL MIDDLEWARES

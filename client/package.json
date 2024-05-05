@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.28.9",
+    "@tanstack/react-query-devtools": "^5.28.10",
     "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
     "hamburger-react": "^2.5.0",
     "react": "^18.2.0",
+    "react-cookie": "^7.1.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",
     "react-hot-toast": "^2.4.1",

@@ -1,5 +1,5 @@
 import { MdEmail } from 'react-icons/md';
-import Button from '../../Button';
+import Button from '../../../Button';
 import { RiLockPasswordFill } from 'react-icons/ri';
 function LoginPatient() {
   return (

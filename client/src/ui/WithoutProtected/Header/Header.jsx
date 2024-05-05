@@ -1,8 +1,4 @@
 import { useState } from 'react';
-import HeaderMenu from './HeaderMenu';
-import Logo from '../Logo';
-import HeaderAll from './HeaderAll';
-import LoginSignup from './LoginSignup';
 import Hero from '../HomePage/Hero';
 import MainHeader from './MainHeader';
 function Header() {
