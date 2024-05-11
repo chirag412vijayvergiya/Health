@@ -1,56 +1,22 @@
 import { MdEmail } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
-import Button from '../../../Button';
+
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { FaUser } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { toast } from 'react-hot-toast';
-
-import { useEffect, useState } from 'react';
 import { usePatinetSignup } from './usePatientSignup';
+import Button from '../../../ui/Button';
 function SignUpPatient() {
-  const { signuppatient, isLoading } = usePatinetSignup();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
-  const navigate = useNavigate();
-
-  // function onSubmit({ fullName, email, password }) {
-  //   console.log({ fullName, email, password });
-  //   signuppatient(
-  //     { fullName, email, password },
-  //     {
-  //       onSettled: () => reset(),
-  //     },
-  //   );
-  // }
-
-  const onSubmit = async ({ fullName, email, password }) => {
-    try {
-      const response = await axios.post(
-        '/api/v1/patient/signup',
-        {
-          name: fullName,
-          email,
-          password,
-          passwordConfirm: password,
-        },
-        { withCredentials: true },
-      );
-
-      if (response.status >= 200 && response.status < 300) {
-        toast.success('Registration successful');
-        navigate('/issues'); // Redirect to login page after successful registration
-        console.log(response);
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error(err.message);
-    }
-
-    reset();
-  };
-
+  const { signup, isPending } = usePatinetSignup();
+  function onSubmit({ fullName, email, password }) {
+    signup(
+      { fullName, email, password },
+      {
+        onSettled: () => reset(),
+      },
+    );
+  }
   return (
     <form
       className="flex w-full flex-col gap-y-3 tracking-tighter"

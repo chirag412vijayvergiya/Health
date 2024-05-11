@@ -1,7 +1,7 @@
 import { MdEmail } from 'react-icons/md';
-import Button from '../../../Button';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { FaUser } from 'react-icons/fa';
+import Button from '../../../ui/Button';
 function SignUpDoctor() {
   return (
     <form className="flex w-full flex-col gap-y-3 tracking-tighter">

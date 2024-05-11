@@ -8,10 +8,10 @@ function HeaderMenu() {
   return (
     <div>
       <ul className="flex h-[45px] list-none items-center">
-        <li className="mr-2">
+        <li className="mr-3">
           <DarkModeToggle />
         </li>
-        <li className="mx-2 mr-8">
+        <li className="mr-11">
           <UserAvatar />
         </li>
         {/* <li className="mx-2 ">

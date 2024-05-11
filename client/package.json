@@ -10,14 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.1.9",
     "@tanstack/react-query": "^5.28.9",
     "@tanstack/react-query-devtools": "^5.28.10",
     "axios": "^1.6.8",
+    "cookie-storage": "^6.1.0",
     "dotenv": "^16.4.5",
     "hamburger-react": "^2.5.0",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-cookie": "^7.1.2",
     "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.13",
     "react-hook-form": "^7.51.2",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.0.1",

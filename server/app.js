@@ -1,13 +1,15 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit'); // Limit requests from same API
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
-const AppError = require('./utils/AppError');
 const cors = require('cors');
+const AppError = require('./utils/AppError');
+
 // const session = require('express-session');
-const cookieParser = require('cookie-parser');
+
 //
 //const userRoute = require('./Routes/userRoute');
 const doctorRouter = require('./Routes/doctorRoute');
@@ -24,6 +26,12 @@ app.use(
   cors({
     origin: 'http://localhost:5173',
     credentials: true,
+    headers: [
+      'Content-Type',
+      'Authorization',
+      'X-Frame-Options',
+      'access-control-allow-origin',
+    ],
   }),
 );
 

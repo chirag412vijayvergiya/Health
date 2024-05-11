@@ -26,14 +26,30 @@ const createSendToken = (model, statusCode, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     ),
-    httpOnly: true,
+    // expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minute from now
+
+    // httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
     // sameSite: 'None', // Set sameSite attribute
     // domain: 'ocalhost', // Set domain to localhost
   };
 
   if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
-  res.cookie('jwt', token, cookiesOptions);
+  // res.cookie('jwt', token, cookiesOptions);
+
+  // // Send the JWT token in an HTTP-only cookie for server-side use
+  res.cookie(
+    'jwt',
+    token,
+    Object.assign({}, cookiesOptions, { httpOnly: true }),
+  );
+
+  // Send the JWT token in a non-HTTP-only cookie for client-side access
+  res.cookie(
+    'jwt-client',
+    token,
+    Object.assign({}, cookiesOptions, { httpOnly: false }),
+  );
 
   // Set Access-Control-Allow-Credentials header
   // res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -107,59 +123,65 @@ exports.loginpatient = catchAsync(async (req, res, next) => {
 
 // ******************************************************************************* //
 
-// const protect = async (req, res, model, next) => {
-//   // 1) Getting token and check of it's there
-//   let token;
-//   if (
-//     req.headers.authorization &&
-//     req.headers.authorization.startsWith('Bearer')
-//   ) {
-//     token = req.headers.authorization.split(' ')[1];
-//   }
-
-//   if (!token) {
-//     return next(
-//       new AppError('You are not logged in! Please log in to get access.', 401),
-//     );
-//   }
-
-//   //Verification token
-//   // promisify converts callback-based functions into promise-based functions.
-//   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-//   // console.log(decoded);
-
-//   //3) check if user still exist
-//   const currentUser = await model.findById(decoded.id);
-//   if (!currentUser) {
-//     return next(
-//       new AppError(
-//         'The user belonging to this token does no longer exist.',
-//         401,
-//       ),
-//     );
-//   }
-
-//   // 4) Check if user changed password after the token was issued
-//   if (currentUser.changedPasswordAfter(decoded.iat)) {
-//     return next(
-//       new AppError('User recently changed password! Please log in again.', 401),
-//     );
-//   }
-//   // GRANT ACCESS TO PROTECTED ROUTE
-//   req.user = currentUser;
-//   next();
-// };
 const protect = async (req, res, model, next) => {
-  // 1) Getting token and check if it's there
+  // 1) Getting token and check of it's there
+  console.log('Request :- ', req);
   let token;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return next(
+      new AppError('You are not logged in! Please log in to get access.', 401),
+    );
+  }
+
+  //Verification token
+  // promisify converts callback-based functions into promise-based functions.
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  console.log('decoded :- ', decoded);
+
+  //3) check if user still exist
+  const currentUser = await model.findById(decoded.id);
+  if (!currentUser) {
+    return next(
+      new AppError(
+        'The user belonging to this token does no longer exist.',
+        401,
+      ),
+    );
+  }
+
+  // 4) Check if user changed password after the token was issued
+  if (currentUser.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError('User recently changed password! Please log in again.', 401),
+    );
+  }
+  // GRANT ACCESS TO PROTECTED ROUTE
+  req.user = currentUser;
+  next();
+};
+/*
+const protect = async (req, res, model, next) => {
+  // 1) Getting token and check if it's there
+  let token;
+  console.log(req.headers);
+  console.log(req.cookies);
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+    console.log('Token from headers:', token);
   } else if (req.cookies.jwt) {
     // If token is not present in headers, check if it's present in cookies
     token = req.cookies.jwt;
+    console.log('Token from cookies:', token);
   }
 
   if (!token) {
@@ -171,7 +193,7 @@ const protect = async (req, res, model, next) => {
   try {
     // Verification token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+    console.log('Decoded Token:', decoded);
     // Check if user still exists
     const currentUser = await model.findById(decoded.id);
     if (!currentUser) {
@@ -200,7 +222,7 @@ const protect = async (req, res, model, next) => {
     return next(new AppError('Invalid token! Please log in again.', 401));
   }
 };
-
+*/
 // For protect Doctor
 exports.protectdoctor = catchAsync(async (req, res, next) => {
   await protect(req, res, doctor, next);

@@ -1,7 +1,7 @@
 import { MdEmail } from 'react-icons/md';
-import Button from '../../../Button';
 import { RiLockPasswordFill } from 'react-icons/ri';
-function LoginDoctor() {
+import Button from '../../../ui/Button';
+function LoginPatient() {
   return (
     <form className="flex w-full flex-col gap-y-3 tracking-tighter">
       <div className="grid items-center gap-1.5"></div>
@@ -47,4 +47,4 @@ function LoginDoctor() {
   );
 }
 
-export default LoginDoctor;
+export default LoginPatient;

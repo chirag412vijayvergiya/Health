@@ -1,6 +1,6 @@
 import MainHeader from '../ui/WithoutProtected/Header/MainHeader';
-import DoctorAuth from '../ui/WithoutProtected/authentication/Doctors/DoctorAuth';
-import PatientAuth from '../ui/WithoutProtected/authentication/Patients/PatientAuth';
+import PatientAuth from '../features/authentication/Patients/PatientAuth';
+import DoctorAuth from '../features/authentication/Doctors/DoctorAuth';
 
 function Login() {
   return (
