@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
   return (
-    <div className="sticky m-[2vh] hidden h-[86vh] flex-col rounded-xl border-r border-r-grey-200 bg-gray-200 dark:border-r-grey-800 dark:bg-slate-800 lg:flex">
+    <div className="sticky m-[2vh] hidden min-h-[86vh] flex-col rounded-xl border-r border-r-grey-200 bg-gray-200 dark:border-r-grey-800 dark:bg-slate-800 lg:flex">
       <div className="mb-20 mt-6 space-y-6 border-b border-b-grey-100 pb-8 dark:border-b-grey-800">
         <h1 className="ml-[2vw] font-semibold uppercase text-grey-500">
           medicine
@@ -19,7 +19,7 @@ function Sidebar() {
         <div className="ml-[4vw] mt-3 flex max-w-max flex-col space-y-5 pb-12 pr-8">
           <NavLink
             to="/dashboard"
-            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400 "
+            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-200 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-gray-800 dark:aria-[current=page]:text-indigo-400"
           >
             <Button type="sidebar">
               <MdSpaceDashboard />

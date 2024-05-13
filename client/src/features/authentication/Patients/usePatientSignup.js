@@ -8,10 +8,11 @@ export function usePatinetSignup() {
   const { mutate: signup, isPending } = useMutation({
     mutationFn: patientsignupApi,
     onSuccess: (user) => {
-      toast.success(
-        "Account successfully created! Please verufy the new account from the user's email address.",
-      );
+      toast.success('Account successfully created!');
       navigate('/dashboard');
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 

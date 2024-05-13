@@ -11,3 +11,14 @@ exports.getAppointment = factory.getOne(appointments);
 exports.createAppointment = factory.createOne(appointments);
 exports.deleteAppointment = factory.deleteOne(appointments);
 exports.updateAppointment = factory.updateOne(appointments);
+
+exports.getMyAppointments = async (req, res, next) => {
+  const appointment = await appointments.find({ patient: req.user.id });
+  res.status(200).json({
+    status: 'success',
+    results: appointment.length,
+    data: {
+      appointment,
+    },
+  });
+};

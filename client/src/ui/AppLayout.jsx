@@ -7,10 +7,10 @@ function AppLayout() {
     <>
       <MainHeader />
       <div className="mt-[4.5rem] flex ">
-        <div className="w-1/5">
+        <div className="w-1/5 overflow-hidden">
           <Sidebar />
         </div>
-        <div className="w-4/5">
+        <div className="w-4/5 ">
           <Outlet />
         </div>
       </div>

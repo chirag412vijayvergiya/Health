@@ -13,7 +13,7 @@ exports.createOne = (Model) =>
   });
 
 // ******************************************************************************* //
-
+/*
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.find();
@@ -22,6 +22,32 @@ exports.getAll = (Model) =>
       result: doc.length,
       data: {
         data: doc,
+      },
+    });
+  });
+  */
+
+exports.getAll = (Model, selectFields = '', populateOptions = []) =>
+  catchAsync(async (req, res, next) => {
+    let query = Model.find();
+
+    // Select specific fields if provided
+    if (selectFields) {
+      query = query.select(selectFields);
+    }
+
+    // Populate specified fields if provided
+    populateOptions.forEach((option) => {
+      query = query.populate(option);
+    });
+
+    const docs = await query;
+
+    res.status(200).json({
+      status: 'success',
+      result: docs.length,
+      data: {
+        data: docs,
       },
     });
   });

@@ -8,6 +8,7 @@ const router = express.Router();
 
 // POST /doctor/234fad4/reviews
 // GET /doctor/234fad4/reviews
+router.get('/all-doctors', doctorController.getAllDoctor);
 
 // It is because I am grabing doctorId from doctor route.
 router.use('/:doctorId/reviews', reviewRouter);

@@ -3,7 +3,11 @@ const appointmentController = require('../Controllers/appointmentContoller');
 const authController = require('../Controllers/authController');
 
 const router = express.Router();
-
+router.get(
+  '/my-appointments',
+  authController.protectpatient,
+  appointmentController.getMyAppointments,
+);
 router.use(authController.protectdoctor);
 router
   .route('/')

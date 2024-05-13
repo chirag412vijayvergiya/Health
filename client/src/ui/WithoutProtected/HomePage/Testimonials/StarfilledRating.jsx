@@ -1,6 +1,6 @@
-function StarRating() {
+function StarfilledRating() {
   return (
-    <span className="h-7 w-7 fill-amber-400 stroke-amber-500">
+    <span className="h-6 w-6 fill-amber-400 stroke-amber-500">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
@@ -12,4 +12,4 @@ function StarRating() {
   );
 }
 
-export default StarRating;
+export default StarfilledRating;
