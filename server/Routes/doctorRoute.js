@@ -27,6 +27,11 @@ router.patch('/resetPassword/:token', authController.resetPasswordDoctor);
 
 // ******************************************************************************* //
 
+// Visible profile for everyone (no need to be logged in)
+// Because every Person can see the profile of a doctor
+
+router.get('/:id', doctorController.getUser);
+
 router.use(authController.protectdoctor);
 router.patch('/updateMyPassword', authController.updatePasswordDoctor);
 
@@ -56,7 +61,6 @@ router
 
 router
   .route('/:id')
-  .get(doctorController.getUser)
   .delete(doctorController.deleteUser)
   .patch(doctorController.updateUser);
 // router.get('/', userController.getAllUsers);

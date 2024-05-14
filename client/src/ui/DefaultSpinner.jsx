@@ -1,9 +1,7 @@
-import { Spinner } from '@material-tailwind/react';
+import { ImSpinner3 } from 'react-icons/im';
 function DefaultSpinner() {
   return (
-    <div className="mr-14">
-      <Spinner />
-    </div>
+    <ImSpinner3 className="mx-auto my-[14rem] h-12 w-12 animate-spin text-blue-500 delay-200" />
   );
 }
 

@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cors = require('cors');
+const path = require('path');
 const AppError = require('./utils/AppError');
 
 // const session = require('express-session');
@@ -21,6 +22,8 @@ const GlobalErrorHandler = require('./Controllers/errorController');
 const app = express();
 
 // Use express-session middleware
+
+app.use('/users', express.static(path.join(__dirname, 'public/users')));
 
 app.use(
   cors({

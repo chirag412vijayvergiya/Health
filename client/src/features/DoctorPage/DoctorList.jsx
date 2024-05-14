@@ -1,9 +1,10 @@
+import DefaultSpinner from '../../ui/DefaultSpinner';
 import CardBod from './CardBod';
 import { useDoctors } from './useDoctors';
 
 function DoctorList() {
   const { isPending, doctors } = useDoctors();
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <DefaultSpinner />;
   if (!doctors) return <div>No doctors found</div>;
 
   console.log(doctors);
@@ -18,6 +19,7 @@ function DoctorList() {
           ratingsQuantity={doctor.ratingsQuantity}
           photo={doctor.photo}
           role={doctor.role}
+          doctorId={doctor.id}
         />
       ))}
     </div>

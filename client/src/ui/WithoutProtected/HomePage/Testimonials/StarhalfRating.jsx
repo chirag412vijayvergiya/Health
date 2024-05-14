@@ -5,8 +5,8 @@ export function StarhalfRating() {
         <defs>
           {' '}
           <linearGradient id="grad">
-            /<stop offset="50%" stop-color="#f59e0b" />
-            <stop offset="50%" stop-color="" />{' '}
+            /<stop offset="50%" stopColor="#f59e0b" />
+            <stop offset="50%" stopColor="" />{' '}
           </linearGradient>{' '}
         </defs>
         <path

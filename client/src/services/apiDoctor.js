@@ -1,13 +1,21 @@
-import axios from 'axios';
+import customFetch from '../utils/customFetch';
 
 export async function getDoctors() {
   try {
-    const response = await axios.get(
-      'http://127.0.0.1:8000/api/v1/doctor/all-doctors',
-    );
+    const response = await customFetch.get('/doctor/all-doctors');
     return response.data.data.data;
   } catch (error) {
     console.error('Error fetching doctors: ', error);
     throw new Error('Failed to fetch doctors');
+  }
+}
+
+export async function getDoctor(doctorId) {
+  try {
+    const response = await customFetch.get(`/doctor/${doctorId}`);
+    return response.data.data.data;
+  } catch (error) {
+    console.error('Error fetching doctor: ', error);
+    throw new Error('Failed to fetch doctor');
   }
 }

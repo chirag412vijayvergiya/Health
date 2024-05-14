@@ -32,12 +32,12 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
-  await sharp(req.file.buffer)
+  const x = await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`public/users/${req.file.filename}`);
-
+  console.log(x);
   next();
 });
 
@@ -63,7 +63,7 @@ const updateMe = catchAsync(async (req, res, model, next) => {
   }
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
-  const filteredBody = filteredObj(req.body, 'name', 'email');
+  const filteredBody = filteredObj(req.body, 'name', 'gender');
   if (req.file) filteredBody.photo = req.file.filename;
   const updatedUser = await model.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,

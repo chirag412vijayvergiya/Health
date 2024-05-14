@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
 function UserAvatar({ name, photo }) {
@@ -13,8 +12,7 @@ function UserAvatar({ name, photo }) {
       >
         <div className="flex items-center gap-x-1">
           <img
-            // src={userData.photo}
-            src={`${photo}`}
+            src={`${import.meta.env.VITE_API_BASE_URL}/users/${photo}`}
             loading="lazy"
             width="35"
             height="35"

@@ -1,17 +1,65 @@
-import Button from './Button';
-import { useUser } from './../features/authentication/Patients/useUser';
+import { useState } from 'react';
+import Button from '../../../ui/Button';
+import { useUpdatePatient } from './useUpdatePatient';
+import { useUser } from './useUser';
+import { Avatar } from '@material-tailwind/react';
 
 function Updateuserdata() {
-  const { user } = useUser();
-  console.log(user);
+  const {
+    user: {
+      data: {
+        data: {
+          name: currentFullName,
+          email: currentEmail,
+          role: currentRole,
+          gender: currentGender,
+          photo: currentPhoto,
+        },
+      },
+    },
+  } = useUser();
+
+  const { updateUser, isUpdating } = useUpdatePatient();
+  const [fullName, setFullName] = useState(currentFullName);
+  const [avatar, setAvatar] = useState(currentPhoto);
+  const [Gender, setGender] = useState(currentGender);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(avatar, Gender, fullName);
+
+    updateUser(
+      { fullName, Gender, avatar },
+      {
+        onSuccess: () => {
+          console.log('User account successfully updated', avatar);
+          e.target.reset();
+        },
+      },
+    );
+  }
+
+  function handleCancel() {
+    setFullName(currentFullName);
+    setAvatar(currentPhoto);
+    setGender(currentGender);
+  }
+
+  console.log(
+    currentPhoto,
+    currentFullName,
+    currentEmail,
+    currentRole,
+    currentGender,
+  );
   return (
-    user && (
-      <form className="m-8 flex ">
+    fullName !== undefined && (
+      <form className="m-8 flex " onSubmit={handleSubmit}>
         <div className="h-10 w-1/3">
           <span className="relative my-6 ml-10 flex shrink-0 overflow-hidden rounded-full hover:brightness-90">
             <img
-              src={user.data.data.photo}
-              alt={`Avatar of ${user.data.data.name}`}
+              src={`${import.meta.env.VITE_API_BASE_URL}/users/${avatar}`}
+              alt={`Avatar of ${fullName}`}
               className=" aspect-square  rounded-full border object-cover"
               height="115"
               width="115"
@@ -20,6 +68,8 @@ function Updateuserdata() {
           <input
             type="file"
             accept="image/*"
+            onChange={(e) => setAvatar(e.target.files[0])}
+            disabled={isUpdating}
             className="mt-2 w-[12.9rem] cursor-pointer rounded-sm bg-brand-600 px-2 py-2 font-mono text-sm tracking-tighter text-brand-50 transition duration-200 hover:bg-brand-700"
           />
         </div>
@@ -32,9 +82,10 @@ function Updateuserdata() {
               <div className="relative">
                 <input
                   type="text"
-                  value={user.data.data.name}
+                  defaultValue={fullName}
                   id="fullName"
-                  disabled={false}
+                  onChange={(e) => setFullName(e.target.value)}
+                  disabled={isUpdating}
                   className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
                 />
               </div>
@@ -46,7 +97,7 @@ function Updateuserdata() {
               <div className="">
                 <input
                   type="text"
-                  value={user.data.data.email}
+                  defaultValue={currentEmail}
                   disabled
                   className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  opacity-50 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
                 />
@@ -61,8 +112,8 @@ function Updateuserdata() {
               <div className="relative">
                 <input
                   type="text"
-                  value={user.data.data.role}
-                  id="fullName"
+                  defaultValue={currentRole}
+                  id="Role"
                   disabled
                   className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  opacity-50 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
                 />
@@ -75,9 +126,10 @@ function Updateuserdata() {
               <div className="relative">
                 <input
                   type="text"
-                  value={user.data.data.gender}
-                  id="fullName"
-                  disabled={false}
+                  defaultValue={Gender}
+                  id="Gender"
+                  onChange={(e) => setGender(e.target.value)}
+                  disabled={isUpdating}
                   className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100 "
                 />
               </div>
@@ -87,12 +139,12 @@ function Updateuserdata() {
             <Button
               type="reset"
               variation="secondary"
-              disabled="false"
-              className=""
+              disabled={isUpdating}
+              onClick={handleCancel}
             >
               Cancel
             </Button>
-            <Button disabled="false" type="update">
+            <Button disabled={isUpdating} type="update">
               Update account
             </Button>
           </div>

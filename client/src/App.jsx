@@ -10,13 +10,14 @@ import AppLayout from './ui/AppLayout';
 import Dashboard from './pages/Dashboard';
 import Appointment from './pages/Appointment';
 import Patient from './pages/Patient';
-import Doctor from './pages/Doctor';
+import Doctor from './pages/Doctors';
 import Payments from './pages/Payments';
 import Reviews from './pages/Reviews';
 import PageNotFound from './pages/PageNotFound';
 import Settings from './pages/Settings';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Profile from './pages/Profile';
+import DoctorProfile from './pages/DoctorProfile';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +45,7 @@ function App() {
               <Route path="appointments" element={<Appointment />} />
               <Route path="patients" element={<Patient />} />
               <Route path="doctors" element={<Doctor />} />
+              <Route path="doctors/:doctorId" element={<DoctorProfile />} />
               <Route path="payments" element={<Payments />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="settings" element={<Settings />} />
@@ -73,8 +75,8 @@ function App() {
               fontSize: '16px',
               maxWidth: '500px',
               padding: '16px 24px',
-              backgroundColor: 'bg-gray-300', // Background color grey-300
-              color: 'text-gray-900', // Text color grey-900
+              backgroundColor: 'bg-gray-300',
+              color: 'text-gray-900',
             },
           }}
         />

@@ -19,7 +19,7 @@ function Sidebar() {
         <div className="ml-[4vw] mt-3 flex max-w-max flex-col space-y-5 pb-12 pr-8">
           <NavLink
             to="/dashboard"
-            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-200 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-gray-800 dark:aria-[current=page]:text-indigo-400"
+            className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
           >
             <Button type="sidebar">
               <MdSpaceDashboard />
@@ -28,7 +28,7 @@ function Sidebar() {
           </NavLink>
           <NavLink
             to="/appointments"
-            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400 "
+            className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
           >
             <Button type="sidebar">
               <GiTechnoHeart />
@@ -38,7 +38,7 @@ function Sidebar() {
 
           <NavLink
             to="/patients"
-            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400 "
+            className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
           >
             <Button type="sidebar">
               <FaPersonCane />
@@ -48,7 +48,7 @@ function Sidebar() {
 
           <NavLink
             to="/doctors"
-            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400 "
+            className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
           >
             <Button type="sidebar">
               <FaUserDoctor />
@@ -58,7 +58,7 @@ function Sidebar() {
 
           <NavLink
             to="/payments"
-            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400 "
+            className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
           >
             <Button type="sidebar">
               <MdOutlinePayments />
@@ -68,7 +68,7 @@ function Sidebar() {
 
           <NavLink
             to="/reviews"
-            className="text-grey-600 hover:text-indigo-600 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400 "
+            className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
           >
             <Button type="sidebar">
               <HiOutlineUsers />
@@ -80,7 +80,7 @@ function Sidebar() {
       <div className="mt-19 ml-[4vw] flex max-w-max flex-col space-y-5 pr-8 pt-5">
         <NavLink
           to="/settings"
-          className="text-grey-600 hover:text-indigo-600 aria-[current=page]:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400 "
+          className="rounded-md p-1 px-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
         >
           <Button type="sidebar">
             <HiOutlineCog6Tooth />
@@ -88,10 +88,10 @@ function Sidebar() {
           </Button>
         </NavLink>
 
-        <Button type="sidebar">
+        {/* <Button type="sidebar">
           <HiArrowRightOnRectangle className="h-5 w-5 text-red-500" />
           <span className="font-semibold text-red-500">Logout</span>
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

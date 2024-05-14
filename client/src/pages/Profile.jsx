@@ -1,6 +1,6 @@
-import InsuranceRelated from '../ui/InsuranceRelated';
-import UpdatePassword from '../ui/UpdatePassword';
-import Updateuserdata from '../ui/Updateuserdata';
+import InsuranceRelated from '../features/authentication/Patients/InsuranceRelated';
+import UpdatePassword from '../features/authentication/Patients/UpdatePassword';
+import Updateuserdata from '../features/authentication/Patients/Updateuserdata';
 
 function Profile() {
   return (

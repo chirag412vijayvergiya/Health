@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { patientsignup as patientsignupApi } from './../../../services/apiAuth';
+import { patientsignup as patientsignupApi } from '../../../services/apiAuthPatient';
 
 export function usePatinetSignup() {
   const navigate = useNavigate();
