@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../../ui/Button';
 import { useUpdatePatient } from './useUpdatePatient';
 import { useUser } from './useUser';
-import { Avatar } from '@material-tailwind/react';
 
 function Updateuserdata() {
   const {
@@ -21,15 +20,24 @@ function Updateuserdata() {
 
   const { updateUser, isUpdating } = useUpdatePatient();
   const [fullName, setFullName] = useState(currentFullName);
-  const [avatar, setAvatar] = useState(currentPhoto);
+  const [avatar, setAvatar] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [Gender, setGender] = useState(currentGender);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAvatar(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log(avatar, Gender, fullName);
 
     updateUser(
-      { fullName, Gender, avatar },
+      { fullName, Gender, photo: avatar },
       {
         onSuccess: () => {
           console.log('User account successfully updated', avatar);
@@ -41,7 +49,7 @@ function Updateuserdata() {
 
   function handleCancel() {
     setFullName(currentFullName);
-    setAvatar(currentPhoto);
+    setAvatar(null);
     setGender(currentGender);
   }
 
@@ -58,8 +66,11 @@ function Updateuserdata() {
         <div className="h-10 w-1/3">
           <span className="relative my-6 ml-10 flex shrink-0 overflow-hidden rounded-full hover:brightness-90">
             <img
-              src={`${import.meta.env.VITE_API_BASE_URL}/users/${avatar}`}
-              alt={`Avatar of ${fullName}`}
+              src={
+                preview ||
+                `${import.meta.env.VITE_API_BASE_URL}/users/${currentPhoto}`
+              }
+              alt={`Avatar of ${currentFullName}`}
               className=" aspect-square  rounded-full border object-cover"
               height="115"
               width="115"
@@ -68,7 +79,7 @@ function Updateuserdata() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setAvatar(e.target.files[0])}
+            onChange={handleFileChange}
             disabled={isUpdating}
             className="mt-2 w-[12.9rem] cursor-pointer rounded-sm bg-brand-600 px-2 py-2 font-mono text-sm tracking-tighter text-brand-50 transition duration-200 hover:bg-brand-700"
           />

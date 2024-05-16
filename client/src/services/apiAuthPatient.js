@@ -41,19 +41,23 @@ export async function getCurrentUser() {
 export async function updatePateintData({ fullName, Gender, photo }) {
   try {
     const token = Cookies.get('jwt-client');
-    const form = new FormData();
-    form.append('name', fullName);
-    form.append('gender', Gender);
-    form.append('photo', photo);
+    const formdata = new FormData();
+    formdata.append('name', fullName);
+    formdata.append('gender', Gender);
+    formdata.append('photo', photo);
 
-    const response = await customFetch.patch('/patient/updateMe', form, {
+    for (let [key, value] of formdata.entries()) {
+      console.log(key, value);
+    }
+    const response = await customFetch.patch('/patient/updateMe', formdata, {
       withCredentials: true, // Include cookies in the request
       headers: {
         Authorization: `Bearer ${token}`, // Include JWT token in headers
+        'Content-Type': 'multipart/form-data',
       },
     });
 
-    // console.log(response.data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching user data: ', error);

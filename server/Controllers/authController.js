@@ -77,7 +77,7 @@ const signup = async (req, res, model, next) => {
     // phone: req.body.phone,
     // BloodGroup: req.body.BloodGroup,
   });
-  console.log(newUser);
+  // console.log(newUser);
   createSendToken(newUser, 201, res);
 };
 
@@ -125,7 +125,7 @@ exports.loginpatient = catchAsync(async (req, res, next) => {
 
 const protect = async (req, res, model, next) => {
   // 1) Getting token and check of it's there
-  console.log('Request :- ', req);
+  // console.log('Request :- ', req);
   let token;
   if (
     req.headers.authorization &&
@@ -143,7 +143,7 @@ const protect = async (req, res, model, next) => {
   //Verification token
   // promisify converts callback-based functions into promise-based functions.
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log('decoded :- ', decoded);
+  // console.log('decoded :- ', decoded);
 
   //3) check if user still exist
   const currentUser = await model.findById(decoded.id);
@@ -240,7 +240,7 @@ exports.restrictTo =
   (...roles) =>
   (req, res, next) => {
     // roles ['admin', 'lead-guide']. role='user'
-    console.log(req.user.role);
+    // console.log(req.user.role);
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError('You do not have permission to perform this action', 403),

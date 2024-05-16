@@ -6,6 +6,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      aspectRatio: {
+        1: '1',
+      },
       animation: {
         'spin-slow': 'spin 3s linear infinite',
         bounce: 'bounce 15s infinite',
