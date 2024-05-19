@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-function Button({ children, type }) {
+function Button({ children, type, disabled }) {
   const base =
     'p-small flex items-center justify-center rounded-full font-medium';
   const styles = {
@@ -11,7 +11,11 @@ function Button({ children, type }) {
     sidebar:
       'font-medium text-base subpixel-antialiased tracking-wide flex flex-row items-center gap-2',
   };
-  return <button className={styles[type]}>{children}</button>;
+  return (
+    <button className={styles[type]} disabled={disabled}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;

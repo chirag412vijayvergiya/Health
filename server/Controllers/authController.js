@@ -28,7 +28,7 @@ const createSendToken = (model, statusCode, res) => {
     ),
     // expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minute from now
 
-    // httpOnly: true,
+    httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
     // sameSite: 'None', // Set sameSite attribute
     // domain: 'ocalhost', // Set domain to localhost
@@ -36,20 +36,30 @@ const createSendToken = (model, statusCode, res) => {
 
   if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
   // res.cookie('jwt', token, cookiesOptions);
-
+  console.log('Cookies Options :- ', token);
   // // Send the JWT token in an HTTP-only cookie for server-side use
   res.cookie(
     'jwt',
     token,
-    Object.assign({}, cookiesOptions, { httpOnly: true }),
+    // Object.assign({}, cookiesOptions, { httpOnly: true })
+    cookiesOptions,
   );
 
+  // Optionally send user role in a non-HTTP-only cookie for client-side access
+  res.cookie('userRole', model.role, {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+    ),
+    httpOnly: false,
+    secure: process.env.NODE_ENV === 'production',
+  });
+
   // Send the JWT token in a non-HTTP-only cookie for client-side access
-  res.cookie(
-    'jwt-client',
-    token,
-    Object.assign({}, cookiesOptions, { httpOnly: false }),
-  );
+  // res.cookie(
+  //   'jwt-client',
+  //   token,
+  //   Object.assign({}, cookiesOptions, { httpOnly: false }),
+  // );
 
   // Set Access-Control-Allow-Credentials header
   // res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -125,13 +135,18 @@ exports.loginpatient = catchAsync(async (req, res, next) => {
 
 const protect = async (req, res, model, next) => {
   // 1) Getting token and check of it's there
-  // console.log('Request :- ', req);
+  // console.log('Request :- ', req.cookies);
+  // console.log('Request :- ', req.headers);
+  const { userRole } = req.cookies;
+  // console.log('User Role :- ', userRole);
   let token;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
 
   if (!token) {
@@ -143,6 +158,16 @@ const protect = async (req, res, model, next) => {
   //Verification token
   // promisify converts callback-based functions into promise-based functions.
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  if (token && !userRole) {
+    // Decode the token to get the user's role
+    res.cookie('userRole', decoded.role, {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+      ),
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',
+    });
+  }
   // console.log('decoded :- ', decoded);
 
   //3) check if user still exist
@@ -163,6 +188,7 @@ const protect = async (req, res, model, next) => {
     );
   }
   // GRANT ACCESS TO PROTECTED ROUTE
+  // console.log(req.user);
   req.user = currentUser;
   next();
 };
@@ -370,6 +396,21 @@ exports.updatePasswordDoctor = catchAsync(async (req, res, next) => {
 exports.updatePasswordPatient = catchAsync(async (req, res, next) => {
   await updatePassword(req, res, patient, next);
 });
+
+const logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};
+
+exports.logoutdoctor = (req, res) => {
+  logout(req, res);
+};
+exports.logoutpatient = (req, res) => {
+  logout(req, res);
+};
 
 // ******************************************************************************* //
 

@@ -73,14 +73,47 @@ exports.updateOne = (Model) =>
   });
 
 // ******************************************************************************* //
-
+/*
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
+    // console.log(req.params.id);
     let query = Model.findById(req.params.id);
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
     if (!doc) {
       return next(new AppError('No document find with that ID', 404));
+    }
+    // console.log(doc);
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: doc,
+      },
+    });
+  });
+  */
+
+exports.getOne = (Model, popOptions) =>
+  catchAsync(async (req, res, next) => {
+    let query = Model.findById(req.params.id);
+
+    if (popOptions) {
+      if (Array.isArray(popOptions)) {
+        popOptions.forEach((option) => {
+          // console.log(`Populating option ${index}: `, option);
+          query = query.populate(option);
+        });
+      } else {
+        // console.log('Populating single option: ', popOptions);
+        query = query.populate(popOptions);
+      }
+    }
+
+    // console.log('Query after population options:', query);
+    const doc = await query;
+
+    if (!doc) {
+      return next(new AppError('No document found with that ID', 404));
     }
 
     res.status(200).json({
@@ -90,6 +123,8 @@ exports.getOne = (Model, popOptions) =>
       },
     });
   });
+
+// Usage
 
 // ******************************************************************************* //
 //Route.delete() requires a callback function but got a [object Undefined

@@ -19,6 +19,7 @@ router.post('/signup', authController.signupdoctor);
 router.post('/login', authController.logindoctor);
 // router.post('/signup', authController.signup);
 // router.post('/login', authController.login);
+router.get('/logout', authController.logoutdoctor);
 
 // ******************************************************************************* //
 
@@ -27,9 +28,16 @@ router.patch('/resetPassword/:token', authController.resetPasswordDoctor);
 
 // ******************************************************************************* //
 
+// Define /me route before /:id
+router.get(
+  '/me',
+  authController.protectdoctor,
+  currentUserController.getMe,
+  doctorController.getUser,
+);
+
 // Visible profile for everyone (no need to be logged in)
 // Because every Person can see the profile of a doctor
-
 router.get('/:id', doctorController.getUser);
 
 router.use(authController.protectdoctor);
@@ -37,7 +45,6 @@ router.patch('/updateMyPassword', authController.updatePasswordDoctor);
 
 // ******************************************************************************* //
 
-router.get('/me', currentUserController.getMe, doctorController.getUser);
 router.delete(
   '/deleteMe',
   authController.protectdoctor,

@@ -92,6 +92,7 @@ exports.updateMePatient = catchAsync(async (req, res, next) => {
 
 exports.getMe = (req, res, next) => {
   //   console.log(req.user.id);
+  console.log(req);
   req.params.id = req.user.id;
   //   console.log(req.params.id);
   console.log(req.params.id);

@@ -21,6 +21,7 @@ const GlobalErrorHandler = require('./Controllers/errorController');
 
 const app = express();
 
+app.use(cookieParser());
 // Use express-session middleware
 
 app.use('/users', express.static(path.join(__dirname, 'public/users')));
@@ -38,7 +39,6 @@ app.use(
   }),
 );
 
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 // ******************************************************************************* //

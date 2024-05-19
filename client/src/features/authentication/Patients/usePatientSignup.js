@@ -7,7 +7,7 @@ export function usePatinetSignup() {
   const navigate = useNavigate();
   const { mutate: signup, isPending } = useMutation({
     mutationFn: patientsignupApi,
-    onSuccess: (user) => {
+    onSuccess: (data) => {
       toast.success('Account successfully created!');
       navigate('/dashboard');
     },

@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import LoginDoctor from './LoginDoctor';
-import SignUpDoctor from './SignUpDoctor';
-
 function DoctorAuth() {
-  const [isLogin, setLogin] = useState(true);
+  // const [isLogin, setLogin] = useState(true);
 
-  const toggleMode = () => {
-    setLogin((prevState) => !prevState);
-  };
+  // const toggleMode = () => {
+  //   setLogin((prevState) => !prevState);
+  // };
 
   return (
     <div className="flex max-w-lg  flex-col items-start gap-5 rounded-md  border-b-[5px]  border-indigo-900  bg-slate-900 bg-gradient-to-t from-slate-900 to-grey-800 px-10 py-6 shadow ">
@@ -54,13 +51,21 @@ function DoctorAuth() {
         </p>
         <span className="h-[1px] flex-1 bg-grey-300"></span>
       </div>
-      {isLogin ? <LoginDoctor /> : <SignUpDoctor />}
+      {/* {isLogin ? <LoginDoctor /> : <SignUpDoctor />}
       <button
         className=" focus-visible:ring-ring mx-auto -mt-2 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-mono text-sm font-medium tracking-tight text-blue-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
         type="button"
         onClick={toggleMode}
       >
         {isLogin ? "Don't have an account?" : 'Already have an account?'}
+      </button> */}
+      <LoginDoctor />
+      <button
+        className=" focus-visible:ring-ring text-md mx-auto -mt-2 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-mono font-semibold tracking-tight text-blue-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-80"
+        type="button"
+        disabled
+      >
+        {'For Registration, Contact Admin'}
       </button>
     </div>
   );

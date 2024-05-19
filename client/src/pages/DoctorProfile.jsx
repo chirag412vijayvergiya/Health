@@ -1,4 +1,8 @@
 import { useDoctor } from '../features/DoctorPage/useDoctor';
+import PersonalData from '../features/DoctorProfilePage/PersonalData';
+import ProfileImage from '../features/DoctorProfilePage/ProfileImage';
+import ReviewData from '../features/DoctorProfilePage/ReviewData';
+import Specialization from '../features/DoctorProfilePage/Specialization';
 import DefaultSpinner from '../ui/DefaultSpinner';
 
 function DoctorProfile() {
@@ -8,15 +12,22 @@ function DoctorProfile() {
   if (!doctor) return <div>No doctor found</div>;
 
   return (
-    <div className="flex w-full flex-col">
-      <div className="">
-        <img
-          className="mb-2 h-24 w-24 rounded-full shadow-lg"
-          src={`${import.meta.env.VITE_API_BASE_URL}/users/${doctor.photo}`}
-          alt={doctor.name + 's photo'}
-        />
+    <div className="m-[2vh] flex h-[86vh] flex-col rounded-xl border-r border-r-grey-200 bg-slate-200 p-4 tracking-wider shadow-md shadow-blue-200 dark:border-r-grey-800 dark:bg-gradient-to-r dark:from-slate-800 dark:to-slate-900 dark:shadow-blue-900">
+      <h1 className="sticky top-0 z-10 m-2 w-full bg-slate-200 text-lg font-semibold dark:bg-gradient-to-r dark:from-slate-800 dark:to-slate-900 dark:shadow-blue-900">
+        {`${doctor.name}'s Profile`}
+      </h1>
+      <div className="flex-1 overflow-scroll">
+        <ProfileImage doctor={doctor} className="h-1/3" />
+        <div className="mx-auto flex w-full flex-row items-center justify-center gap-x-2">
+          <div className="flex h-1/3 w-full flex-row items-center justify-center gap-x-2">
+            <PersonalData doctor={doctor} />
+            <Specialization doctor={doctor} />
+          </div>
+        </div>
+        <div className="h-1/3">
+          <ReviewData doctor={doctor} />
+        </div>
       </div>
-      <div></div>
     </div>
   );
 }

@@ -10,7 +10,7 @@ const appointmentSchema = new mongoose.Schema(
     doctor: {
       type: mongoose.Schema.ObjectId,
       ref: 'Doctor',
-      required: [true, 'Patient should be exist'],
+      required: [true, 'Doctor should be exist'],
     },
     appointmentDate: {
       type: Date,
@@ -34,6 +34,7 @@ const appointmentSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true }, // By this we ensure that virtual properties are included when i
     toObject: { virtuals: true }, //convert a Mongoose document to either JSON or JavaScript object.
+    id: false,
   },
 );
 appointmentSchema.index({ patient: 1, doctor: 1 });

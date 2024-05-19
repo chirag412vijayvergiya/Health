@@ -4,21 +4,24 @@ import DarkModeToggle from '../../DarkModeToggle';
 import HeaderMobile from './HeaderMobile';
 import { useUser } from '../../../features/authentication/Patients/useUser';
 import UserAvatar from './UserAvatar';
-import HeaderLogoutMenu from './HeaderLogoutMenu';
 import ButtonIcon from '../../DarkModeIcon';
 import DefaultSpinner from '../../DefaultSpinner';
+import LogoutPatient from '../../../features/authentication/Patients/LogoutPatient';
+import LogoutDoctor from '../../../features/authentication/Doctors/LogoutDoctor';
+import { useEffect } from 'react';
 
 function LoginSignup() {
   const { user, isPending } = useUser();
+
+  if (isPending) <DefaultSpinner />;
+
   return (
     <div>
       <ul className="mr-3 flex h-[45px] list-none items-center dark:text-white">
         <li className="mx-2">
           <DarkModeToggle />
         </li>
-        {isPending ? (
-          <DefaultSpinner />
-        ) : user ? (
+        {user ? (
           <>
             <li className="mr-2">
               <UserAvatar
@@ -26,9 +29,12 @@ function LoginSignup() {
                 photo={user.data.data.photo}
               />
             </li>
-            <ButtonIcon>
-              <HeaderLogoutMenu />
-            </ButtonIcon>
+            {/* {user.data.data.role === 'patient' ? (
+              <LogoutPatient />
+            ) : (
+              <LogoutDoctor />
+            )} */}
+            <LogoutPatient />
           </>
         ) : (
           <li className="mx-2 hidden sm:block">

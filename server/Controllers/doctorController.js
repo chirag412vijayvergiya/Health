@@ -16,7 +16,10 @@ exports.deleteMe = currentUserController.deleteMeDoctor;
 exports.updateMe = currentUserController.updateMeDoctor;
 
 exports.getAllUsers = factory.getAll(Doctor);
-exports.getUser = factory.getOne(Doctor, { path: 'appointment' });
+exports.getUser = factory.getOne(Doctor, [
+  { path: 'reviews' },
+  { path: 'appointment' },
+]);
 exports.createUser = currentUserController.createUser;
 exports.updateUser = (req, res) => {
   res.status(500).json({

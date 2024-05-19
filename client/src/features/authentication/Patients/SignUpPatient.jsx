@@ -123,7 +123,7 @@ function SignUpPatient() {
         </div>
       </div>
 
-      <Button type="third" class="margin-left: 4px">
+      <Button type="third" class="margin-left: 4px" disabled={isPending}>
         <span className="font-mono">Sign Up</span>
       </Button>
     </form>

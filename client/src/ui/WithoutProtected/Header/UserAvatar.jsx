@@ -20,7 +20,7 @@ function UserAvatar({ name, photo }) {
             className="rounded-full bg-transparent"
           />
           <IoIosArrowDown className="lucide lucide-chevron-down stroke-neutral-2 mt-3 h-3 w-3 stroke-1" />
-          <span className="ml-1 tracking-wider">{name}</span>
+          <span className=" ml-1 hidden tracking-wider md:inline">{name}</span>
         </div>
       </button>
     </div>

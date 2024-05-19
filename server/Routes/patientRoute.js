@@ -12,6 +12,8 @@ const router = express.Router();
 router.post('/signup', authController.signuppatient);
 router.post('/login', authController.loginpatient);
 
+router.get('/logout', authController.logoutpatient);
+
 // ******************************************************************************* //
 
 // router.post('/forgotPassword', authController.forgotPassword);
@@ -28,6 +30,7 @@ router.patch(
   authController.updatePasswordPatient,
 );
 
+router.get('/no-role', authController.protectpatient);
 // ******************************************************************************* //
 
 router.get(
