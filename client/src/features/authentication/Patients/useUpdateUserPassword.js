@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updatePateintData } from '../../../services/apiAuthPatient';
 import toast from 'react-hot-toast';
+import { UpdateUserPassword } from '../../../services/apiCommonUser';
 
-export function useUpdatePatient() {
+export function useUpdateUserPassword() {
   const queryClient = useQueryClient();
 
   const { mutate: updateUser, isPending: isUpdating } = useMutation({
-    mutationFn: updatePateintData,
+    mutationFn: UpdateUserPassword,
     onSuccess: () => {
-      toast.success('User account successfully updated');
+      toast.success('User password successfully updated');
       //   queryClient.setQueryData(['user'], user);
       queryClient.invalidateQueries('user');
     },

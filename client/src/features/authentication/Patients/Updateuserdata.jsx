@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../../../ui/Button';
-import { useUpdatePatient } from './useUpdatePatient';
+import { useUpdateUserData } from './useUpdateUserData';
 import { useUser } from './useUser';
 
 function Updateuserdata() {
@@ -18,7 +18,7 @@ function Updateuserdata() {
     },
   } = useUser();
 
-  const { updateUser, isUpdating } = useUpdatePatient();
+  const { updateUser, isUpdating } = useUpdateUserData();
   const [fullName, setFullName] = useState(currentFullName);
   const [avatar, setAvatar] = useState(null);
   const [preview, setPreview] = useState(null);

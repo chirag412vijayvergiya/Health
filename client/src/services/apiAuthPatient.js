@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie';
-import { toast } from 'react-hot-toast';
 import customFetch from '../utils/customFetch';
 
 export async function patientsignup({ fullName, email, password }) {
@@ -24,62 +22,6 @@ export async function patientsignup({ fullName, email, password }) {
   }
 }
 
-export async function getCurrentUser() {
-  try {
-    let role = Cookies.get('userRole');
-    if (!role) role = await getRole();
-    if (role === 'admin') role = 'doctor';
-    const response = await customFetch.get(`/${role}/me`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching user data: ', error);
-    throw new Error('Failed to fetch user data');
-  }
-}
-
-export async function updatePateintData({ fullName, Gender, photo }) {
-  try {
-    // const token = Cookies.get('jwt-client');
-    let role = Cookies.get('userRole');
-    if (role === 'admin') role = 'doctor';
-    const formdata = new FormData();
-    formdata.append('name', fullName);
-    formdata.append('gender', Gender);
-    formdata.append('photo', photo);
-
-    for (let [key, value] of formdata.entries()) {
-      console.log(key, value);
-    }
-    const response = await customFetch.patch(`/${role}/updateMe`, formdata);
-
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching user data: ', error);
-    throw new Error('Failed to fetch user data');
-  }
-}
-
-export async function Patientlogout() {
-  let role = Cookies.get('userRole');
-  if (role === 'admin') role = 'doctor';
-  const res = await customFetch.get(`/${role}/logout`);
-  console.log(res.data);
-  Cookies.remove('userRole');
-  return res.data;
-}
-
-async function getRole() {
-  try {
-    const response = await customFetch.get('/patient/no-role');
-    console.log(response.data.data);
-    return response;
-  } catch (error) {
-    console.error('Error fetching patient data: ', error);
-    throw new Error('Failed to fetch patient data');
-  }
-}
-
 export async function patientLogin({ email, password }) {
   try {
     const response = await customFetch.post(
@@ -90,8 +32,6 @@ export async function patientLogin({ email, password }) {
       },
       { withCredentials: true },
     );
-    // const userRole = response.data.data.model.role;
-    // Cookies.set('userRole', userRole, { expires: 7 });
     console.log(response.data.data.model.role);
     return response.data;
   } catch (error) {
