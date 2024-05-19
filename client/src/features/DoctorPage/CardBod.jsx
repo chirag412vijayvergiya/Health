@@ -20,8 +20,7 @@ export function CardBod({
 
   return (
     <div className="w-[19rem] max-w-xl rounded-lg border border-gray-200 bg-white p-2  shadow-md shadow-blue-200 dark:border-gray-700  dark:bg-gray-800  dark:shadow-blue-900">
-      <div className="flex justify-end px-4 pt-4"></div>
-      <div className="flex flex-col items-center pb-10">
+      <div className="flex flex-col items-center px-4 pb-10 pt-4">
         <img
           className="mb-2 h-24 w-24 rounded-full shadow-lg"
           src={`${import.meta.env.VITE_API_BASE_URL}/users/${photo}`}

@@ -39,7 +39,7 @@ export async function getCurrentUser() {
 
 export async function updatePateintData({ fullName, Gender, photo }) {
   try {
-    const token = Cookies.get('jwt-client');
+    // const token = Cookies.get('jwt-client');
     let role = Cookies.get('userRole');
     if (role === 'admin') role = 'doctor';
     const formdata = new FormData();
@@ -50,13 +50,7 @@ export async function updatePateintData({ fullName, Gender, photo }) {
     for (let [key, value] of formdata.entries()) {
       console.log(key, value);
     }
-    const response = await customFetch.patch(`/${role}/updateMe`, formdata, {
-      withCredentials: true, // Include cookies in the request
-      headers: {
-        Authorization: `Bearer ${token}`, // Include JWT token in headers
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = await customFetch.patch(`/${role}/updateMe`, formdata);
 
     console.log(response.data);
     return response.data;
@@ -69,9 +63,7 @@ export async function updatePateintData({ fullName, Gender, photo }) {
 export async function Patientlogout() {
   let role = Cookies.get('userRole');
   if (role === 'admin') role = 'doctor';
-  const res = await customFetch.get(`/${role}/logout`, {
-    withCredentials: true,
-  });
+  const res = await customFetch.get(`/${role}/logout`);
   console.log(res.data);
   Cookies.remove('userRole');
   return res.data;

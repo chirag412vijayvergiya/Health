@@ -9,6 +9,7 @@ const authController = require('../Controllers/authController');
 const router = express.Router({ mergeParams: true });
 
 router.use(authController.protectpatient);
+router.get('/my-reviews', reviewController.getMyReviews);
 router
   .route('/')
   .get(reviewController.getAllReview)
