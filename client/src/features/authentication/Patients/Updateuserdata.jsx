@@ -1,23 +1,14 @@
 import { useState } from 'react';
 import Button from '../../../ui/Button';
 import { useUpdateUserData } from './useUpdateUserData';
-import { useUser } from './useUser';
 
-function Updateuserdata() {
-  const {
-    user: {
-      data: {
-        data: {
-          name: currentFullName,
-          email: currentEmail,
-          role: currentRole,
-          gender: currentGender,
-          photo: currentPhoto,
-        },
-      },
-    },
-  } = useUser();
-
+function Updateuserdata({
+  currentFullName,
+  currentEmail,
+  currentRole,
+  currentGender,
+  currentPhoto,
+}) {
   const { updateUser, isUpdating } = useUpdateUserData();
   const [fullName, setFullName] = useState(currentFullName);
   const [avatar, setAvatar] = useState(null);

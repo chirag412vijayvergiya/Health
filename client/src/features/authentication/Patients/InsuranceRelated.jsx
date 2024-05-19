@@ -1,4 +1,13 @@
+import { useUser } from './useUser';
+
 function InsuranceRelated() {
+  const {
+    user: {
+      data: {
+        data: { InsuranceProviderCompany, PolicyNumber },
+      },
+    },
+  } = useUser();
   return (
     <div>
       <h1 className="rounded-md bg-indigo-500 px-1 py-2 text-center text-slate-900 dark:bg-indigo-800 dark:text-grey-100">
@@ -13,9 +22,9 @@ function InsuranceRelated() {
           <div className="relative">
             <input
               type="text"
-              value="Health Insurance"
+              defaultValue={InsuranceProviderCompany}
               id="fullName"
-              disabled={false}
+              disabled
               className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
             />
           </div>
@@ -28,9 +37,9 @@ function InsuranceRelated() {
           <div className="relative">
             <input
               type="text"
-              value="123456789"
+              defaultValue={PolicyNumber}
               id="fullName"
-              disabled={false}
+              disabled
               className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
             />
           </div>
