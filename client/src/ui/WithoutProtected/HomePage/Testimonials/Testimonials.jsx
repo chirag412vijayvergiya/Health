@@ -87,8 +87,8 @@ function Test() {
       <div className="min-w-screen relative  flex min-h-[calc(100vh-4.5rem)] overflow-hidden bg-grey-50 dark:bg-grey-900">
         <div className="flex-1">
           <div className="mx-auto mb-10 h-full w-11/12 max-w-[1200px] space-y-[50px] py-20">
-            <div className="rotate-150 absolute -left-11 -top-8 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
-            <div className="absolute bottom-0 right-0 z-[100] h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
+            <div className="rotate-150 absolute -left-11 -top-8 h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
+            <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
             <div className="flex flex-col gap-2 sm:items-center">
               <p className="text-md font-semibold uppercase text-indigo-400">
                 Patient-Centered Excellence, Doctor-Driven Care!

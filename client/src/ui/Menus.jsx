@@ -1,9 +1,6 @@
-import { createContext, useContext, useState } from 'react';
-import { HiEllipsisVertical } from 'react-icons/hi2';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 import { createPortal } from 'react-dom';
-import { IoIosArrowDown } from 'react-icons/io';
-import { NavLink } from 'react-router-dom';
 
 const MenusContext = createContext();
 
@@ -14,6 +11,10 @@ function Menus({ children }) {
   const close = () => setOpenId('');
   const open = setOpenId;
 
+  useEffect(() => {
+    console.log('openId changed:', openId);
+  }, [openId]);
+
   return (
     <MenusContext.Provider
       value={{ openId, close, open, position, setPosition }}
@@ -23,10 +24,9 @@ function Menus({ children }) {
   );
 }
 
-function Toggle({ id }) {
-  console.log('id', id);
+function Toggle({ id, icon: Icon }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
-  console.log('openId', openId);
+
   function handleClick(e) {
     e.stopPropagation();
     const rect = e.target.closest('button').getBoundingClientRect();
@@ -34,16 +34,15 @@ function Toggle({ id }) {
       x: window.innerWidth - rect.width - rect.x,
       y: rect.y + rect.height + 8,
     });
-    console.log('openId', openId);
+
     openId === '' || openId !== id ? open(id) : close();
   }
-
   return (
     <button
       onClick={handleClick}
-      className="lucide lucide-chevron-down stroke-neutral-2 mt-3 h-3 w-3 stroke-1"
+      className="stroke-neutral-2 mr-2 mt-4 h-1 w-1 stroke-1"
     >
-      <IoIosArrowDown />
+      <Icon />
     </button>
   );
 }
@@ -51,14 +50,14 @@ function Toggle({ id }) {
 function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
   console.log('close', close);
-  const ref = useOutsideClick({ handler: close });
+  const ref = useOutsideClick({ handler: close, listenCapturing: false });
 
   if (openId !== id) return null;
 
   return createPortal(
     <ul
-      style={{ right: position.x - 19, top: position.y + 19 }}
-      className="fixed rounded-sm bg-grey-200  text-grey-700 shadow-md dark:bg-slate-800 dark:text-grey-300"
+      style={{ right: position?.x - 19, top: position?.y + 8 }}
+      className="fixed z-[2000] rounded-sm  bg-grey-200 text-grey-700 shadow-md dark:bg-slate-800 dark:text-grey-300"
       ref={ref}
     >
       {children}

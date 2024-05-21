@@ -23,9 +23,9 @@ function UserAvatar({ name, photo }) {
             alt="user"
             className="rounded-full bg-transparent"
           />
-          <Menus.Toggle id="profile" />
+          <Menus.Toggle id="profile" icon={IoIosArrowDown} />
         </div>
-        <Menus.List id="profile" className="z-20">
+        <Menus.List id="profile">
           <Menus.Button
             icon={<FaUser />}
             onClick={() => handleNavigation('/account')}
