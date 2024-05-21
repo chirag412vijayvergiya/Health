@@ -67,6 +67,13 @@ function DoctorAuth() {
       >
         {'For Registration, Contact Admin'}
       </button>
+      <button
+        className=" focus-visible:ring-ring mx-auto -mt-2 mr-0 inline-flex h-10  whitespace-nowrap rounded-md py-1 pl-4 font-mono text-sm font-medium tracking-tight text-red-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+        type="button"
+        // onClick={toggleMode}
+      >
+        forgot Password?
+      </button>
     </div>
   );
 }

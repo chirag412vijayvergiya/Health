@@ -26,7 +26,7 @@ export async function updateUserData({ fullName, Gender, photo }) {
 export async function getCurrentUser() {
   try {
     let role = Cookies.get('userRole');
-    if (!role) role = await getRole();
+    // if (!role) role = await getRole();
     if (role === 'admin') role = 'doctor';
     const response = await customFetch.get(`/${role}/me`);
     return response.data;
@@ -36,16 +36,16 @@ export async function getCurrentUser() {
   }
 }
 
-async function getRole() {
-  try {
-    const response = await customFetch.get('/patient/no-role');
-    console.log(response.data.data);
-    return response;
-  } catch (error) {
-    console.error('Error fetching user role : ', error);
-    throw new Error('Failed to fetch user Role');
-  }
-}
+// async function getRole() {
+//   try {
+//     const response = await customFetch.get('/patient/no-role');
+//     console.log(response.data.data);
+//     return response;
+//   } catch (error) {
+//     console.error('Error fetching user role : ', error);
+//     throw new Error('Failed to fetch user Role');
+//   }
+// }
 
 export async function Userlogout() {
   let role = Cookies.get('userRole');

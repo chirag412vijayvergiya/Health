@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 function LoginSignup() {
   const { user, isPending } = useUser();
 
-  if (isPending) <DefaultSpinner />;
+  // if (isPending) <DefaultSpinner />;
 
   return (
     <div>
@@ -36,12 +36,14 @@ function LoginSignup() {
             )} */}
             <LogoutPatient />
           </>
-        ) : (
+        ) : !isPending ? (
           <li className="mx-2 hidden sm:block">
             <Link to="/login">
               <Button type="primary">Login</Button>
             </Link>
           </li>
+        ) : (
+          <DefaultSpinner />
         )}
 
         <li className="mx-2 md:hidden">

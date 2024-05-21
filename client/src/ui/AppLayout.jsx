@@ -5,7 +5,6 @@ import Sidebar from './Sidebar';
 function AppLayout() {
   return (
     <>
-      <MainHeader />
       <div className="mt-[4.5rem] flex ">
         <div className="md:w-1/5 md:overflow-hidden">
           <Sidebar />

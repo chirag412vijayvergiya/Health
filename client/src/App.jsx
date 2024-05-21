@@ -19,6 +19,7 @@ import ProtectedRoute from './ui/ProtectedRoute';
 import Profile from './pages/Profile';
 import DoctorProfile from './pages/DoctorProfile';
 import { UserProvider } from './Context/UserRoleContext';
+import MainHeader from './ui/WithoutProtected/Header/MainHeader';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,32 +35,31 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <BrowserRouter>
-          <UserProvider>
-            <Routes>
-              <Route
-                element={
-                  <ProtectedRoute>
-                    <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="appointments" element={<Appointment />} />
-                <Route path="patients" element={<Patient />} />
-                <Route path="doctors" element={<Doctor />} />
-                <Route path="doctors/:doctorId" element={<DoctorProfile />} />
-                <Route path="payments" element={<Payments />} />
-                <Route path="reviews" element={<Reviews />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="account" element={<Profile />} />
-              </Route>
-              <Route index element={<Navigate replace to="home" />} />
-              <Route path="home" element={<HomePage />} />
-              <Route path="login" element={<Login />} />
-              <Route path="issues" element={<Issues />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-          </UserProvider>
+          <MainHeader />
+          <Routes>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="appointments" element={<Appointment />} />
+              <Route path="patients" element={<Patient />} />
+              <Route path="doctors" element={<Doctor />} />
+              <Route path="doctors/:doctorId" element={<DoctorProfile />} />
+              <Route path="payments" element={<Payments />} />
+              <Route path="reviews" element={<Reviews />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="account" element={<Profile />} />
+            </Route>
+            <Route index element={<Navigate replace to="home" />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="issues" element={<Issues />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
         </BrowserRouter>
         <Toaster
           position="top-center"

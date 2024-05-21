@@ -4,7 +4,7 @@ import Button from '../../../Button';
 function Features() {
   return (
     <div id="features-section">
-      <div className="min-w-screen  relative z-[10] flex overflow-hidden bg-grey-50 bg-cover dark:bg-gray-900">
+      <div className="min-w-screen  relative  flex overflow-hidden bg-grey-50 bg-cover dark:bg-gray-900">
         <div className="rotate-150 absolute -bottom-5 -left-11 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
         <div className="absolute -top-2 right-0 z-[100] h-80 w-80 rounded-full bg-green-600 opacity-40 blur-[120px] dark:opacity-20"></div>
         <div className="flex-1">

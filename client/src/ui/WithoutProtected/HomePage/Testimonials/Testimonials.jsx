@@ -84,7 +84,7 @@ function Test() {
 
   return (
     <div id="testimonial-section">
-      <div className="min-w-screen relative z-[10] flex min-h-[calc(100vh-4.5rem)] overflow-hidden bg-grey-50 dark:bg-grey-900">
+      <div className="min-w-screen relative  flex min-h-[calc(100vh-4.5rem)] overflow-hidden bg-grey-50 dark:bg-grey-900">
         <div className="flex-1">
           <div className="mx-auto mb-10 h-full w-11/12 max-w-[1200px] space-y-[50px] py-20">
             <div className="rotate-150 absolute -left-11 -top-8 z-[100] h-80 w-80 rounded-full bg-blue-600 opacity-40 blur-[120px] dark:opacity-30"></div>
