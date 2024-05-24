@@ -12,13 +12,14 @@ function Review() {
     <div className="grid grid-cols-1 gap-x-2 gap-y-8  sm:grid-cols-2 xl:gap-x-4">
       {Reviews.map((review, index) => (
         <ReviewCard
-          key={review.id}
+          key={review._id}
           Doctorname={review.doctor.name}
           email={review.doctor.email}
           ratings={review.rating}
           photo={review.doctor.photo}
           review={review.review}
           date={review.createdAt}
+          id={review._id}
         />
       ))}
     </div>

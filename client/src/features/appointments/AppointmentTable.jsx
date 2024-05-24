@@ -1,5 +1,8 @@
 import TableHeader from './TableHeader';
-import { BsThreeDotsVertical } from 'react-icons/bs';
+import { useAppointments } from './useAppointments';
+import DefaultSpinner from './../../ui/DefaultSpinner';
+import Empty from '../../ui/Empty';
+import AppointmentRow from './AppointmentRow';
 
 const headerContent = [
   'No.',
@@ -11,6 +14,10 @@ const headerContent = [
   'Date',
 ];
 function AppointmentTable() {
+  const { isLoading, appointments, error } = useAppointments();
+  if (isLoading) return <DefaultSpinner />;
+
+  if (!appointments?.length) return <Empty resourceName="Appointment" />;
   return (
     <div className="flex flex-col ">
       <div className="my-2 overflow-x-auto sm:mx-3 lg:mx-4">
@@ -28,57 +35,13 @@ function AppointmentTable() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-400 bg-grey-200 text-slate-600 dark:bg-slate-800 dark:text-grey-100">
-                <tr>
-                  <td className="whitespace-nowrap px-6 py-4">1</td>
-                  <td className="whitespace-nowrap px-6 py-4">John Doe</td>
-                  <td className="whitespace-nowrap px-6 py-4">Dr. Jane Doe</td>
-                  <td className="whitespace-nowrap px-6 py-4">Fever</td>
-                  <td className="whitespace-nowrap px-6 py-4">Paid</td>
-                  <td className="whitespace-nowrap px-6 py-4">Pending</td>
-                  <td className="whitespace-nowrap px-6 py-4">12/12/2021</td>
-                  <td className="whitespace-nowrap px-6 py-2">
-                    <div
-                      className="outline-2px h-9 w-9 cursor-pointer rounded border-none
-           bg-transparent p-2.5 transition  duration-200 ease-in-out hover:bg-gray-200 dark:hover:bg-slate-900"
-                    >
-                      <BsThreeDotsVertical />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="whitespace-nowrap px-6 py-4">2</td>
-                  <td className="whitespace-nowrap px-6 py-4">John Doe</td>
-                  <td className="whitespace-nowrap px-6 py-4">Dr. Jane Doe</td>
-                  <td className="whitespace-nowrap px-6 py-4">Fever</td>
-                  <td className="whitespace-nowrap px-6 py-4">Paid</td>
-                  <td className="whitespace-nowrap px-6 py-4">Pending</td>
-                  <td className="whitespace-nowrap px-6 py-4">12/12/2021</td>
-                  <td className="whitespace-nowrap px-6 py-2">
-                    <div
-                      className="outline-2px h-9 w-9 cursor-pointer rounded border-none
-           bg-transparent p-2.5 transition  duration-200 ease-in-out hover:bg-gray-200 dark:hover:bg-slate-900"
-                    >
-                      <BsThreeDotsVertical />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="whitespace-nowrap px-6 py-4">3</td>
-                  <td className="whitespace-nowrap px-6 py-4">John Doe</td>
-                  <td className="whitespace-nowrap px-6 py-4">Dr. Jane Doe</td>
-                  <td className="whitespace-nowrap px-6 py-4">Fever</td>
-                  <td className="whitespace-nowrap px-6 py-4">Paid</td>
-                  <td className="whitespace-nowrap px-6 py-4">Pending</td>
-                  <td className="whitespace-nowrap px-6 py-4">12/12/2021</td>
-                  <td className="whitespace-nowrap px-6 py-2">
-                    <div
-                      className="outline-2px h-9 w-9 cursor-pointer rounded border-none
-           bg-transparent p-2.5 transition  duration-200 ease-in-out hover:bg-gray-200 dark:hover:bg-slate-900"
-                    >
-                      <BsThreeDotsVertical />
-                    </div>
-                  </td>
-                </tr>
+                {appointments.map((content, index) => (
+                  <AppointmentRow
+                    key={content._id}
+                    index={index + 1}
+                    elements={content}
+                  />
+                ))}
               </tbody>
             </table>
           </div>

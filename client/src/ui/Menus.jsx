@@ -11,9 +11,9 @@ function Menus({ children }) {
   const close = () => setOpenId('');
   const open = setOpenId;
 
-  useEffect(() => {
-    console.log('openId changed:', openId);
-  }, [openId]);
+  // useEffect(() => {
+  //   console.log('openId changed:', openId);
+  // }, [openId]);
 
   return (
     <MenusContext.Provider
@@ -24,9 +24,9 @@ function Menus({ children }) {
   );
 }
 
-function Toggle({ id, icon: Icon }) {
+function Toggle({ id, icon: Icon, className }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
-
+  console.log('openId :- ', openId);
   function handleClick(e) {
     e.stopPropagation();
     const rect = e.target.closest('button').getBoundingClientRect();
@@ -34,29 +34,31 @@ function Toggle({ id, icon: Icon }) {
       x: window.innerWidth - rect.width - rect.x,
       y: rect.y + rect.height + 8,
     });
-
+    // console.log('openId and id: -', openId, id);
     openId === '' || openId !== id ? open(id) : close();
+    // if (openId === id) {
+    //   close();
+    // } else {
+    //   open(id);
+    // }
   }
   return (
-    <button
-      onClick={handleClick}
-      className="stroke-neutral-2 mr-2 mt-4 h-1 w-1 stroke-1"
-    >
+    <button onClick={handleClick} className={className}>
       <Icon />
     </button>
   );
 }
 
-function List({ id, children }) {
+function List({ id, children, positionX, positionY }) {
   const { openId, position, close } = useContext(MenusContext);
   console.log('close', close);
-  const ref = useOutsideClick({ handler: close, listenCapturing: false });
-
+  const ref = useOutsideClick(close, false);
+  console.log(openId, id);
   if (openId !== id) return null;
 
   return createPortal(
     <ul
-      style={{ right: position?.x - 19, top: position?.y + 8 }}
+      style={{ right: position?.x - positionX, top: position?.y + positionY }}
       className="fixed z-[2000] rounded-sm  bg-grey-200 text-grey-700 shadow-md dark:bg-slate-800 dark:text-grey-300"
       ref={ref}
     >

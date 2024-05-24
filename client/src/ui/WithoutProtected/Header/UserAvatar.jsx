@@ -1,7 +1,7 @@
 import { IoIosArrowDown } from 'react-icons/io';
 import { FaUser } from 'react-icons/fa6';
 import Menus from '../../Menus';
-import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
+// import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import { MdSpaceDashboard } from 'react-icons/md';
 
@@ -23,9 +23,18 @@ function UserAvatar({ name, photo }) {
             alt="user"
             className="rounded-full bg-transparent"
           />
-          <Menus.Toggle id="profile" icon={IoIosArrowDown} />
+          <Menus.Toggle
+            id="profile"
+            icon={IoIosArrowDown}
+            className="stroke-neutral-2 mr-2 mt-4 h-1 w-1 stroke-1"
+          />
         </div>
-        <Menus.List id="profile">
+        <Menus.List
+          id="profile"
+          listClass="dark:bg-slate-800 dark:text-grey-300"
+          positionX={19}
+          positionY={8}
+        >
           <Menus.Button
             icon={<FaUser />}
             onClick={() => handleNavigation('/account')}

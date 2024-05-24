@@ -1,8 +1,19 @@
 import MainHeader from '../ui/WithoutProtected/Header/MainHeader';
 import PatientAuth from '../features/authentication/Patients/PatientAuth';
 import DoctorAuth from '../features/authentication/Doctors/DoctorAuth';
+import { useUser } from '../features/authentication/Patients/useUser';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Login() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/home', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <>
       <MainHeader />

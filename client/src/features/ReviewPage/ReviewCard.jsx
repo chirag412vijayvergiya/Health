@@ -3,8 +3,10 @@ import StarblankRating from '../../ui/WithoutProtected/HomePage/Testimonials/Sta
 import StarfilledRating from '../../ui/WithoutProtected/HomePage/Testimonials/StarfilledRating';
 import StarhalfRating from '../../ui/WithoutProtected/HomePage/Testimonials/StarhalfRating';
 import { formatRelativeTime } from '../../utils/helpers';
+import Menus from '../../ui/Menus';
+import { HiPencil } from 'react-icons/hi2';
 
-function ReviewCard({ Doctorname, email, ratings, photo, review, date }) {
+function ReviewCard({ Doctorname, email, ratings, photo, review, date, id }) {
   const wholeStars = Math.floor(ratings); // 3
   const hasHalfStar = ratings - wholeStars >= 0.5; // 0.5
   const blankStars = 5 - wholeStars - (hasHalfStar ? 1 : 0); // 1
@@ -39,12 +41,27 @@ function ReviewCard({ Doctorname, email, ratings, photo, review, date }) {
           </div>
         </div>
       </div>
-      <div
+      {/* <div
         className="outline-2px  h-9 w-9 cursor-pointer rounded
            border-none bg-transparent p-2.5  transition duration-200 ease-in-out hover:bg-gray-200 dark:hover:bg-slate-800"
       >
         <BsThreeDotsVertical />
-      </div>
+      </div> */}
+      <Menus>
+        <div>
+          <Menus.Toggle
+            id={id}
+            icon={BsThreeDotsVertical}
+            className="outline-2px  h-9 w-9 cursor-pointer rounded
+            border-none bg-transparent p-2.5  transition duration-200 ease-in-out hover:bg-gray-200 dark:hover:bg-slate-800"
+          />
+          <Menus.List id={id} positionX={2} positionY={-13}>
+            <Menus.Button icon={<HiPencil />} disabled>
+              Edit
+            </Menus.Button>
+          </Menus.List>
+        </div>
+      </Menus>
     </div>
   );
 }

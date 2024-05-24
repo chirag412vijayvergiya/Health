@@ -47,7 +47,7 @@ appointmentSchema.pre(/^find/, function (next) {
     select: 'name photo', // This will show ( populate ) the name and photo
   }).populate({
     path: 'doctor',
-    select: 'name photo', // This will show ( populate ) the name and photo
+    select: 'name photo fees', // This will show ( populate ) the name and photo
   });
   next();
 });
