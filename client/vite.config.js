@@ -11,8 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target:
-          process.env.VITE_API_BASE_URL || 'https://jeevan-backend.vercel.app',
+        // target: process.env.VITE_API_BASE_URL || 'https://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
