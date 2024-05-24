@@ -32,11 +32,12 @@ const createSendToken = (model, statusCode, res) => {
     secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
     // sameSite: 'None', // Set sameSite attribute
     // domain: 'ocalhost', // Set domain to localhost
+    domain: '.vercel.app',
   };
 
   // if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
-  if (process.env.NODE_ENV === 'production')
-    cookiesOptions.domain = '.vercel.app';
+  // if (process.env.NODE_ENV === 'production')
+  //   cookiesOptions.domain = '.vercel.app';
   // res.cookie('jwt', token, cookiesOptions);
   // console.log('Cookies Options :- ', token);
   // // Send the JWT token in an HTTP-only cookie for server-side use
