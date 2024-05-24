@@ -5,13 +5,10 @@ dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  build: {
-    outDir: 'dist', // Ensure the output directory is set to 'dist'
-  },
   server: {
     proxy: {
       '/api': {
-        // target: process.env.VITE_API_BASE_URL || 'https://localhost:8000',
+        target: 'http:',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
