@@ -28,7 +28,7 @@ app.use('/users', express.static(path.join(__dirname, 'public/users')));
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://jeevan-frontend.vercel.app',
     credentials: true,
     headers: [
       'Content-Type',
