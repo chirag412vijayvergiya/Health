@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "public": "dist",
+  "public": true,
   "builds": [
     {
       "src": "dist/**/*",
