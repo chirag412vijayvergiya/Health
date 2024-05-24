@@ -34,7 +34,9 @@ const createSendToken = (model, statusCode, res) => {
     // domain: 'ocalhost', // Set domain to localhost
   };
 
-  if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
+  // if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
+  if (process.env.NODE_ENV === 'production')
+    cookiesOptions.domain = '.vercel.app';
   // res.cookie('jwt', token, cookiesOptions);
   // console.log('Cookies Options :- ', token);
   // // Send the JWT token in an HTTP-only cookie for server-side use
