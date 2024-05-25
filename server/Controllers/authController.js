@@ -55,7 +55,7 @@ const createSendToken = (model, statusCode, res) => {
     ),
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
-    // domain: 'jeevan-frontend.vercel.app',
+    domain: 'jeevan-frontend.vercel.app',
     sameSite: 'None',
   });
 
