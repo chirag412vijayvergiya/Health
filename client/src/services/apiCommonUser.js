@@ -27,11 +27,9 @@ export async function getCurrentUser() {
   try {
     let role = Cookies.get('userRole');
     // if (!role) role = await getRole();
-    console.log('Role :-', role);
-    console.log('jwt :- ', Cookies.get('jwt'));
     if (role === 'admin') role = 'doctor';
-    // const response = await customFetch.get(`/${role}/me`);
-    const response = await customFetch.get(`/patient/me`);
+    const response = await customFetch.get(`/${role}/me`);
+    // const response = await customFetch.get(`/patient/me`);
     return response.data;
   } catch (error) {
     console.error('Error fetching user data: ', error);

@@ -59,16 +59,6 @@ const createSendToken = (model, statusCode, res) => {
   //   sameSite: 'None',
   // });
 
-  res.cookie('userRole', model.role, {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-    ),
-    httpOnly: false,
-    secure: process.env.NODE_ENV === 'production',
-    domain: 'jeevan-frontend.vercel.app',
-    sameSite: 'None',
-  });
-
   // Send the JWT token in a non-HTTP-only cookie for client-side access
   // res.cookie(
   //   'jwt-client',

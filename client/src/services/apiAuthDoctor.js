@@ -8,7 +8,7 @@ export async function doctorLogin({ email, password }) {
       password,
     });
     const userRole = response.data.data.model.role;
-    Cookies.set('userRole', userRole, { expires: 7 });
+    Cookies.set('userRole', userRole, { expires: 90 });
     return response.data;
   } catch (error) {
     console.error('Error logging in: ', error);
