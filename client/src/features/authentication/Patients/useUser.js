@@ -19,6 +19,9 @@ export function useUser() {
     enabled: !!role,
     retry: 0,
   });
+  if (role === null) {
+    return { isPending: false, user: null, isAuthenticated: false };
+  }
 
   return { isPending, user, isAuthenticated: user?.status };
 }
