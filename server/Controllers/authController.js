@@ -53,9 +53,9 @@ const createSendToken = (model, statusCode, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     ),
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    domain: 'jeevan-frontend.vercel.app',
+    httpOnly: false,
+    // secure: process.env.NODE_ENV === 'production',
+    // domain: 'jeevan-frontend.vercel.app',
     sameSite: 'None',
   });
 
