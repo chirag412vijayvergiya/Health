@@ -32,7 +32,7 @@ const createSendToken = (model, statusCode, res) => {
     secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
     sameSite: 'None', // Set sameSite attribute
     // domain: 'ocalhost', // Set domain to localhost
-    domain: '.vercel.app',
+    domain: 'jeevan-frontend.vercel.app',
   };
 
   // if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
@@ -55,7 +55,7 @@ const createSendToken = (model, statusCode, res) => {
     ),
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
-    domain: '.vercel.app',
+    domain: 'jeevan-frontend.vercel.app',
     sameSite: 'None',
   });
 
