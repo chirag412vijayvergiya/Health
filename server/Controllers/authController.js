@@ -56,7 +56,7 @@ const createSendToken = (model, statusCode, res) => {
     httpOnly: false,
     // secure: process.env.NODE_ENV === 'production',
     // domain: 'jeevan-frontend.vercel.app',
-    sameSite: 'None',
+    // sameSite: 'None',
   });
 
   // Send the JWT token in a non-HTTP-only cookie for client-side access
