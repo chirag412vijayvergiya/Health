@@ -393,7 +393,7 @@ const logout = (req, res) => {
   //   secure: process.env.NODE_ENV === 'production',
   // });
   res.clearCookie('jwt');
-  res.status(200).json({ status: 'success' });
+  res.status(200).json({ status: 'successful' });
 };
 
 exports.logoutdoctor = (req, res) => {
