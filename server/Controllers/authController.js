@@ -410,6 +410,8 @@ const logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    sameSite: 'None',
+    secure: process.env.NODE_ENV === 'production',
   });
   res.status(200).json({ status: 'success' });
 };
