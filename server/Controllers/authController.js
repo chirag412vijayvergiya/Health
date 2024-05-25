@@ -49,13 +49,23 @@ const createSendToken = (model, statusCode, res) => {
   );
 
   // Optionally send user role in a non-HTTP-only cookie for client-side access
+  // res.cookie('userRole', model.role, {
+  //   expires: new Date(
+  //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+  //   ),
+  //   httpOnly: false,
+  //   secure: process.env.NODE_ENV === 'production',
+  //   // domain: 'jeevan-frontend.vercel.app',
+  //   sameSite: 'None',
+  // });
+
   res.cookie('userRole', model.role, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     ),
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
-    // domain: 'jeevan-frontend.vercel.app',
+    domain: 'jeevan-frontend.vercel.app',
     sameSite: 'None',
   });
 
