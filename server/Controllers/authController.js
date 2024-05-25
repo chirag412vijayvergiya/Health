@@ -55,7 +55,7 @@ const createSendToken = (model, statusCode, res) => {
     ),
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
-    domain: 'jeevan-frontend.vercel.app',
+    // domain: 'jeevan-frontend.vercel.app',
     sameSite: 'None',
   });
 
@@ -171,6 +171,7 @@ const protect = async (req, res, model, next) => {
       ),
       httpOnly: false,
       secure: process.env.NODE_ENV === 'production',
+      sameSite: 'None',
     });
   }
   // console.log('decoded :- ', decoded);
