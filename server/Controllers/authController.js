@@ -142,7 +142,7 @@ const protect = async (req, res, model, next) => {
   // 1) Getting token and check of it's there
   // console.log('Request :- ', req.cookies);
   // console.log('Request :- ', req.headers);
-  const { userRole } = req.cookies;
+  // const { userRole } = req.cookies;
   // console.log('User Role :- ', userRole);
   let token;
   if (
@@ -163,17 +163,17 @@ const protect = async (req, res, model, next) => {
   //Verification token
   // promisify converts callback-based functions into promise-based functions.
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  if (token && !userRole) {
-    // Decode the token to get the user's role
-    res.cookie('userRole', decoded.role, {
-      expires: new Date(
-        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-      ),
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'None',
-    });
-  }
+  // if (token && !userRole) {
+  //   // Decode the token to get the user's role
+  //   res.cookie('userRole', decoded.role, {
+  //     expires: new Date(
+  //       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+  //     ),
+  //     httpOnly: false,
+  //     secure: process.env.NODE_ENV === 'production',
+  //     sameSite: 'None',
+  //   });
+  // }
   // console.log('decoded :- ', decoded);
 
   //3) check if user still exist
