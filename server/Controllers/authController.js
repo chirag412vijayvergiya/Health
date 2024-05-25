@@ -35,18 +35,7 @@ const createSendToken = (model, statusCode, res) => {
     // domain: 'jeevan-frontend.vercel.app',
   };
 
-  // if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
-  // if (process.env.NODE_ENV === 'production')
-  //   cookiesOptions.domain = '.vercel.app';
-  // res.cookie('jwt', token, cookiesOptions);
-  // console.log('Cookies Options :- ', token);
-  // // Send the JWT token in an HTTP-only cookie for server-side use
-  res.cookie(
-    'jwt',
-    token,
-    // Object.assign({}, cookiesOptions, { httpOnly: true })
-    cookiesOptions,
-  );
+  res.cookie('jwt', token, cookiesOptions);
 
   // Optionally send user role in a non-HTTP-only cookie for client-side access
   // res.cookie('userRole', model.role, {
@@ -58,16 +47,6 @@ const createSendToken = (model, statusCode, res) => {
   //   // domain: 'jeevan-frontend.vercel.app',
   //   sameSite: 'None',
   // });
-
-  // Send the JWT token in a non-HTTP-only cookie for client-side access
-  // res.cookie(
-  //   'jwt-client',
-  //   token,
-  //   Object.assign({}, cookiesOptions, { httpOnly: false }),
-  // );
-
-  // Set Access-Control-Allow-Credentials header
-  // res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   model.password = undefined;
 
