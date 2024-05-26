@@ -21,6 +21,7 @@ function HeaderMobile() {
         offset: -75,
         spy: true,
       });
+      setOpen(false);
     } catch (err) {
       console.error('Error navigating or scrolling:', err);
     }
@@ -85,7 +86,7 @@ function HeaderMobile() {
           <div className="my-6 flex justify-center">
             {' '}
             {/* Center the login button */}
-            <Link to="/login">
+            <Link to="/login" onClick={() => setOpen((prev) => !prev)}>
               <Button type="primary">Login</Button>
             </Link>
           </div>
