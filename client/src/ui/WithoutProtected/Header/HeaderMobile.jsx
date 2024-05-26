@@ -6,7 +6,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import * as Scroll from 'react-scroll';
 import Button from '../../Button';
+import { useUser } from '../../../features/authentication/Patients/useUser';
 function HeaderMobile() {
+  const { user, isPending } = useUser();
   const [isOpen, setOpen] = useState(false);
   const path = useLocation().pathname;
   const location = path.split('/')[1];
@@ -83,13 +85,16 @@ function HeaderMobile() {
                   );
                 })}
           </ul>
-          <div className="my-6 flex justify-center">
-            {' '}
-            {/* Center the login button */}
-            <Link to="/login" onClick={() => setOpen((prev) => !prev)}>
-              <Button type="primary">Login</Button>
-            </Link>
-          </div>
+          {!user ? (
+            <div className="my-6 flex justify-center">
+              {/* Center the login button */}
+              <Link to="/login" onClick={() => setOpen((prev) => !prev)}>
+                <Button type="primary">Login</Button>
+              </Link>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       )}
     </div>

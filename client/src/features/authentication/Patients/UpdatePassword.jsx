@@ -35,14 +35,14 @@ function UpdatePassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className="mx-[22vh] rounded-md bg-indigo-500 px-1 py-2 text-center text-slate-900 dark:bg-indigo-800 dark:text-grey-100">
+      <h1 className="rounded-md bg-indigo-500 px-1 py-2 text-center text-slate-900 dark:bg-indigo-800 dark:text-grey-100 md:mx-[22vh]">
         Update Password
       </h1>
       <div className="flex flex-col gap-y-3 p-2">
         <div className="flex flex-col gap-y-1">
           <label
             htmlFor="currentPassword"
-            className="font-mono text-lg font-medium text-stone-900 dark:text-stone-300"
+            className=" text-lg font-medium text-stone-900 dark:text-stone-300"
           >
             Current Password
           </label>
@@ -52,15 +52,15 @@ function UpdatePassword() {
               id="currentPassword"
               onChange={(e) => setCurPassword(e.target.value)}
               disabled={isUpdating}
-              className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
+              className="w-full rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 tracking-tighter  shadow-sm  dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100 md:w-[12.7rem]"
             />
           </div>
         </div>
-        <div className="flex gap-6 ">
+        <div className="flex flex-col gap-6 md:flex-row">
           <div className="flex flex-col gap-y-1">
             <label
               htmlFor="newPassword"
-              className="font-mono text-lg font-medium text-stone-900 dark:text-stone-300"
+              className=" text-lg font-medium text-stone-900 dark:text-stone-300"
             >
               New Password
             </label>
@@ -70,14 +70,14 @@ function UpdatePassword() {
                 id="newPassword"
                 onChange={(e) => setNewPassword(e.target.value)}
                 disabled={isUpdating}
-                className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
+                className="w-full rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 tracking-tighter  shadow-sm  dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100 md:w-[12.7rem]"
               />
             </div>
           </div>
           <div className="flex flex-col gap-y-1">
             <label
               htmlFor="confirmPassword"
-              className="font-mono text-lg font-medium text-stone-900 dark:text-stone-300"
+              className=" text-lg font-medium text-stone-900 dark:text-stone-300"
             >
               Confirm Password
             </label>
@@ -87,7 +87,7 @@ function UpdatePassword() {
                 id="confirmPassword"
                 onChange={(e) => setConfPassword(e.target.value)}
                 disabled={isUpdating}
-                className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
+                className="w-full rounded-sm border border-grey-300 bg-grey-0 p-1 pl-3 tracking-tighter  shadow-sm  dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100 md:w-[12.7rem]"
               />
             </div>
           </div>

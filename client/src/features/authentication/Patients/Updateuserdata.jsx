@@ -53,16 +53,19 @@ function Updateuserdata({
   );
   return (
     fullName !== undefined && (
-      <form className="m-8 flex " onSubmit={handleSubmit}>
-        <div className="h-10 w-1/3">
-          <span className="relative my-6 ml-10 flex shrink-0 overflow-hidden rounded-full hover:brightness-90">
+      <form
+        className="m-9 ml-10 flex flex-col font-sans md:flex-row"
+        onSubmit={handleSubmit}
+      >
+        <div className="ml-7 h-full w-full items-center md:ml-0 md:h-10 md:w-1/3">
+          <span className="relative my-4 ml-10 flex shrink-0 overflow-hidden rounded-full hover:brightness-90 md:my-6">
             <img
               src={
                 preview ||
                 `${import.meta.env.VITE_API_BASE_URL}/users/${currentPhoto}`
               }
               alt={`Avatar of ${currentFullName}`}
-              className=" aspect-square  rounded-full border object-cover"
+              className="aspect-square items-center rounded-full border object-cover md:mx-0"
               height="115"
               width="115"
             />
@@ -72,13 +75,13 @@ function Updateuserdata({
             accept="image/*"
             onChange={handleFileChange}
             disabled={isUpdating}
-            className="mt-2 w-[12.9rem] cursor-pointer rounded-sm bg-brand-600 px-2 py-2 font-mono text-sm tracking-tighter text-brand-50 transition duration-200 hover:bg-brand-700"
+            className="ml-6 mt-1 w-[9rem] cursor-pointer rounded-sm bg-brand-600 px-2 py-2  text-sm tracking-wider text-brand-50 transition duration-200 hover:bg-brand-700 md:ml-0 md:mt-2 md:w-[12.9rem]"
           />
         </div>
-        <div className="flex w-2/3 flex-col gap-y-3">
-          <div className="flex gap-6 ">
+        <div className="mt-4 flex w-full flex-col gap-y-3 md:mt-0 md:w-2/3">
+          <div className="flex  flex-row gap-6">
             <div className="flex flex-1 flex-col gap-1">
-              <label className="font-mono text-lg font-medium text-stone-900 dark:text-stone-300">
+              <label className=" text-base font-medium tracking-wider text-stone-900 dark:text-stone-300 md:text-lg">
                 Full Name
               </label>
               <div className="relative">
@@ -88,12 +91,12 @@ function Updateuserdata({
                   id="fullName"
                   onChange={(e) => setFullName(e.target.value)}
                   disabled={isUpdating}
-                  className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
+                  className="w-full  rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 text-sm tracking-normal shadow-sm dark:border-slate-700 dark:bg-slate-800  dark:text-gray-100 md:w-[12.7rem] md:text-base md:tracking-wider"
                 />
               </div>
             </div>
             <div className="flex flex-1 flex-col gap-1">
-              <label className="font-mono text-lg font-medium text-stone-900 dark:text-stone-300">
+              <label className=" text-base font-medium tracking-wider text-stone-900 dark:text-stone-300">
                 Email
               </label>
               <div className="">
@@ -101,14 +104,14 @@ function Updateuserdata({
                   type="text"
                   defaultValue={currentEmail}
                   disabled
-                  className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  opacity-50 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
+                  className="w-full  rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 text-sm tracking-normal opacity-50 shadow-sm dark:border-slate-700 dark:bg-slate-800  dark:text-gray-100 md:w-[12.7rem] md:text-base md:tracking-wider"
                 />
               </div>
             </div>
           </div>
-          <div className="flex gap-6">
+          <div className="flex  flex-row gap-6">
             <div className="flex flex-1 flex-col gap-1">
-              <label className="font-mono text-lg font-medium text-stone-900 dark:text-stone-300">
+              <label className=" text-base font-medium tracking-wider text-stone-900 dark:text-stone-300">
                 Role
               </label>
               <div className="relative">
@@ -117,12 +120,12 @@ function Updateuserdata({
                   defaultValue={currentRole}
                   id="Role"
                   disabled
-                  className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  opacity-50 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100"
+                  className=" w-full rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 text-sm tracking-wider opacity-50  shadow-sm  dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100 md:w-[12.7rem] md:text-base"
                 />
               </div>
             </div>
             <div className="flex flex-1 flex-col gap-1">
-              <label className="font-mono text-lg font-medium text-stone-900 dark:text-stone-300">
+              <label className="text-base font-medium tracking-wider text-stone-900 dark:text-stone-300">
                 Gender
               </label>
               <div className="relative">
@@ -132,12 +135,12 @@ function Updateuserdata({
                   id="Gender"
                   onChange={(e) => setGender(e.target.value)}
                   disabled={isUpdating}
-                  className="w-[12.7rem] rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 font-mono tracking-tighter  shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100 "
+                  className="w-full rounded-sm border border-grey-300 bg-grey-0 p-2 pl-3 text-sm tracking-wider shadow-sm  dark:border-slate-700  dark:bg-slate-800 dark:text-gray-100 md:w-[12.7rem] md:text-base "
                 />
               </div>
             </div>
           </div>
-          <div className="mt-5 flex justify-end gap-5">
+          <div className="mt-5 flex justify-end gap-5 ">
             <Button
               type="reset"
               variation="secondary"
