@@ -73,7 +73,7 @@ function MobileBottombar() {
         className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
         <HiOutlineCog6Tooth size={22} />
-        <span className="text-xs font-thin tracking-tighter">Settings</span>
+        {/* <span className="text-xs font-thin tracking-tighter">Settings</span> */}
       </NavLink>
     </div>
   );

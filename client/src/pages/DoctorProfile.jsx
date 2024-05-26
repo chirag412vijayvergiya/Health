@@ -17,14 +17,14 @@ function DoctorProfile() {
         {`${doctor.name}'s Profile`}
       </h1>
       <div className="flex-1 overflow-scroll">
-        <ProfileImage doctor={doctor} className="h-1/3" />
-        <div className="mx-auto flex w-full flex-row items-center justify-center gap-x-2">
-          <div className="flex h-1/3 w-full flex-row items-center justify-center gap-x-2">
+        <ProfileImage doctor={doctor} className="md:h-1/3" />
+        <div className="mx-auto flex w-full flex-col items-center justify-center gap-x-2 lg:flex-row">
+          <div className="flex h-full w-full flex-col items-center justify-center gap-x-2 md:h-1/3 md:flex-row">
             <PersonalData doctor={doctor} />
             <Specialization doctor={doctor} />
           </div>
         </div>
-        <div className="h-1/3">
+        <div className="md:h-1/3">
           <ReviewData doctor={doctor} />
         </div>
       </div>
