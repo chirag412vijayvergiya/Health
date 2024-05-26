@@ -24,22 +24,22 @@ function MobileBottombar() {
         className="relative flex flex-1 flex-col items-center text-grey-800 dark:text-grey-500"
       >
         <MdSpaceDashboard className="" />
-        {/* <span className="text-xs">Dashboard</span> */}
+        <span className="text-xs font-thin tracking-tighter">Dashboard</span>
       </NavLink>
       <NavLink
         to="/appointments"
         className="text-main-06 hover:text-main-06 relative flex flex-1 flex-col items-center"
       >
         <GiTechnoHeart />
-        {/* <span className="text-xs">Appointments</span> */}
+        <span className="text-xs font-thin tracking-tighter">Appointments</span>
       </NavLink>
 
       <NavLink
         to="/patients"
-        className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
+        className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600  aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400"
       >
         <FaPersonCane />
-        {/* <span className="text-xs">Patients</span> */}
+        <span className="text-xs font-thin tracking-tighter">Patients</span>
       </NavLink>
 
       <NavLink
@@ -47,7 +47,7 @@ function MobileBottombar() {
         className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
       >
         <FaUserDoctor />
-        {/* <span className="text-xs">Doctors</span> */}
+        <span className="text-xs font-thin tracking-tighter">Doctors</span>
       </NavLink>
 
       <NavLink
@@ -55,7 +55,7 @@ function MobileBottombar() {
         className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
       >
         <MdOutlinePayments />
-        {/* <span className="text-xs">Payments</span> */}
+        <span className="text-xs font-thin tracking-tighter">Payments</span>
       </NavLink>
       {currentRole === 'patient' && (
         <NavLink
@@ -63,7 +63,7 @@ function MobileBottombar() {
           className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
         >
           <HiOutlineUsers />
-          {/* <span className="text-xs">Reviews</span> */}
+          <span className="text-xs font-thin tracking-tighter">Reviews</span>
         </NavLink>
       )}
 
@@ -72,7 +72,7 @@ function MobileBottombar() {
         className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
       >
         <HiOutlineCog6Tooth />
-        {/* <span className="text-xs">Settings</span> */}
+        <span className="text-xs font-thin tracking-tighter">Settings</span>
       </NavLink>
     </div>
   );
