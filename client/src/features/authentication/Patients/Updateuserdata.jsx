@@ -57,7 +57,7 @@ function Updateuserdata({
         className="m-9 ml-10 flex flex-col font-sans md:flex-row"
         onSubmit={handleSubmit}
       >
-        <div className="ml-7 h-full w-full items-center md:ml-0 md:h-10 md:w-1/3">
+        <div className="ml-11 h-full w-full  md:ml-0 md:h-10 md:w-1/3">
           <span className="relative my-4 ml-10 flex shrink-0 overflow-hidden rounded-full hover:brightness-90 md:my-6">
             <img
               src={

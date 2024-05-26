@@ -8,7 +8,7 @@ import * as Scroll from 'react-scroll';
 import Button from '../../Button';
 import { useUser } from '../../../features/authentication/Patients/useUser';
 function HeaderMobile() {
-  const { user, isPending } = useUser();
+  const { user } = useUser();
   const [isOpen, setOpen] = useState(false);
   const path = useLocation().pathname;
   const location = path.split('/')[1];

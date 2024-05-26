@@ -1,7 +1,11 @@
+import { useUser } from '../../../../features/authentication/Patients/useUser';
 import Button from '../../../Button';
+import DefaultSpinner from '../../../DefaultSpinner';
 import AboutUs from './AboutUs';
+import { Link } from 'react-router-dom';
 
 function Footer() {
+  const { user, isPending } = useUser();
   return (
     <footer
       className="relative mx-auto min-h-[280px] w-full bg-gray-900 py-8 pb-8 pt-48 dark:bg-gray-50"
@@ -18,7 +22,19 @@ function Footer() {
                 Talk to us today
               </p>
             </div>
-            <Button type="third">Get Started</Button>
+            {!isPending ? (
+              user ? (
+                <Link to="/dashboard">
+                  <Button type="third">Get Started</Button>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <Button type="third">Get Started</Button>
+                </Link>
+              )
+            ) : (
+              <DefaultSpinner />
+            )}
           </div>
         </div>
       </div>

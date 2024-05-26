@@ -1,6 +1,10 @@
 import Button from '../../Button';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
+import { useUser } from '../../../features/authentication/Patients/useUser';
+import DefaultSpinner from '../../DefaultSpinner';
 function Hero() {
+  const { user, isPending } = useUser();
   return (
     <div
       id="Home"
@@ -12,10 +16,26 @@ function Hero() {
         <div className="flex-1">
           <div className="mx-auto flex w-11/12 max-w-[1200px] flex-col items-center justify-between gap-[50px] py-10 sm:py-[5rem] md:h-full lg:flex-row lg:gap-6 lg:py-0">
             <div className="space-y-4 sm:space-y-8">
-              <button className="dark:accent-1-06 bg-accent-1-11 dark:border-accent-1-02 mx-auto flex items-center gap-1 rounded-full border border-amber-600 bg-amber-100 p-1 px-2 text-[10px] font-medium text-yellow-600 dark:bg-gray-800 sm:px-3 sm:text-sm lg:mx-0 lg:justify-start">
-                <p>Start your healing journey with us today</p>
-                <IoIosArrowForward />
-              </button>
+              {!isPending ? (
+                user ? (
+                  <Link to="/dashboard">
+                    <button className="dark:accent-1-06 bg-accent-1-11 dark:border-accent-1-02 mx-auto flex items-center gap-1 rounded-full border border-amber-600 bg-amber-100 p-1 px-2 text-[10px] font-medium text-yellow-600 dark:bg-gray-800 sm:px-3 sm:text-sm lg:mx-0 lg:justify-start">
+                      <p>Start your healing journey with us today</p>
+                      <IoIosArrowForward />
+                    </button>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <button className="dark:accent-1-06 bg-accent-1-11 dark:border-accent-1-02 mx-auto flex items-center gap-1 rounded-full border border-amber-600 bg-amber-100 p-1 px-2 text-[10px] font-medium text-yellow-600 dark:bg-gray-800 sm:px-3 sm:text-sm lg:mx-0 lg:justify-start">
+                      <p>Start your healing journey with us today</p>
+                      <IoIosArrowForward />
+                    </button>
+                  </Link>
+                )
+              ) : (
+                <DefaultSpinner />
+              )}
+
               <div className="space-y-2">
                 <h1 className="text-center text-3xl font-bold sm:text-4xl lg:text-left xl:text-5xl">
                   <span className="leading-[1.2] text-grey-800  dark:text-grey-50">
@@ -33,9 +53,13 @@ function Hero() {
                 </p>
               </div>
               <div className="flex items-center justify-center gap-x-4 lg:justify-start">
-                <a href="#">
-                  <Button type="primary">Join Now</Button>
-                </a>
+                {user ? (
+                  ''
+                ) : (
+                  <Link to="/login">
+                    <Button type="primary">Join Now</Button>
+                  </Link>
+                )}
               </div>
             </div>
             <div className="flex aspect-square w-[320px] items-center justify-center sm:w-[500px]">
