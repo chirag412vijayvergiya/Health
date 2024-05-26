@@ -18,62 +18,61 @@ function MobileBottombar() {
     },
   } = useUser();
   return (
-    <div className="mx-1 flex w-11/12 max-w-lg items-center justify-between py-2">
+    <div className="mx-auto flex w-11/12 max-w-lg items-center justify-between py-3">
       <NavLink
         to="/dashboard"
-        className="relative flex flex-1 flex-col items-center text-grey-800 dark:text-grey-500"
+        className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
-        <MdSpaceDashboard className="" />
-        <span className="pr-[0.5rem] text-xs font-thin tracking-tight">
-          Dashboard
-        </span>
+        <MdSpaceDashboard size={22} />
+
+        {/* <span className="text-xs font-thin tracking-tight">Dashboard</span> */}
       </NavLink>
       <NavLink
         to="/appointments"
-        className="text-main-06 hover:text-main-06 relative flex flex-1 flex-col items-center"
+        className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
-        <GiTechnoHeart />
-        <span className="text-xs font-thin tracking-tighter">Appointments</span>
+        <GiTechnoHeart size={22} />
+        {/* <span className="text-xs font-thin tracking-tighter">Appointments</span> */}
       </NavLink>
 
       <NavLink
         to="/patients"
-        className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600  aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:text-indigo-400"
+        className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
-        <FaPersonCane />
-        <span className="text-xs font-thin tracking-tighter">Patients</span>
+        <FaPersonCane size={22} />
+        {/* <span className="text-xs font-thin tracking-tighter">Patients</span> */}
       </NavLink>
 
       <NavLink
         to="/doctors"
-        className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
+        className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
-        <FaUserDoctor />
-        <span className="text-xs font-thin tracking-tighter">Doctors</span>
+        <FaUserDoctor size={22} />
+        {/* <span className="text-xs font-thin tracking-tighter">Doctors</span> */}
       </NavLink>
 
       <NavLink
         to="/payments"
-        className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
+        className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
-        <MdOutlinePayments />
-        <span className="text-xs font-thin tracking-tighter">Payments</span>
+        <MdOutlinePayments size={22} />
+        {/* <span className="text-xs font-thin tracking-tighter">Payments</span> */}
       </NavLink>
       {currentRole === 'patient' && (
         <NavLink
           to="/reviews"
-          className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
+          className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
         >
-          <HiOutlineUsers />
-          <span className="text-xs font-thin tracking-tighter">Reviews</span>
+          <HiOutlineUsers size={22} />
+          {/* <span className="text-xs font-thin tracking-tighter">Reviews</span> */}
         </NavLink>
       )}
 
       <NavLink
         to="/settings"
-        className="relative flex flex-1 flex-col items-center text-grey-600 hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
+        className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
-        <HiOutlineCog6Tooth />
+        <HiOutlineCog6Tooth size={22} />
         <span className="text-xs font-thin tracking-tighter">Settings</span>
       </NavLink>
     </div>
