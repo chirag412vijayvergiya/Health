@@ -18,13 +18,15 @@ function MobileBottombar() {
     },
   } = useUser();
   return (
-    <div className="mx-auto flex w-11/12 max-w-lg items-center justify-between py-4">
+    <div className="mx-1 flex w-11/12 max-w-lg items-center justify-between py-2">
       <NavLink
         to="/dashboard"
         className="relative flex flex-1 flex-col items-center text-grey-800 dark:text-grey-500"
       >
         <MdSpaceDashboard className="" />
-        <span className="text-xs font-thin tracking-tighter">Dashboard</span>
+        <span className="pr-[0.5rem] text-xs font-thin tracking-tight">
+          Dashboard
+        </span>
       </NavLink>
       <NavLink
         to="/appointments"
