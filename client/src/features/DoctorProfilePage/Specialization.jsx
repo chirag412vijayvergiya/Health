@@ -10,10 +10,10 @@ function Specialization({ doctor }) {
     <div
       // className=" flex w-full flex-col gap-6 rounded-2xl border border-gray-300 bg-gray-50 p-6 tracking-widest shadow-sm  shadow-grey-400 dark:border-slate-800 dark:bg-slate-900 dark:shadow-grey-900 md:w-1/2 md:overflow-scroll"
       // style={{ height: '28vh', overflowY: 'auto' }}
-      className=" mb-2 flex h-auto w-full flex-col gap-6 rounded-2xl border border-gray-300 bg-gray-50 p-6 tracking-widest shadow-sm shadow-grey-400 dark:border-slate-800 dark:bg-slate-900 dark:shadow-grey-900 md:mb-0 md:h-[28vh] md:w-1/2 md:overflow-y-auto"
+      className="mb-2 flex h-auto w-full flex-col gap-6 rounded-2xl border border-gray-300 bg-gray-50 p-6 tracking-widest shadow-sm shadow-grey-400 dark:border-slate-800 dark:bg-slate-900 dark:shadow-grey-900 md:mb-0 md:h-[28vh] md:w-1/2 md:overflow-y-auto"
     >
       <p
-        className="mx-[4rem] gap-y-3 rounded-xl border-2 border-yellow-500 bg-green-300 px-9 text-sm font-semibold  uppercase text-grey-800 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:mx-[6.5rem] "
+        className="mx-[2rem] gap-y-3 rounded-xl border-2 border-yellow-500 bg-green-300 px-2 text-sm font-semibold uppercase text-grey-800  peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:mx-[6.5rem]  md:px-9 "
         htmlFor={doctor.id}
       >
         Specialization
