@@ -11,7 +11,7 @@ function ReviewCard({ Doctorname, email, ratings, photo, review, date, id }) {
   const hasHalfStar = ratings - wholeStars >= 0.5; // 0.5
   const blankStars = 5 - wholeStars - (hasHalfStar ? 1 : 0); // 1
   return (
-    <div className="m-auto flex h-[13rem] w-[21rem] max-w-xl flex-row justify-between overflow-scroll rounded-xl border-b border-gray-300 bg-gray-50 p-6 tracking-wider shadow-sm shadow-grey-400 dark:border-slate-800 dark:bg-slate-900 dark:shadow-grey-900 md:h-[15rem] md:w-[29rem]">
+    <div className="m-auto flex h-[13rem] w-[20rem] max-w-xl flex-row justify-between overflow-scroll rounded-xl border-b border-gray-300 bg-gray-50 p-6 tracking-wider shadow-sm shadow-grey-400 dark:border-slate-800 dark:bg-slate-900 dark:shadow-grey-900 md:h-[15rem] md:w-[29rem]">
       <div className="flex flex-row">
         <img
           src={`${import.meta.env.VITE_API_BASE_URL}/users/${photo}`}
