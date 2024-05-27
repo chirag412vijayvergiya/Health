@@ -1,5 +1,7 @@
 const factory = require('./handleFactory');
 const appointments = require('../models/appointmentModel');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/AppError');
 
 exports.setPatientDoctorIDs = (req, res, next) => {
   if (!req.body.patient) req.body.patient = req.patient.id;
@@ -22,3 +24,29 @@ exports.getMyAppointments = async (req, res, next) => {
     },
   });
 };
+
+exports.getOneAppointment = catchAsync(async (req, res, next) => {
+  // console.log(req.user);
+  // const appointment = await appointments.find({ patient: req.user.id });
+  // const OneAppointment = appointment.findById(req.params.id);
+  const appointment = await appointments.findOne({
+    _id: req.params.id,
+    patient: req.user.id,
+  });
+  console.log(appointment);
+  if (!appointment) {
+    return next(
+      new AppError(
+        'No appointment found with that ID for the current user',
+        404,
+      ),
+    );
+  }
+  res.status(200).json({
+    status: 'success',
+    results: appointment.length,
+    data: {
+      appointment,
+    },
+  });
+});

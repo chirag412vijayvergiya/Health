@@ -20,6 +20,7 @@ import Profile from './pages/Profile';
 import DoctorProfile from './pages/DoctorProfile';
 import { UserProvider } from './Context/UserRoleContext';
 import MainHeader from './ui/WithoutProtected/Header/MainHeader';
+import Appointments from './pages/Appointments';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,7 +46,11 @@ function App() {
               }
             >
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="appointments" element={<Appointment />} />
+              <Route path="appointments" element={<Appointments />} />
+              <Route
+                path="appointments/:appointmentId"
+                element={<Appointment />}
+              />
               <Route path="patients" element={<Patient />} />
               <Route path="doctors" element={<Doctor />} />
               <Route path="doctors/:doctorId" element={<DoctorProfile />} />

@@ -14,12 +14,24 @@ const appointmentSchema = new mongoose.Schema(
     },
     appointmentDate: {
       type: Date,
-      default: () => {
-        // Calculate the current date plus one day
-        const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + 1);
-        return currentDate;
+      required: [true, 'Appointment date is required'],
+      validate: {
+        validator: function (value) {
+          return value > this.bookingDate;
+        },
+        message: 'Appointment date must be greater than booking date',
       },
+    },
+    review: {
+      type: String,
+      required: [
+        true,
+        'Required for checking if Review Exist for Particular Doctor',
+      ],
+    },
+    bookingDate: {
+      type: Date,
+      default: Date.now,
     },
     disease: {
       type: String,
@@ -44,10 +56,10 @@ appointmentSchema.index({ patient: 1, doctor: 1 });
 appointmentSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'patient',
-    select: 'name photo', // This will show ( populate ) the name and photo
+    select: 'name photo email', // This will show ( populate ) the name and photo
   }).populate({
     path: 'doctor',
-    select: 'name photo fees', // This will show ( populate ) the name and photo
+    select: 'name photo fees email', // This will show ( populate ) the name and photo
   });
   next();
 });

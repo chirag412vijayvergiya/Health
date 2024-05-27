@@ -8,6 +8,13 @@ router.get(
   authController.protectpatient,
   appointmentController.getMyAppointments,
 );
+
+router.get(
+  '/:id',
+  authController.protectpatient,
+  appointmentController.getOneAppointment,
+);
+
 router.use(authController.protectdoctor);
 router
   .route('/')
@@ -20,7 +27,7 @@ router
 
 router
   .route('/:id')
-  .get(appointmentController.getAppointment)
+  // .get(appointmentController.getAppointment)
   .delete(appointmentController.deleteAppointment)
   .patch(appointmentController.updateAppointment);
 // router.get('/', userController.getAllUsers);

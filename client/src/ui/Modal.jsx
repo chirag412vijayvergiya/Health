@@ -34,7 +34,10 @@ function Window({ children, name }) {
       className="fixed left-0 top-0 z-[1000] h-[100vh] w-full bg-grey-500 transition-all duration-500"
       style={{ backdropFilter: 'blur(4px)' }}
     >
-      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-gray-100 p-12 shadow-lg transition-all duration-500">
+      <div
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-gray-100 p-12 shadow-lg transition-all duration-500"
+        ref={ref}
+      >
         <button className="absolute right-8 top-4 translate-x-8 transform rounded-sm border-none bg-transparent p-1 transition-all duration-200 hover:bg-gray-100">
           <HiXMark />
         </button>
