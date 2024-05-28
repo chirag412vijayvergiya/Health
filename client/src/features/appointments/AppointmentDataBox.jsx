@@ -43,7 +43,6 @@ function AppointmentDataBox({ appointment }) {
               {appointment.doctor.name}
             </p>
 
-            {/* <span className="pt-[0.1rem]">&bull;</span> */}
             <p className="text-sm text-slate-600 dark:text-slate-400">
               {appointment.doctor.email}
             </p>
@@ -64,21 +63,20 @@ function AppointmentDataBox({ appointment }) {
               {appointment.patient.name}
             </p>
 
-            {/* <span className="pt-[0.1rem]">&bull;</span> */}
             <p className="text-sm text-slate-600 dark:text-slate-400">
               {appointment.patient.email}
             </p>
           </div>
         </div>
-        <div className=" flex items-center justify-between rounded-sm bg-green-200 p-[1rem_2rem] text-green-700 dark:bg-green-600 dark:text-green-100">
-          <div className="flex items-center gap-6 p-[0_0.8rem] ">
-            <span className="flex items-center gap-[1rem] text-lg ">
+        <div className="flex flex-col items-center justify-between rounded-sm bg-green-200 p-[0.6rem_1rem] text-green-700 dark:bg-green-600 dark:text-green-100 md:flex-row md:p-[1rem_2rem]">
+          <div className="flex items-center gap-2 p-[0_0.8rem] md:gap-6 ">
+            <span className="flex items-center gap-[0.5rem] pr-2 text-lg md:gap-[1rem]">
               <HiOutlineCurrencyRupee
                 style={{ width: '1.7rem', height: '1.7rem' }}
               />
               <span>Fees</span>
             </span>
-            <span className="">&#x20B9; {appointment.doctor.fees}.00</span>
+            <span>&#x20B9; {appointment.doctor.fees}.00</span>
           </div>
           <p className="text-base font-semibold uppercase">
             {appointment.status}
