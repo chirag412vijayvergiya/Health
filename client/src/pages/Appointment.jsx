@@ -7,6 +7,7 @@ import DefaultSpinner from '../ui/DefaultSpinner';
 function Appointment() {
   const moveBack = useMoveBack();
   const { isPending, appointment } = useAppointment();
+  console.log(appointment);
   if (isPending) return <DefaultSpinner />;
   if (!appointment) return <div>No Appointment found</div>;
   return (
@@ -31,7 +32,7 @@ function Appointment() {
             {appointment.review === 'Yes' ? 'Edit Review' : 'Create Review'}
           </Button> */}
 
-          <AddNewReview doctor={appointment.doctor.id} />
+          <AddNewReview doctor={appointment.doctor} />
         </div>
       </div>
     </div>

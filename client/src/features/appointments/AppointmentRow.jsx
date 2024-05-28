@@ -4,7 +4,6 @@ import Menus from '../../ui/Menus';
 import { HiEye, HiPencil, HiSquare2Stack } from 'react-icons/hi2';
 import Modal from '../../ui/Modal';
 import { useNavigate } from 'react-router-dom';
-import CreateReviewForm from './CreateReviewForm';
 
 function AppointmentRow({ index, elements }) {
   const navigate = useNavigate();
