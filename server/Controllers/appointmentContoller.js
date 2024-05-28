@@ -26,14 +26,10 @@ exports.getMyAppointments = async (req, res, next) => {
 };
 
 exports.getOneAppointment = catchAsync(async (req, res, next) => {
-  // console.log(req.user);
-  // const appointment = await appointments.find({ patient: req.user.id });
-  // const OneAppointment = appointment.findById(req.params.id);
   const appointment = await appointments.findOne({
     _id: req.params.id,
     patient: req.user.id,
   });
-  console.log(appointment);
   if (!appointment) {
     return next(
       new AppError(

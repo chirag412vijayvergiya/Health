@@ -34,10 +34,11 @@ export async function deleteReview(reviewId) {
   }
 }
 
-export async function createReview({ DoctorId, review, rating }) {
+export async function createReview({ doctor, review, rating }) {
   try {
+    console.log('From Api :- ', doctor, review, rating);
     const response = await customFetch.post('/reviews', {
-      DoctorId,
+      doctor,
       review,
       rating,
     });

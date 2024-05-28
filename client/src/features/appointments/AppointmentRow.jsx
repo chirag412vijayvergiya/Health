@@ -34,14 +34,7 @@ function AppointmentRow({ index, elements }) {
               >
                 See Details
               </Menus.Button>
-
-              <Modal.Open opens="review">
-                <Menus.Button icon={<HiPencil />}>Create Review</Menus.Button>
-              </Modal.Open>
             </Menus.List>
-            <Modal.Window name="review">
-              <CreateReviewForm reviewToEdit={elements}></CreateReviewForm>
-            </Modal.Window>
           </Menus>
         </Modal>
       </td>

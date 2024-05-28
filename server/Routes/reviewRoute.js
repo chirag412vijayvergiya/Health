@@ -10,6 +10,7 @@ const router = express.Router({ mergeParams: true });
 
 router.use(authController.protectpatient);
 router.get('/my-reviews', reviewController.getMyReviews);
+
 router
   .route('/')
   .get(reviewController.getAllReview)
@@ -18,6 +19,7 @@ router
     reviewController.setdoctorpatientIds,
     reviewController.createReview,
   );
+
 router
   .route('/:id')
   .get(reviewController.getReview)

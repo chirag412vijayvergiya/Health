@@ -22,19 +22,21 @@ function Footer() {
                 Talk to us today
               </p>
             </div>
-            {!isPending ? (
-              user ? (
-                <Link to="/dashboard">
-                  <Button type="third">Get Started</Button>
-                </Link>
+            <div className="mx-auto items-center">
+              {!isPending ? (
+                user ? (
+                  <Link to="/dashboard">
+                    <Button type="third">Get Started</Button>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <Button type="third">Get Started</Button>
+                  </Link>
+                )
               ) : (
-                <Link to="/login">
-                  <Button type="third">Get Started</Button>
-                </Link>
-              )
-            ) : (
-              <DefaultSpinner />
-            )}
+                <DefaultSpinner />
+              )}
+            </div>
           </div>
         </div>
       </div>

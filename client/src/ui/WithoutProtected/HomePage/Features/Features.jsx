@@ -1,7 +1,11 @@
 import { FaAmbulance } from 'react-icons/fa';
 import FacilityFeatures from './FacilityFeatures';
 import Button from '../../../Button';
+import { Link } from 'react-router-dom';
+import { useUser } from '../../../../features/authentication/Patients/useUser';
+import DefaultSpinner from '../../../DefaultSpinner';
 function Features() {
+  const { user, isPending } = useUser();
   return (
     <div id="features-section">
       <div className="min-w-screen  relative  flex overflow-hidden bg-grey-50 bg-cover dark:bg-gray-900">
@@ -50,9 +54,22 @@ function Features() {
               </div>
             </div>
             <div className="py-5">
-              <a href="">
+              {/* <Link to="">
                 <Button type="third">Learn More</Button>
-              </a>
+              </Link> */}
+              {!isPending ? (
+                user ? (
+                  <Link to="/dashboard">
+                    <Button type="third">Learn More</Button>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <Button type="third">Learn More</Button>
+                  </Link>
+                )
+              ) : (
+                <DefaultSpinner />
+              )}
             </div>
           </div>
         </div>

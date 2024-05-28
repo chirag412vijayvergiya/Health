@@ -26,7 +26,7 @@ function Menus({ children }) {
 
 function Toggle({ id, icon: Icon, className }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
-  console.log('openId :- ', openId);
+  // console.log('openId :- ', openId);
   function handleClick(e) {
     e.stopPropagation();
     const rect = e.target.closest('button').getBoundingClientRect();
@@ -51,9 +51,9 @@ function Toggle({ id, icon: Icon, className }) {
 
 function List({ id, children, positionX, positionY }) {
   const { openId, position, close } = useContext(MenusContext);
-  console.log('close', close);
+  // console.log('close', close);
   const ref = useOutsideClick(close, false);
-  console.log(openId, id);
+  // console.log(openId, id);
   if (openId !== id) return null;
 
   return createPortal(
