@@ -31,6 +31,7 @@ router.patch(
 );
 
 router.get('/no-role', authController.protectpatient);
+router.get('/patientCount', patientController.getLengthPatients);
 // ******************************************************************************* //
 
 router.get(

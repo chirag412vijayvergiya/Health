@@ -13,6 +13,7 @@ exports.getAppointment = factory.getOne(appointments);
 exports.createAppointment = factory.createOne(appointments);
 exports.deleteAppointment = factory.deleteOne(appointments);
 exports.updateAppointment = factory.updateOne(appointments);
+exports.getLengthAppointments = factory.getLength(appointments);
 
 exports.getMyAppointments = async (req, res, next) => {
   const appointment = await appointments.find({ patient: req.user.id });

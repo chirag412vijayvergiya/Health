@@ -12,9 +12,11 @@ const currentUserController = require('./currentUserController');
 //   req.params.id = req.user.id;
 //   next();
 // };
+
 exports.deleteMe = currentUserController.deleteMeDoctor;
 exports.updateMe = currentUserController.updateMeDoctor;
 
+exports.getLengthDoctors = factory.getLength(Doctor);
 exports.getAllUsers = factory.getAll(Doctor);
 exports.getUser = factory.getOne(Doctor, [
   { path: 'reviews' },

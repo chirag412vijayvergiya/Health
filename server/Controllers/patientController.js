@@ -25,3 +25,4 @@ exports.getUser = factory.getOne(patient, {
 });
 exports.updateUser = factory.updateOne(patient);
 exports.deleteUser = factory.deleteOne(patient);
+exports.getLengthPatients = factory.getLength(patient);

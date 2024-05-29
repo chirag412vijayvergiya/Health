@@ -1,4 +1,6 @@
 const Review = require('../models/reviewModel');
+const AppError = require('../utils/AppError');
+const catchAsync = require('../utils/catchAsync');
 // const AppError = require('../utils/AppError');
 // const catchAsync = require('../utils/catchAsync');
 const factory = require('./handleFactory');
@@ -12,7 +14,7 @@ exports.setdoctorpatientIds = (req, res, next) => {
   next();
 };
 
-exports.getReview = factory.getOne(Review);
+// exports.getReview = factory.getOne(Review);
 exports.createReview = factory.createOne(Review);
 exports.updateReview = factory.updateOne(Review);
 exports.deleteReview = factory.deleteOne(Review);
@@ -76,3 +78,51 @@ exports.deleteOneReview = catchAsync(async (req, res, next) => {
   });
 });
 */
+exports.getReview = catchAsync(async (req, res, next) => {
+  // console.log(req.user.id);
+  const query = Review.findById(req.params.id);
+  // console.log(query);
+
+  // console.log('Query after population options:', query);
+  const doc = await query;
+  // console.log(doc.patient.id);
+  if (!doc) {
+    return next(new AppError('No document found with that ID', 404));
+  }
+  // Check for the :- Requested person has permission to get the review
+  if (doc.patient.id !== req.user.id) {
+    return next(
+      new AppError('You do not have permission to access this review', 403),
+    );
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: doc,
+    },
+  });
+});
+
+exports.findReviewByPatientAndDoctor = catchAsync(async (req, res, next) => {
+  // console.log(req.user.id);
+  const { doctorId } = req.params;
+
+  const review = await Review.findOne({
+    patient: req.user.id,
+    doctor: doctorId,
+  });
+
+  // if (!review) {
+  //   return next(
+  //     new AppError('No review found for the given patient and doctor', 404),
+  //   );
+  // }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      review,
+    },
+  });
+});

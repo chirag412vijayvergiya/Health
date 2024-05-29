@@ -11,7 +11,7 @@ function Filter({ filterField, options }) {
     setSearchParams(searchParams);
   }
   return (
-    <div className="border-1 flex gap-2 rounded-sm border-solid border-grey-100 bg-grey-50 p-1 py-1.5 text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-300">
+    <div className="border-1 flex gap-1 rounded-sm border-solid border-grey-100 bg-grey-50 p-1 py-1.5 text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-300 md:gap-2">
       {options.map((option) => (
         <FilterButton
           key={option.value}

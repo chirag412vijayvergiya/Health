@@ -3,7 +3,7 @@ import SortBy from '../../ui/SortBy';
 
 function AppointmentsOperations() {
   return (
-    <div className="flex items-center gap-7">
+    <div className="flex flex-col items-center gap-1 md:flex-row md:gap-7">
       <Filter
         filterField="status"
         options={[

@@ -11,6 +11,10 @@ const router = express.Router({ mergeParams: true });
 router.use(authController.protectpatient);
 router.get('/my-reviews', reviewController.getMyReviews);
 
+router.get(
+  '/reviewByDoctor/:doctorId',
+  reviewController.findReviewByPatientAndDoctor,
+);
 router
   .route('/')
   .get(reviewController.getAllReview)

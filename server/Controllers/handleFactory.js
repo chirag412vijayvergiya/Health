@@ -52,6 +52,15 @@ exports.getAll = (Model, selectFields = '', populateOptions = []) =>
     });
   });
 
+exports.getLength = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const count = await Model.countDocuments();
+    res.status(200).json({
+      status: 'success',
+      data: count,
+    });
+  });
+
 // ******************************************************************************* //
 
 exports.updateOne = (Model) =>

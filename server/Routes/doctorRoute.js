@@ -36,6 +36,8 @@ router.get(
   doctorController.getUser,
 );
 
+router.get('/doctorCount', doctorController.getLengthDoctors);
+
 // Visible profile for everyone (no need to be logged in)
 // Because every Person can see the profile of a doctor
 router.get('/:id', doctorController.getUser);
