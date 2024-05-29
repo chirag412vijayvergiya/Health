@@ -1,5 +1,6 @@
 import customFetch from '../utils/customFetch';
 
+// Done
 export async function getDoctors() {
   try {
     const response = await customFetch.get('/doctor/all-doctors');
@@ -10,6 +11,7 @@ export async function getDoctors() {
   }
 }
 
+// Done
 export async function getDoctor(doctorId) {
   try {
     const response = await customFetch.get(`/doctor/${doctorId}`);
@@ -17,5 +19,15 @@ export async function getDoctor(doctorId) {
   } catch (error) {
     console.error('Error fetching doctor: ', error);
     throw new Error('Failed to fetch doctor');
+  }
+}
+
+export async function GetDoctorsCount() {
+  try {
+    const response = await customFetch.get('/doctor/doctorCount');
+    return response.data;
+  } catch (error) {
+    console.error("Error Getting Doctor's Count: ", error);
+    throw new Error("Failed to Get doctor's Count");
   }
 }

@@ -15,10 +15,16 @@ router.get(
   appointmentController.getOneAppointment,
 );
 
+router.get(
+  '/',
+  authController.protectpatient,
+  appointmentController.getAllAppointments,
+);
+
 router.use(authController.protectdoctor);
 router
   .route('/')
-  .get(appointmentController.getAllAppointments)
+  // .get(appointmentController.getAllAppointments)
   .post(
     authController.restrictTo('doctor'),
     appointmentController.setPatientDoctorIDs,

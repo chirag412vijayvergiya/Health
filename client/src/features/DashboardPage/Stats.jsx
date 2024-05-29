@@ -10,7 +10,7 @@ import {
   FaPersonCane,
   FaUserDoctor,
 } from 'react-icons/fa6';
-function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
+function Stats({ doctors, appointments, patients, cabinCount }) {
   return (
     <>
       <Stat
@@ -18,21 +18,21 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
         icon={
           <FaPersonCane className="h-[3rem] w-[3rem] text-blue-600 opacity-75" />
         }
-        value={45}
+        value={patients}
       />
       <Stat
         title="Appointments"
         icon={
           <FaBriefcaseMedical className="h-[3rem] w-[3rem] text-blue-600 opacity-75" />
         }
-        value={45}
+        value={appointments}
       />
       <Stat
         title="Doctors"
         icon={
           <FaUserDoctor className="h-[3rem] w-[3rem] text-blue-600 opacity-75" />
         }
-        value={45}
+        value={doctors}
       />
       <Stat
         title="Emergency"

@@ -68,6 +68,10 @@ const patientSchema = new mongoose.Schema(
       type: String,
       // required: [true, 'Please provide your Mobile Number'],
     },
+    dob: {
+      type: Date,
+      // required: [true, 'Please provide your Date of Birth'],
+    },
     active: {
       type: Boolean,
       default: true,
