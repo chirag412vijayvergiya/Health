@@ -17,17 +17,27 @@ const appointmentSchema = new mongoose.Schema(
       required: [true, 'Appointment date is required'],
       validate: {
         validator: function (value) {
-          return value > this.bookingDate;
+          // Create a new Date object combining appointmentDate and appointmentTime
+          const appointmentDateTime = new Date(value);
+          if (this.appointmentTime) {
+            const timeParts = this.appointmentTime.split(':');
+            appointmentDateTime.setHours(timeParts[0], timeParts[1], 0, 0);
+          }
+          return appointmentDateTime > this.bookingDate;
         },
-        message: 'Appointment date must be greater than booking date',
+        message: 'Appointment date and time must be greater than booking date',
       },
     },
-    review: {
-      type: String,
-      required: [
-        true,
-        'Required for checking if Review Exist for Particular Doctor',
-      ],
+    appointmentTime: {
+      type: String, // or Date, depending on your use case
+      required: [true, 'Appointment time is required'],
+      validate: {
+        validator: function (value) {
+          // Validate time format (HH:mm)
+          return /^([01]\d|2[0-3]):?([0-5]\d)$/.test(value);
+        },
+        message: 'Invalid time format. Use HH:mm format.',
+      },
     },
     bookingDate: {
       type: Date,
@@ -50,7 +60,11 @@ const appointmentSchema = new mongoose.Schema(
   },
 );
 appointmentSchema.index({ patient: 1, doctor: 1 });
-
+// Create a unique index to ensure no double booking for the same doctor, date, and time
+appointmentSchema.index(
+  { doctor: 1, appointmentDate: 1, appointmentTime: 1 },
+  { unique: true },
+);
 // ******************************************************************************* //
 
 appointmentSchema.pre(/^find/, function (next) {

@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit'); // Limit requests from same API
 const helmet = require('helmet');
@@ -18,6 +19,7 @@ const patientRouter = require('./Routes/patientRoute');
 const appointmentRouter = require('./Routes/appointmentRoute');
 const reviewRouter = require('./Routes/reviewRoute');
 const GlobalErrorHandler = require('./Controllers/errorController');
+const appointmentController = require('./Controllers/appointmentContoller');
 
 const app = express();
 
@@ -69,6 +71,12 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // ******************************************************************************* //
+
+app.post(
+  '/webhook-checkout',
+  bodyParser.raw({ type: 'application/json' }),
+  appointmentController.webhookCheckout,
+);
 
 //It should be used before route defined
 //the parsed JSON data is converted into a JavaScript object

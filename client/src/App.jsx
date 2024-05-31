@@ -21,6 +21,7 @@ import DoctorProfile from './pages/DoctorProfile';
 import { UserProvider } from './Context/UserRoleContext';
 import MainHeader from './ui/WithoutProtected/Header/MainHeader';
 import Appointments from './pages/Appointments';
+import BookAppointment from './pages/BookAppointment';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +47,7 @@ function App() {
               }
             >
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="book" element={<BookAppointment />} />
               <Route path="appointments" element={<Appointments />} />
               <Route
                 path="appointments/:appointmentId"
