@@ -48,11 +48,11 @@ const BookAppointmentForm = () => {
       const response = await customFetch.post(
         'https://jeevan-backend.vercel.app/api/v1/appointment/book-appointment',
         {
-          body: JSON.stringify({
+          body: {
             ...bookingData,
             amount: Number(bookingData.amount),
             paymentMethodId: paymentMethod.id,
-          }),
+          },
         },
       );
 

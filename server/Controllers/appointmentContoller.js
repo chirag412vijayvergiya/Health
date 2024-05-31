@@ -55,7 +55,6 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   console.log('Protocol :- ', req.protocol);
   console.log('Host :- ', req.get('host'));
 
-  const body = JSON.parse(req.body);
   const {
     patientId,
     doctorId,
@@ -63,7 +62,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
     appointmentTime,
     disease,
     amount,
-  } = body;
+  } = req.body;
 
   console.log('Extracted Fields:');
   console.log('patientId:', patientId);
