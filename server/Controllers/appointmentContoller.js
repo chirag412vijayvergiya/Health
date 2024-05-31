@@ -56,14 +56,23 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   console.log('Host :- ', req.get('host'));
 
   const {
-    patientId,
-    doctorId,
-    appointmentDate,
-    appointmentTime,
-    disease,
-    amount,
-    paymentMethodId,
+    body: {
+      patientId,
+      doctorId,
+      appointmentDate,
+      appointmentTime,
+      disease,
+      amount,
+    },
   } = req.body;
+
+  console.log('Extracted Fields:');
+  console.log('patientId:', patientId);
+  console.log('doctorId:', doctorId);
+  console.log('appointmentDate:', appointmentDate);
+  console.log('appointmentTime:', appointmentTime);
+  console.log('disease:', disease);
+  console.log('amount:', amount);
 
   // Ensure amount is parsed correctly
   const parsedAmount = parseInt(amount, 10);
