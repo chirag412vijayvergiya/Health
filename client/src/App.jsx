@@ -22,6 +22,8 @@ import { UserProvider } from './Context/UserRoleContext';
 import MainHeader from './ui/WithoutProtected/Header/MainHeader';
 import Appointments from './pages/Appointments';
 import BookAppointment from './pages/BookAppointment';
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +49,8 @@ function App() {
               }
             >
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="/cancel" element={<Cancel />} />
               <Route path="book" element={<BookAppointment />} />
               <Route path="appointments" element={<Appointments />} />
               <Route

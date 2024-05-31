@@ -62,6 +62,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 
   const session = await mongoose.startSession();
   session.startTransaction();
+
   try {
     // Step 1: Check if the appointment slot is available
     const existingAppointment = await appointments
@@ -75,20 +76,8 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
     if (existingAppointment) {
       throw new AppError('This appointment slot is already booked.', 400);
     }
-    const transformedItems = [
-      {
-        price_data: {
-          currency: 'INR',
-          unit_amount: amount.price * 100,
 
-          product_data: {
-            name: `Appointment with Doctor ${doctorId}`,
-          },
-        },
-        quantity: 1,
-      },
-    ];
-
+    // Step 2: Create Stripe payment session
     const stripeSession = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       success_url: `${req.protocol}://${req.get('host')}/success`,
@@ -101,13 +90,24 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
         disease,
         patientId,
       }),
-      line_items: transformedItems,
+      line_items: [
+        {
+          price_data: {
+            currency: 'INR',
+            unit_amount: amount * 100,
+            product_data: {
+              name: `Appointment with Doctor ${doctorId}`,
+            },
+          },
+          quantity: 1,
+        },
+      ],
       mode: 'payment',
     });
 
     await session.commitTransaction();
     session.endSession();
-    // 2) Create checkout session
+
     res.status(200).json({
       status: 'success',
       stripeSession,
@@ -157,8 +157,9 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
-  if (event.type === 'checkout.session.completed')
+  if (event.type === 'checkout.session.completed') {
     createBookingCheckout(event.data.object);
+  }
 
   res.status(200).json({ received: true });
 };
