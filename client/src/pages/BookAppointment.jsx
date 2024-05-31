@@ -50,6 +50,7 @@ const BookAppointmentForm = () => {
         {
           body: JSON.stringify({
             ...bookingData,
+            amount: Number(bookingData.amount),
             paymentMethodId: paymentMethod.id,
           }),
         },
