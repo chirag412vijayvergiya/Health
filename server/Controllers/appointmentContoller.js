@@ -50,7 +50,10 @@ exports.getOneAppointment = catchAsync(async (req, res, next) => {
   });
 });
 exports.bookAppointment = catchAsync(async (req, res, next) => {
-  console.log('User :- ', req);
+  console.log('Request Body:', req.body);
+  console.log('Authenticated User:', req.user);
+  console.log('Protocol :- ', req.protocol);
+  console.log('Host :- ', req.get('host'));
   const {
     patientId,
     doctorId,
@@ -74,6 +77,10 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
     }
 
     // Step 2: Create Stripe payment session
+    if (!req.user || !req.user.email) {
+      throw new AppError('User email is not available.', 400);
+    }
+
     const stripeSession = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       success_url: `${req.protocol}://${req.get('host')}/success`,
@@ -101,6 +108,14 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       mode: 'payment',
     });
 
+    // Ensure amount is parsed correctly
+    const parsedAmount = parseInt(amount, 10);
+    if (Number.isNaN(parsedAmount)) {
+      console.error('Amount is not a valid number:', amount);
+      return next(new AppError('Invalid amount value', 400));
+    }
+    console.log('Parsed Amount:', parsedAmount);
+
     await session.commitTransaction();
     session.endSession();
 
@@ -109,6 +124,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       stripeSessionId: stripeSession.id,
     });
   } catch (err) {
+    console.error('Error during booking appointment:', err);
     await session.abortTransaction();
     session.endSession();
     next(err);
