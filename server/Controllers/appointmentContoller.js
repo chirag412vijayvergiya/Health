@@ -50,6 +50,7 @@ exports.getOneAppointment = catchAsync(async (req, res, next) => {
   });
 });
 exports.bookAppointment = catchAsync(async (req, res, next) => {
+  console.log('User :- ', req.body);
   const {
     patientId,
     doctorId,
