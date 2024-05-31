@@ -12,8 +12,8 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const BookAppointmentForm = () => {
   const [bookingData, setBookingData] = useState({
-    patientId: '', // Set this dynamically based on user authentication
-    doctorId: 'doctorId', // Replace with actual doctor ID
+    patientId: '6651d4513c56381f99050280', // Set this dynamically based on user authentication
+    doctorId: '5c8a1d5b0190b214360dc057', // Replace with actual doctor ID
     appointmentDate: '',
     appointmentTime: '',
     disease: '',
