@@ -118,7 +118,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      stripeSessionId: stripeSession.id,
+      session: stripeSession,
     });
   } catch (err) {
     console.error('Error during booking appointment:', err);
