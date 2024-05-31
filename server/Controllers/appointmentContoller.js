@@ -56,12 +56,14 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   console.log('Host :- ', req.get('host'));
 
   const {
-    patientId,
-    doctorId,
-    appointmentDate,
-    appointmentTime,
-    disease,
-    amount,
+    body: {
+      patientId,
+      doctorId,
+      appointmentDate,
+      appointmentTime,
+      disease,
+      amount,
+    },
   } = req.body;
 
   console.log('Extracted Fields:');
