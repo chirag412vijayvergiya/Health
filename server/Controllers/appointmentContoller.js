@@ -50,11 +50,6 @@ exports.getOneAppointment = catchAsync(async (req, res, next) => {
   });
 });
 exports.bookAppointment = catchAsync(async (req, res, next) => {
-  console.log('Request Body:', req.body);
-  console.log('Authenticated User:', req.user);
-  console.log('Protocol :- ', req.protocol);
-  console.log('Host :- ', req.get('host'));
-
   const {
     body: {
       patientId,
@@ -65,15 +60,6 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       amount,
     },
   } = req.body;
-
-  console.log('Extracted Fields:');
-  console.log('patientId:', patientId);
-  console.log('doctorId:', doctorId);
-  console.log('appointmentDate:', appointmentDate);
-  console.log('appointmentTime:', appointmentTime);
-  console.log('disease:', disease);
-  console.log('amount:', amount);
-
   // Ensure amount is parsed correctly
   const parsedAmount = parseInt(amount, 10);
   if (Number.isNaN(parsedAmount)) {
@@ -126,7 +112,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       ],
       mode: 'payment',
     });
-
+    console.log('Stripe Session:', stripeSession);
     await session.commitTransaction();
     session.endSession();
 
@@ -143,6 +129,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 });
 
 const createBookingCheckout = async (session) => {
+  console.log('Session:', session.client_reference_id);
   const { doctorId, appointmentDate, appointmentTime, disease, patientId } =
     JSON.parse(session.client_reference_id);
 
@@ -154,7 +141,7 @@ const createBookingCheckout = async (session) => {
   });
 
   if (!existingAppointment) {
-    await appointments.create({
+    const x = await appointments.create({
       patient: mongoose.Types.ObjectId(patientId),
       doctor: mongoose.Types.ObjectId(doctorId),
       appointmentDate,
@@ -163,12 +150,13 @@ const createBookingCheckout = async (session) => {
       bookingDate: new Date(),
       status: 'scheduled',
     });
+    console.log('x :- ', x);
   }
 };
 
 exports.webhookCheckout = (req, res, next) => {
   const signature = req.headers['stripe-signature'];
-
+  console.log('signature :- ', signature);
   let event;
   try {
     event = stripe.webhooks.constructEvent(
