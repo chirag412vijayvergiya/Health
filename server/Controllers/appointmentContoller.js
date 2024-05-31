@@ -91,13 +91,13 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       success_url: `${req.protocol}://${req.get('host')}/success`,
       cancel_url: `${req.protocol}://${req.get('host')}/cancel`,
       customer_email: req.user.email,
-      client_reference_id: JSON.stringify({
+      client_reference_id: {
         doctorId,
         appointmentDate,
         appointmentTime,
         disease,
         patientId,
-      }),
+      },
       line_items: [
         {
           price_data: {
@@ -131,7 +131,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 const createBookingCheckout = async (session) => {
   console.log('Session:', session.client_reference_id);
   const { doctorId, appointmentDate, appointmentTime, disease, patientId } =
-    JSON.parse(session.client_reference_id);
+    session.client_reference_id;
 
   // Check if the appointment slot is still available
   const existingAppointment = await appointments.findOne({
