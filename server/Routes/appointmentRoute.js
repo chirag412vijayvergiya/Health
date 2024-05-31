@@ -9,7 +9,7 @@ router.get(
   appointmentController.getMyAppointments,
 );
 
-router.post('/book-appointment', appointmentController.bookAppointment);
+router.get('/book-appointment', appointmentController.bookAppointment);
 
 router.get(
   '/:id',

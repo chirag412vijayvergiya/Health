@@ -12,7 +12,7 @@ exports.setPatientDoctorIDs = (req, res, next) => {
 };
 exports.getAllAppointments = factory.getAll(appointments);
 exports.getAppointment = factory.getOne(appointments);
-// exports.createAppointment = factory.createOne(appointments);
+exports.createAppointment = factory.createOne(appointments);
 exports.deleteAppointment = factory.deleteOne(appointments);
 exports.updateAppointment = factory.updateOne(appointments);
 // exports.getLengthAppointments = factory.getLength(appointments);
