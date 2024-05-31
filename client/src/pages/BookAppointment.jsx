@@ -6,6 +6,7 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import customFetch from '../utils/customFetch';
 
 // Load your publishable key from environment variables
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -44,13 +45,9 @@ const BookAppointmentForm = () => {
       }
 
       // Step 2: Send booking request to the backend
-      const response = await fetch(
+      const response = await customFetch.post(
         'https://jeevan-backend.vercel.app/api/v1/appointment/book-appointment',
         {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
           body: JSON.stringify({
             ...bookingData,
             paymentMethodId: paymentMethod.id,
