@@ -49,7 +49,6 @@ exports.getOneAppointment = catchAsync(async (req, res, next) => {
     },
   });
 });
-
 exports.bookAppointment = catchAsync(async (req, res, next) => {
   const {
     patientId,
@@ -66,11 +65,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   try {
     // Step 1: Check if the appointment slot is available
     const existingAppointment = await appointments
-      .findOne({
-        doctor: doctorId,
-        appointmentDate,
-        appointmentTime,
-      })
+      .findOne({ doctor: doctorId, appointmentDate, appointmentTime })
       .session(session);
 
     if (existingAppointment) {
@@ -110,7 +105,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      stripeSessionId: stripeSession.id, // Return the session ID
+      stripeSessionId: stripeSession.id,
     });
   } catch (err) {
     await session.abortTransaction();

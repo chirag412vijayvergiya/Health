@@ -62,7 +62,7 @@ const BookAppointmentForm = () => {
       if (response.status === 200) {
         // Redirect to Stripe Checkout
         const stripe = await stripePromise;
-        await stripe.redirectToCheckout({ sessionId: result.id });
+        await stripe.redirectToCheckout({ sessionId: result.stripeSessionId });
       } else {
         setErrorMessage(result.message || 'Booking failed.');
       }
