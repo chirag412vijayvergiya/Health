@@ -45,7 +45,7 @@ const BookAppointmentForm = () => {
 
       // Step 2: Send booking request to the backend
       const response = await fetch(
-        'https://jeevan-backend.vercel.app/api/v1/appointments/book-appointment',
+        'https://jeevan-backend.vercel.app/api/v1/appointment/book-appointment',
         {
           method: 'POST',
           headers: {
