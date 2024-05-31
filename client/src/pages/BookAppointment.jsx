@@ -7,8 +7,10 @@ import {
   useElements,
 } from '@stripe/react-stripe-js';
 
+// Load your publishable key from environment variables
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-const BookAppointment = () => {
+
+const BookAppointmentForm = () => {
   const [bookingData, setBookingData] = useState({
     patientId: '', // Set this dynamically based on user authentication
     doctorId: 'doctorId', // Replace with actual doctor ID
@@ -114,13 +116,19 @@ const BookAppointment = () => {
             required
           />
         </label>
-        <Elements stripe={stripePromise}>
-          <CardElement />
-        </Elements>
+        <CardElement />
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <button type="submit">Book Appointment</button>
       </form>
     </div>
+  );
+};
+
+const BookAppointment = () => {
+  return (
+    <Elements stripe={stripePromise}>
+      <BookAppointmentForm />
+    </Elements>
   );
 };
 
