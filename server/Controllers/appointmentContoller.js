@@ -110,7 +110,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      stripeSession,
+      stripeSessionId: stripeSession.id, // Return the session ID
     });
   } catch (err) {
     await session.abortTransaction();
@@ -157,9 +157,8 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
-  if (event.type === 'checkout.session.completed') {
+  if (event.type === 'checkout.session.completed')
     createBookingCheckout(event.data.object);
-  }
 
   res.status(200).json({ received: true });
 };
