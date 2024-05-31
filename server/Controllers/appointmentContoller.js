@@ -54,6 +54,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   console.log('Authenticated User:', req.user);
   console.log('Protocol :- ', req.protocol);
   console.log('Host :- ', req.get('host'));
+
   const {
     patientId,
     doctorId,
@@ -61,7 +62,16 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
     appointmentTime,
     disease,
     amount,
+    paymentMethodId,
   } = req.body;
+
+  // Ensure amount is parsed correctly
+  const parsedAmount = parseInt(amount, 10);
+  if (Number.isNaN(parsedAmount)) {
+    console.error('Amount is not a valid number:', amount);
+    return next(new AppError('Invalid amount value', 400));
+  }
+  console.log('Parsed Amount:', parsedAmount);
 
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -97,7 +107,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
         {
           price_data: {
             currency: 'INR',
-            unit_amount: amount * 100,
+            unit_amount: parsedAmount * 100, // Ensure this is correctly parsed
             product_data: {
               name: `Appointment with Doctor ${doctorId}`,
             },
@@ -107,14 +117,6 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       ],
       mode: 'payment',
     });
-
-    // Ensure amount is parsed correctly
-    const parsedAmount = parseInt(amount, 10);
-    if (Number.isNaN(parsedAmount)) {
-      console.error('Amount is not a valid number:', amount);
-      return next(new AppError('Invalid amount value', 400));
-    }
-    console.log('Parsed Amount:', parsedAmount);
 
     await session.commitTransaction();
     session.endSession();
