@@ -166,18 +166,20 @@ const createBookingCheckout = async (session) => {
 };
 
 exports.webhookCheckout = (req, res, next) => {
-  console.log('Webhook Received! ;- ', req.headers);
+  console.log('Request Body:', req);
   const signature = req.headers['stripe-signature'];
-  console.log('signature :- ', signature);
+  console.log('Signature:', signature);
+
   let event;
   try {
-    console.log('Request Body:', req.body);
+    console.log('Raw Request Body:', req.body.toString()); // Log raw body
     event = stripe.webhooks.constructEvent(
       req.body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (err) {
+    console.error(`Webhook error: ${err.message}`);
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
