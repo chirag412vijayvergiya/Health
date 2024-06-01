@@ -158,17 +158,21 @@ const createBookingCheckout = async (session) => {
   }
 
   // if (!existingAppointment) {
-  //   const x = await appointments.create({
-  //     patient: mongoose.Types.ObjectId(patientId),
-  //     doctor: mongoose.Types.ObjectId(doctorId),
-  //     appointmentDate,
-  //     appointmentTime,
-  //     disease,
-  //     bookingDate: new Date(),
-  //     status: 'scheduled',
-  //   });
-  //   console.log('x :- ', x);
-  // }
+  try {
+    const x = await appointments.create({
+      patient: mongoose.Types.ObjectId(patientId),
+      doctor: mongoose.Types.ObjectId(doctorId),
+      appointmentDate,
+      appointmentTime,
+      disease,
+      bookingDate: new Date(),
+      status: 'scheduled',
+    });
+    console.log('x :- ', x);
+    // }
+  } catch (error) {
+    console.error('Error creating existing appointment:', error);
+  }
 };
 
 exports.webhookCheckout = (req, res, next) => {
