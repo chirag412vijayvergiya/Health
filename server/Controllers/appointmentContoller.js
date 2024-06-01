@@ -88,8 +88,8 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 
     const stripeSession = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      success_url: `${req.protocol}://${req.get('host')}/success`,
-      cancel_url: `${req.protocol}://${req.get('host')}/cancel`,
+      success_url: `https://jeevan-frontend.vercel.app/success`,
+      cancel_url: `https://jeevan-frontend.vercel.app/cancel`,
       customer_email: req.user.email,
       client_reference_id: JSON.stringify({
         doctorId,
