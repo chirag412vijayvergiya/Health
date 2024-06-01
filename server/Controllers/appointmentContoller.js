@@ -142,36 +142,38 @@ const createBookingCheckout = async (session) => {
   console.log('Disease:', disease);
   console.log('Patient ID:', patientId);
 
-  // try {
-  //   const existingAppointment = await appointments.findOne({
-  //     doctor: doctorId,
-  //     appointmentDate,
-  //     appointmentTime,
-  //   });
-  //   if (!existingAppointment) {
-  //     console.log('No existing appointment found.');
-  //   } else {
-  //     console.log('Existing Appointment:', existingAppointment);
-  //   }
-  // } catch (error) {
-  //   console.error('Error finding existing appointment:', error);
-  // }
+  // Convert appointmentDate string to Date object
+  const appointmentDateObj = new Date(appointmentDate);
+  console.log('Converted Appointment Date:', appointmentDateObj);
 
-  // if (!existingAppointment) {
+  let existingAppointment;
+
   try {
-    const x = await appointments.create({
-      patient: patientId,
-      doctor: doctorId,
-      // appointmentDate,
-      // appointmentTime,
-      disease,
-      bookingDate: new Date(),
-      status: 'scheduled',
+    existingAppointment = await appointments.findOne({
+      doctor: mongoose.Types.ObjectId(doctorId),
+      appointmentDate: appointmentDateObj,
+      appointmentTime,
     });
-    console.log('x :- ', x);
-    // }
+    console.log('Existing Appointment:', existingAppointment);
   } catch (error) {
-    console.error('Error creating existing appointment:', error);
+    console.error('Error finding existing appointment:', error);
+  }
+
+  if (!existingAppointment) {
+    try {
+      const x = await appointments.create({
+        patient: patientId,
+        doctor: doctorId,
+        appointmentDate: appointmentDateObj,
+        appointmentTime,
+        disease,
+        bookingDate: new Date(),
+        status: 'scheduled',
+      });
+      console.log('New Appointment Created:', x);
+    } catch (error) {
+      console.error('Error creating new appointment:', error);
+    }
   }
 };
 
