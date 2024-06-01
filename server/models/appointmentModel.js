@@ -14,7 +14,7 @@ const appointmentSchema = new mongoose.Schema(
     },
     appointmentDate: {
       type: Date,
-      required: [true, 'Appointment date is required'],
+      // required: [true, 'Appointment date is required'],
       validate: {
         validator: function (value) {
           // Create a new Date object combining appointmentDate and appointmentTime
@@ -30,7 +30,7 @@ const appointmentSchema = new mongoose.Schema(
     },
     appointmentTime: {
       type: String, // or Date, depending on your use case
-      required: [true, 'Appointment time is required'],
+      // required: [true, 'Appointment time is required'],
       validate: {
         validator: function (value) {
           // Validate time format (HH:mm)

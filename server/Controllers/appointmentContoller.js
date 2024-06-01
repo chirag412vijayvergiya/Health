@@ -142,28 +142,28 @@ const createBookingCheckout = async (session) => {
   console.log('Disease:', disease);
   console.log('Patient ID:', patientId);
 
-  try {
-    const existingAppointment = await appointments.findOne({
-      doctor: doctorId,
-      appointmentDate,
-      appointmentTime,
-    });
-    if (!existingAppointment) {
-      console.log('No existing appointment found.');
-    } else {
-      console.log('Existing Appointment:', existingAppointment);
-    }
-  } catch (error) {
-    console.error('Error finding existing appointment:', error);
-  }
+  // try {
+  //   const existingAppointment = await appointments.findOne({
+  //     doctor: doctorId,
+  //     appointmentDate,
+  //     appointmentTime,
+  //   });
+  //   if (!existingAppointment) {
+  //     console.log('No existing appointment found.');
+  //   } else {
+  //     console.log('Existing Appointment:', existingAppointment);
+  //   }
+  // } catch (error) {
+  //   console.error('Error finding existing appointment:', error);
+  // }
 
   // if (!existingAppointment) {
   try {
     const x = await appointments.create({
-      patient: mongoose.Types.ObjectId(patientId),
-      doctor: mongoose.Types.ObjectId(doctorId),
-      appointmentDate,
-      appointmentTime,
+      patient: patientId,
+      doctor: doctorId,
+      // appointmentDate,
+      // appointmentTime,
       disease,
       bookingDate: new Date(),
       status: 'scheduled',
