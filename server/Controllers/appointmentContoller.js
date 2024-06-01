@@ -131,7 +131,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 
 const createBookingCheckout = async (session) => {
   const clientReferenceId = JSON.parse(session.client_reference_id);
-  console.log('Session:', clientReferenceId);
+  console.log('Session:-', clientReferenceId);
   const { doctorId, appointmentDate, appointmentTime, disease, patientId } =
     clientReferenceId;
 
@@ -168,6 +168,7 @@ exports.webhookCheckout = (req, res, next) => {
   console.log('signature :- ', signature);
   let event;
   try {
+    console.log('Request Body:', req.body);
     event = stripe.webhooks.constructEvent(
       req.body,
       signature,

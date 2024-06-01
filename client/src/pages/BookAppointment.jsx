@@ -55,15 +55,18 @@ const BookAppointmentForm = () => {
           },
         },
       );
-
-      const result = await response.json();
-      if (response.status === 200) {
-        // Redirect to Stripe Checkout
-        const stripe = await stripePromise;
-        await stripe.redirectToCheckout({ sessionId: result.stripeSessionId });
-      } else {
-        setErrorMessage(result.message || 'Booking failed.');
-      }
+      console.log(response);
+      //   //   const result = await response.json();
+      //   if (response.status === 200) {
+      //     // Redirect to Stripe Checkout
+      //     const stripe = await stripePromise;
+      //     // await stripe.redirectToCheckout({ sessionId: result.stripeSessionId });
+      //   } else {
+      //     // setErrorMessage(result.message || 'Booking failed.');
+      //   }
+      await stripe.redirectToCheckout({
+        sessionId: response.data.session.id,
+      });
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('An error occurred. Please try again.');
