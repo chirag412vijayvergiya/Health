@@ -148,7 +148,11 @@ const createBookingCheckout = async (session) => {
       appointmentDate,
       appointmentTime,
     });
-    console.log('Existing Appointment:', existingAppointment);
+    if (!existingAppointment) {
+      console.log('No existing appointment found.');
+    } else {
+      console.log('Existing Appointment:', existingAppointment);
+    }
   } catch (error) {
     console.error('Error finding existing appointment:', error);
   }
