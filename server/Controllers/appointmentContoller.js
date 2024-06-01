@@ -149,6 +149,8 @@ const createBookingCheckout = async (session) => {
     appointmentTime,
   });
 
+  console.log('Existing Appointment:', existingAppointment);
+
   if (!existingAppointment) {
     const x = await appointments.create({
       patient: mongoose.Types.ObjectId(patientId),
@@ -164,6 +166,7 @@ const createBookingCheckout = async (session) => {
 };
 
 exports.webhookCheckout = (req, res, next) => {
+  console.log('Webhook Received! ;- ', req.headers);
   const signature = req.headers['stripe-signature'];
   console.log('signature :- ', signature);
   let event;

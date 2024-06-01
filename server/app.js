@@ -41,8 +41,6 @@ app.use(
   }),
 );
 
-app.use(express.urlencoded({ extended: false }));
-
 // ******************************************************************************* //
 
 // GLOBAL MIDDLEWARES
@@ -82,7 +80,7 @@ app.post(
 //the parsed JSON data is converted into a JavaScript object
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
-
+app.use(express.urlencoded({ extended: false }));
 // ******************************************************************************* //
 
 // Data sanitization against NoSQL query injection like $ or . malicious characters
