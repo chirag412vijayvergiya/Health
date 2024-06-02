@@ -60,13 +60,14 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       amount,
     },
   } = req.body;
+  console.log('Booking Appointment:', req.body.body);
   // Ensure amount is parsed correctly
   const parsedAmount = parseInt(amount, 10);
   if (Number.isNaN(parsedAmount)) {
-    console.error('Amount is not a valid number:', amount);
+    // console.error('Amount is not a valid number:', amount);
     return next(new AppError('Invalid amount value', 400));
   }
-  console.log('Parsed Amount:', parsedAmount);
+  // console.log('Parsed Amount:', parsedAmount);
 
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -113,7 +114,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       ],
       mode: 'payment',
     });
-    console.log('Stripe Session:', stripeSession);
+    // console.log('Stripe Session:', stripeSession);
     await session.commitTransaction();
     session.endSession();
 
@@ -131,23 +132,21 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 
 const createBookingCheckout = async (session) => {
   const clientReferenceId = JSON.parse(session.client_reference_id);
-  console.log('Session:-', clientReferenceId);
+  // console.log('Session:-', clientReferenceId);
   const { doctorId, appointmentDate, appointmentTime, disease, patientId } =
     clientReferenceId;
 
-  // Now you can use these values as needed
-  console.log('Doctor ID:', doctorId);
-  console.log('Appointment Date:', appointmentDate);
-  console.log('Appointment Time:', appointmentTime);
-  console.log('Disease:', disease);
-  console.log('Patient ID:', patientId);
+  // // Now you can use these values as needed
+  // console.log('Doctor ID:', doctorId);
+  // console.log('Appointment Date:', appointmentDate);
+  // console.log('Appointment Time:', appointmentTime);
+  // console.log('Disease:', disease);
+  // console.log('Patient ID:', patientId);
 
   // Convert appointmentDate string to Date object
   const appointmentDateObj = new Date(appointmentDate);
-  console.log('Converted Appointment Date:', appointmentDateObj);
 
   let existingAppointment;
-
   try {
     existingAppointment = await appointments.findOne({
       doctor: mongoose.Types.ObjectId(doctorId),
@@ -180,23 +179,23 @@ const createBookingCheckout = async (session) => {
 exports.webhookCheckout = (req, res, next) => {
   // console.log('Request Body:', req);
   const signature = req.headers['stripe-signature'];
-  console.log('Signature:', signature);
+  // console.log('Signature:', signature);
 
   let event;
   try {
-    console.log('Raw Request Body:', req.body.toString()); // Log raw body
+    // console.log('Raw Request Body:', req.body.toString()); // Log raw body
     event = stripe.webhooks.constructEvent(
       req.body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (err) {
-    console.error(`Webhook error: ${err.message}`);
+    // console.error(`Webhook error: ${err.message}`);
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
   if (event.type === 'checkout.session.completed') {
-    console.log('Session Completed:', event.data.object);
+    // console.log('Session Completed:', event.data.object);
     createBookingCheckout(event.data.object);
   }
 
