@@ -33,5 +33,5 @@ exports.deleteUser = factory.deleteOne(Doctor);
 
 exports.getAllDoctor = factory.getAll(
   Doctor,
-  'name email specialization photo ratingsAverage ratingsQuantity role',
+  'name email specialization photo ratingsAverage ratingsQuantity role fees',
 );
