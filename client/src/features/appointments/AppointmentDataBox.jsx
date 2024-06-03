@@ -19,10 +19,7 @@ function AppointmentDataBox({ appointment }) {
           </p>
         </div>
         <p className="font-sans text-sm font-medium tracking-wider md:text-lg md:font-semibold">
-          {format(
-            new Date(`${appointment.appointmentDate}`),
-            'EEE, MMM dd yyyy, p',
-          )}
+          {format(new Date(`${appointment.appointmentDate}`), 'MMM dd yyyy')}
         </p>
       </header>
       <section className="pb-[1rem] pl-[3rem] pr-[3rem] pt-[1.2rem]">

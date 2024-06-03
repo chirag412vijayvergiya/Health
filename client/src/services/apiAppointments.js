@@ -2,6 +2,7 @@
 import customFetch from '../utils/customFetch';
 
 // Appointments only of authenitcated user
+// Done
 export async function getAppointments() {
   try {
     const response = await customFetch.get('/appointment/my-appointments');
@@ -12,6 +13,7 @@ export async function getAppointments() {
   }
 }
 
+// Done
 export async function getOneAppointmentPatient(appointmentId) {
   try {
     console.log(appointmentId);
@@ -25,6 +27,7 @@ export async function getOneAppointmentPatient(appointmentId) {
 }
 
 // Appointments of all users for Dashboard
+// Done
 export async function getAllAppointments() {
   try {
     const response = await customFetch.get('/appointment');
@@ -32,5 +35,20 @@ export async function getAllAppointments() {
   } catch (error) {
     console.error('Error fetching appointments: ', error);
     throw new Error('Failed to fetch Appointments');
+  }
+}
+
+// Done
+export async function createAppointment({ data }) {
+  try {
+    console.log('from api :- ', data);
+    const response = await customFetch.post('/appointment/book-appointment', {
+      data,
+    });
+    console.log(response.data.session);
+    return response.data.session;
+  } catch (error) {
+    console.error('Error creating appointment: ', error);
+    throw new Error('Failed to create Appointment');
   }
 }

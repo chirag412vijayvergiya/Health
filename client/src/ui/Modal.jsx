@@ -30,7 +30,7 @@ function Window({ children, name }) {
   if (name !== openName) return null;
 
   return createPortal(
-    <div className="duration-50 fixed inset-0 z-[10000] bg-gray-100/50 backdrop-blur transition-all">
+    <div className="duration-50 fixed inset-0 z-[10000] bg-gray-100/50 backdrop-blur transition-all dark:bg-slate-800/50">
       <div
         className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-gray-100 p-6 shadow-lg transition-all duration-500 dark:bg-slate-800 md:p-8"
         ref={ref}

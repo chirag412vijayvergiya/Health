@@ -2,6 +2,10 @@ import StarfilledRating from './../../ui/WithoutProtected/HomePage/Testimonials/
 import StarblankRating from './../../ui/WithoutProtected/HomePage/Testimonials/StarblankRating';
 import StarhalfRating from '../../ui/WithoutProtected/HomePage/Testimonials/StarhalfRating';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../ui/Modal';
+import CreateAppointmentWrapper from '../appointments/CreateAppointmentWrapper';
+import { useUser } from '../authentication/Patients/useUser';
+import DefaultSpinner from '../../ui/DefaultSpinner';
 export function CardBod({
   ratings,
   name,
@@ -10,8 +14,12 @@ export function CardBod({
   photo,
   ratingsQuantity,
   doctorId,
+  fees,
 }) {
   const navigate = useNavigate();
+  const { user, isPending } = useUser();
+  if (isPending) return <DefaultSpinner />;
+
   const wholeStars = Math.floor(ratings); // 3
   const hasHalfStar = ratings - wholeStars >= 0.5; // 0.5
   const blankStars = 5 - wholeStars - (hasHalfStar ? 1 : 0); // 1
@@ -62,12 +70,25 @@ export function CardBod({
           <span className="ml-2">({ratingsQuantity})</span>
         </div>
         <div className="mt-4 flex md:mt-6">
-          <button
-            onClick={() => navigate('/book-appointment')}
-            className="inline-flex items-center rounded-lg bg-indigo-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800"
-          >
-            Book Appointment
-          </button>
+          <Modal>
+            <Modal.Open opens="BookAppointment-form">
+              <button
+                onClick={() => navigate('/book-appointment')}
+                className="inline-flex items-center rounded-lg bg-indigo-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800"
+              >
+                Book Appointment
+              </button>
+            </Modal.Open>
+            <Modal.Window name="BookAppointment-form">
+              <CreateAppointmentWrapper
+                doctorId={doctorId}
+                doctorName={name}
+                price={fees}
+                patientId={user.data.data.id}
+              />
+            </Modal.Window>
+          </Modal>
+
           <button
             onClick={() => navigate(`/doctors/${doctorId}`)}
             className="ms-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"

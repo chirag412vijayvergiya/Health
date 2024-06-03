@@ -23,7 +23,7 @@ const appointmentController = require('./Controllers/appointmentContoller');
 
 const app = express();
 
-app.enable('trust proxy');
+app.set('trust proxy', 1);
 app.use(cookieParser());
 // Use express-session middleware
 

@@ -20,6 +20,7 @@ function DoctorList() {
           photo={doctor.photo}
           role={doctor.role}
           doctorId={doctor.id}
+          fees={doctor.fees}
         />
       ))}
     </div>
