@@ -18,7 +18,6 @@ import Settings from './pages/Settings';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Profile from './pages/Profile';
 import DoctorProfile from './pages/DoctorProfile';
-import { UserProvider } from './Context/UserRoleContext';
 import MainHeader from './ui/WithoutProtected/Header/MainHeader';
 import Appointments from './pages/Appointments';
 import Success from './pages/Success';
