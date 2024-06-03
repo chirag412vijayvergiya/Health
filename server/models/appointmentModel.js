@@ -18,12 +18,8 @@ const appointmentSchema = new mongoose.Schema(
       validate: {
         validator: function (value) {
           // Create a new Date object combining appointmentDate and appointmentTime
-          const appointmentDateTime = new Date(value);
-          if (this.appointmentTime) {
-            const timeParts = this.appointmentTime.split(':');
-            appointmentDateTime.setHours(timeParts[0], timeParts[1], 0, 0);
-          }
-          return appointmentDateTime > this.bookingDate;
+
+          return value >= this.bookingDate;
         },
         message: 'Appointment date and time must be greater than booking date',
       },
