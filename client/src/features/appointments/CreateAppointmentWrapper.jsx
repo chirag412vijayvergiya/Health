@@ -95,10 +95,10 @@ function CreateAppointmentForm({
   const currentDate = new Date().toISOString().split('T')[0];
   return (
     <form
-      className="relative flex flex-col overflow-hidden rounded-lg border-[1px] border-solid border-grey-100 bg-grey-0 p-[1.6rem_2.5rem] text-xl dark:border-slate-800  dark:bg-slate-900 md:w-full md:p-[2.4rem_3rem]"
+      className="relative flex w-[310px] flex-col overflow-hidden rounded-lg border-[1px] border-solid border-grey-100 bg-grey-0 p-[1rem_2rem] text-xl  dark:border-slate-800 dark:bg-slate-900 md:w-full md:p-[2.4rem_3rem]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h5 className="mx-3 mb-3 items-center text-base font-semibold tracking-wider text-grey-800 dark:text-grey-100 md:mx-auto md:text-xl">
+      <h5 className="mx-1 items-center text-base font-semibold tracking-wider text-grey-800 dark:text-grey-100 md:mx-auto md:mb-3 md:text-xl">
         Book your Appointment with Best Doctors
       </h5>
       <FormRow label="Doctor Name" error={errors?.doctorName?.message}>
@@ -178,7 +178,7 @@ function CreateAppointmentForm({
           })}
         />
       </FormRow>
-      <div className="flex items-center justify-center gap-3 p-[1.2rem_0] md:justify-end">
+      <div className="flex items-center justify-center gap-3 p-[0.7rem_0] md:justify-end md:p-[1.2rem_0]">
         <Button
           type="reset"
           onClick={() => onCloseModal?.()}
