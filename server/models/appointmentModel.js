@@ -29,14 +29,16 @@ const appointmentSchema = new mongoose.Schema(
       },
     },
     appointmentTime: {
-      type: String, // or Date, depending on your use case
+      type: String,
       required: [true, 'Appointment time is required'],
       validate: {
         validator: function (value) {
-          // Validate time format (HH:mm)
-          return /^([01]\d|2[0-3]):?([0-5]\d)$/.test(value);
+          // Validate time range format (HH:mm - HH:mm)
+          return /^(?:[01]\d|2[0-3]):?([0-5]\d)\s*-\s*(?:[01]\d|2[0-3]):?([0-5]\d)$/.test(
+            value,
+          );
         },
-        message: 'Invalid time format. Use HH:mm format.',
+        message: 'Invalid time range format. Use HH:mm - HH:mm format.',
       },
     },
     bookingDate: {
