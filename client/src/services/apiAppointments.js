@@ -48,7 +48,7 @@ export async function createAppointment({ data }) {
     console.log(response.data.session);
     return response.data.session;
   } catch (error) {
-    console.error('Error creating appointment: ', error);
-    throw new Error('Failed to create Appointment');
+    // console.error('Error creating appointment: ', error.response.data.message);
+    throw new Error(error.response.data.message);
   }
 }

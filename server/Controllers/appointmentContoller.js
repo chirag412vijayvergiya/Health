@@ -60,8 +60,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       amount,
     },
   } = req.body;
-  console.log('Booking Appointment:', req.body.data);
-  // Ensure amount is parsed correctly
+
   const parsedAmount = parseInt(amount, 10);
   if (Number.isNaN(parsedAmount)) {
     // console.error('Amount is not a valid number:', amount);
@@ -137,16 +136,8 @@ const createBookingCheckout = async (session) => {
   const { doctorId, appointmentDate, appointmentTime, disease, patientId } =
     clientReferenceId;
 
-  // // Now you can use these values as needed
-  // console.log('Doctor ID:', doctorId);
-  // console.log('Appointment Date:', appointmentDate);
-  // console.log('Appointment Time:', appointmentTime);
-  // console.log('Disease:', disease);
-  // console.log('Patient ID:', patientId);
-
-  // Convert appointmentDate string to Date object
   const appointmentDateObj = new Date(appointmentDate);
-  // console.log('Appointment Date Object:', appointmentDateObj);
+
   let existingAppointment;
   try {
     existingAppointment = await appointments.findOne({
@@ -154,7 +145,6 @@ const createBookingCheckout = async (session) => {
       appointmentDate: appointmentDateObj,
       appointmentTime,
     });
-    // console.log('Existing Appointment:', existingAppointment);
   } catch (error) {
     console.error('Error finding existing appointment:', error);
   }

@@ -1,11 +1,11 @@
 function FormRow({ label, error, children }) {
   return (
-    <div className="flex-col  border-b py-3 dark:border-slate-600  ">
-      <div className="grid grid-cols-[10rem_1fr_1fr] items-center gap-[3.5rem] ">
+    <div className="flex-col border-b py-3 dark:border-slate-600  ">
+      <div className="items-center gap-[3.5rem] md:grid md:grid-cols-[10rem_1fr_1fr] ">
         {label && (
           <label
             htmlFor={children.props.id}
-            className="font-sans text-base font-medium tracking-widest dark:text-grey-300"
+            className="font-sans text-sm font-medium tracking-widest dark:text-grey-300 md:text-base"
           >
             {label}
           </label>
