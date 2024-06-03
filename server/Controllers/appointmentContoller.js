@@ -51,7 +51,7 @@ exports.getOneAppointment = catchAsync(async (req, res, next) => {
 });
 exports.bookAppointment = catchAsync(async (req, res, next) => {
   const {
-    body: {
+    data: {
       patientId,
       doctorId,
       appointmentDate,
@@ -60,7 +60,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
       amount,
     },
   } = req.body;
-  console.log('Booking Appointment:', req.body.body);
+  console.log('Booking Appointment:', req.body.data);
   // Ensure amount is parsed correctly
   const parsedAmount = parseInt(amount, 10);
   if (Number.isNaN(parsedAmount)) {
