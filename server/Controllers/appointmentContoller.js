@@ -131,21 +131,22 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 });
 
 const createBookingCheckout = async (session) => {
+  console.log('Session:', session);
   const clientReferenceId = JSON.parse(session.client_reference_id);
   // console.log('Session:-', clientReferenceId);
   const { doctorId, appointmentDate, appointmentTime, disease, patientId } =
     clientReferenceId;
 
   // // Now you can use these values as needed
-  // console.log('Doctor ID:', doctorId);
-  // console.log('Appointment Date:', appointmentDate);
-  // console.log('Appointment Time:', appointmentTime);
-  // console.log('Disease:', disease);
-  // console.log('Patient ID:', patientId);
+  console.log('Doctor ID:', doctorId);
+  console.log('Appointment Date:', appointmentDate);
+  console.log('Appointment Time:', appointmentTime);
+  console.log('Disease:', disease);
+  console.log('Patient ID:', patientId);
 
   // Convert appointmentDate string to Date object
   const appointmentDateObj = new Date(appointmentDate);
-
+  console.log('Appointment Date Object:', appointmentDateObj);
   let existingAppointment;
   try {
     existingAppointment = await appointments.findOne({
@@ -195,7 +196,7 @@ exports.webhookCheckout = (req, res, next) => {
   }
 
   if (event.type === 'checkout.session.completed') {
-    // console.log('Session Completed:', event.data.object);
+    console.log('Session Completed:', event.data.object);
     createBookingCheckout(event.data.object);
   }
 
