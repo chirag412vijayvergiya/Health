@@ -26,10 +26,14 @@ const createSendToken = (model, statusCode, res) => {
   };
   const userRoleOptions = {
     expires: cookiesOptions.expires,
-    httpOnly: false, // userRole cookie should be accessible by JavaScript
+    httpOnly: false,
     secure: cookiesOptions.secure,
-    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-    domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
+    sameSite: cookiesOptions.sameSite,
+    domain:
+      process.env.NODE_ENV === 'production'
+        ? '.jeevan-frontend.vercel.app'
+        : 'localhost',
+    path: '/', // Ensure the path is root
   };
 
   res.cookie('jwt', token, cookiesOptions);
