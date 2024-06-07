@@ -29,10 +29,7 @@ const createSendToken = (model, statusCode, res) => {
     httpOnly: false, // userRole cookie should be accessible by JavaScript
     secure: cookiesOptions.secure,
     sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-    domain:
-      process.env.NODE_ENV === 'production'
-        ? 'jeevan-frontend.vercel.app'
-        : 'localhost',
+    domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
   };
 
   res.cookie('jwt', token, cookiesOptions);
