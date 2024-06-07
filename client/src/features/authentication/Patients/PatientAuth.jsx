@@ -11,20 +11,49 @@ function PatientAuth() {
     setLogin((prevState) => !prevState);
   };
 
-  const login = async () => {
-    window.open(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/google`,
-      '_self',
+  const login = () => {
+    const googleLoginUrl = `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/google`;
+
+    // Open a new popup window for Google login
+    const newWindow = window.open(
+      googleLoginUrl,
+      '_blank',
+      'width=500,height=600',
     );
 
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/user-role`,
-      {
-        withCredentials: true,
-      },
-    );
+    // Set up polling to check if the popup window is closed
+    const pollTimer = window.setInterval(() => {
+      if (newWindow.closed !== false) {
+        window.clearInterval(pollTimer);
+        checkAuthStatus();
+      }
+    }, 1000);
+  };
 
-    Cookies.set('userRole', response.data.userRole, { expires: 90 });
+  // Function to check authentication status
+  const checkAuthStatus = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/check-auth-status`,
+        {
+          withCredentials: true,
+        },
+      );
+
+      const { user } = response.data;
+
+      // Set the userRole cookie
+      Cookies.set('userRole', user.role, {
+        expires: 90,
+        sameSite: 'None',
+        secure: process.env.NODE_ENV === 'production',
+      });
+
+      // Redirect to the dashboard
+      window.location.href = '/dashboard';
+    } catch (error) {
+      console.error('Error checking auth status:', error);
+    }
   };
 
   return (
