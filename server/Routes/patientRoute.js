@@ -62,7 +62,7 @@ router.get(
     console.log('Authenticated Patient:', req);
     const { user, role } = req.user;
     createSendToken(user, 200, res);
-    res.redirect(`${process.env.CLIENT_URL}/dashboard?userRole=${role}`);
+    res.redirect(`${process.env.CLIENT_URL}/home?userRole=${role}`);
   },
 );
 
