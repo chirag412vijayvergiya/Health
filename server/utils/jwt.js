@@ -29,7 +29,7 @@ const createSendToken = (model, statusCode, res) => {
     httpOnly: false,
     secure: cookiesOptions.secure,
     sameSite: cookiesOptions.sameSite,
-    domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
+    // domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
   };
 
   res.cookie('jwt', token, cookiesOptions);
