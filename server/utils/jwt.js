@@ -37,13 +37,13 @@ const createSendToken = (model, statusCode, res) => {
 
   model.password = undefined;
 
-  //   res.status(statusCode).json({
-  //     status: 'success',
-  //     token,
-  //     data: {
-  //       model,
-  //     },
-  //   });
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      model,
+    },
+  });
   // It's important to redirect after setting the cookie
   //   res.redirect('http://localhost:5173/dashboard');
 };

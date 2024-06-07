@@ -58,10 +58,21 @@ router.get(
   (req, res) => {
     // Generate token and send as a cookie
     // console.log('Authenticated Patient:', req.user);
-    createSendToken(req.user.user, 200, res);
+    // createSendToken(req.user.user, 200, res);
+    const { user } = req.user;
+    createSendToken(user, 200, res);
     res.redirect(`${process.env.CLIENT_URL}/dashboard`);
   },
 );
+
+router.get('/auth/user-role', (req, res) => {
+  // Assuming the user is authenticated and user data is stored in session or token
+  const userRole = req.user.role; // Or wherever you store the user role
+  res.status(200).json({
+    status: 'success',
+    userRole,
+  });
+});
 // ******************************************************************************* //
 
 // router.post('/forgotPassword', authController.forgotPassword);

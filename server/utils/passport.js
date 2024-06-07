@@ -80,7 +80,7 @@ passport.use(
         const token = signToken(user._id);
         // console.log('Generated JWT:', token);
         return done(null, { user, token });
-        // return done(null, user);
+        // return done(null, { user, token, userRole: user.role });
       } catch (err) {
         // console.error('Error during Google OAuth:', err);
         return done(err, null);

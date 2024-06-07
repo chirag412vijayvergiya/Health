@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import LoginPatient from './LoginPatient';
 import SignUpPatient from './SignUpPatient';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 function PatientAuth() {
   const [isLogin, setLogin] = useState(true);
@@ -9,15 +11,20 @@ function PatientAuth() {
     setLogin((prevState) => !prevState);
   };
 
-  const login = () => {
-    // window.open(
-    //   'http://localhost:8000/api/v1/patient/auth/google/callback',
-    //   '_self',
-    // );
+  const login = async () => {
     window.open(
       `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/google`,
       '_self',
     );
+
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/user-role`,
+      {
+        withCredentials: true,
+      },
+    );
+
+    Cookies.set('userRole', response.data.userRole, { expires: 90 });
   };
 
   return (
