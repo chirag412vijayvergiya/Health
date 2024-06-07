@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import LoginPatient from './LoginPatient';
 import SignUpPatient from './SignUpPatient';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 
 function PatientAuth() {
   const [isLogin, setLogin] = useState(true);
@@ -12,48 +10,14 @@ function PatientAuth() {
   };
 
   const login = () => {
-    const googleLoginUrl = `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/google`;
-
-    // Open a new popup window for Google login
-    const newWindow = window.open(
-      googleLoginUrl,
-      '_blank',
-      'width=500,height=600',
+    // window.open(
+    //   'http://localhost:8000/api/v1/patient/auth/google/callback',
+    //   '_self',
+    // );
+    window.open(
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/google`,
+      '_self',
     );
-
-    // Set up polling to check if the popup window is closed
-    const pollTimer = window.setInterval(() => {
-      if (newWindow.closed !== false) {
-        window.clearInterval(pollTimer);
-        checkAuthStatus();
-      }
-    }, 1000);
-  };
-
-  // Function to check authentication status
-  const checkAuthStatus = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/check-auth-status`,
-        {
-          withCredentials: true,
-        },
-      );
-
-      const { user } = response.data;
-
-      // Set the userRole cookie
-      Cookies.set('userRole', user.role, {
-        expires: 90,
-        sameSite: 'None',
-        secure: process.env.NODE_ENV === 'production',
-      });
-
-      // Redirect to the dashboard
-      window.location.href = '/dashboard';
-    } catch (error) {
-      console.error('Error checking auth status:', error);
-    }
   };
 
   return (

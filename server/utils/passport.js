@@ -77,7 +77,7 @@ passport.use(
         }
 
         const token = signToken(user._id);
-        return done(null, { user, token });
+        return done(null, { user, token, role: 'patient' });
       } catch (err) {
         return done(err, null);
       }

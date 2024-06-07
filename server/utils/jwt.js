@@ -24,13 +24,13 @@ const createSendToken = (user, statusCode, res) => {
 
   user.password = undefined;
 
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    data: {
-      user,
-    },
-  });
+  //   res.status(statusCode).json({
+  //     status: 'success',
+  //     token,
+  //     data: {
+  //       user,
+  //     },
+  //   });
 };
 
 module.exports = { signToken, createSendToken };
