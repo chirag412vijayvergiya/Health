@@ -10,7 +10,10 @@ function DoctorAuth() {
     //   'http://localhost:8000/api/v1/patient/auth/google/callback',
     //   '_self',
     // );
-    window.open('http://localhost:8000/api/v1/doctor/auth/google', '_self');
+    window.open(
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/doctor/auth/google`,
+      '_self',
+    );
   };
 
   return (
