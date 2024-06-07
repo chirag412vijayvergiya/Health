@@ -462,7 +462,8 @@ exports.updatePasswordPatient = catchAsync(async (req, res, next) => {
   await updatePassword(req, res, patient, next);
 });
 
-const logout = (req, res) => {
+exports.logout = (req, res) => {
+  console.log('Logout');
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
@@ -472,13 +473,6 @@ const logout = (req, res) => {
   res.status(200).json({ status: 'success' });
   // res.clearCookie('jwt');
   // res.status(200).json('User has been logged out!');
-};
-
-exports.logoutdoctor = (req, res) => {
-  logout(req, res);
-};
-exports.logoutpatient = (req, res) => {
-  logout(req, res);
 };
 
 // ******************************************************************************* //

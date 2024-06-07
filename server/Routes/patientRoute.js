@@ -15,7 +15,7 @@ const router = express.Router();
 router.post('/signup', authController.signuppatient);
 router.post('/login', authController.loginpatient);
 
-router.get('/logout', authController.logoutpatient);
+router.get('/logout', authController.logout);
 
 // router.get('/login/success', (req, res) => {
 //   if (req.user) {
