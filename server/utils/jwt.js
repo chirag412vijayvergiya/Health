@@ -26,10 +26,10 @@ const createSendToken = (model, statusCode, res) => {
   };
   const userRoleOptions = {
     expires: cookiesOptions.expires,
-    httpOnly: false,
-    secure: cookiesOptions.secure,
-    sameSite: cookiesOptions.sameSite,
-    // domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
+    httpOnly: false, // Set to false to allow access from client-side JavaScript
+    secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
+    sameSite: 'None', // Set sameSite attribute
+    domain: 'jeevan-frontend.vercel.app', // Set domain to frontend domain
   };
 
   res.cookie('jwt', token, cookiesOptions);
