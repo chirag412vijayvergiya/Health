@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import LoginPatient from './LoginPatient';
 import SignUpPatient from './SignUpPatient';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 function PatientAuth() {
   const [isLogin, setLogin] = useState(true);
@@ -8,6 +10,15 @@ function PatientAuth() {
   const toggleMode = () => {
     setLogin((prevState) => !prevState);
   };
+
+  const login = () => {
+    // window.open(
+    //   'http://localhost:8000/api/v1/patient/auth/google/callback',
+    //   '_self',
+    // );
+    window.open('http://localhost:8000/api/v1/patient/auth/google', '_self');
+  };
+
   return (
     <div className="my-3 flex max-w-lg flex-col items-start gap-5 rounded-lg border-t-[5px]  border-indigo-900 bg-gradient-to-b from-slate-900 to-grey-800 px-10 py-6 shadow-md  ">
       <div className="flex flex-col items-center gap-y-1">
@@ -42,7 +53,10 @@ function PatientAuth() {
             d="M15 6.719c2.019 0 3.831.693 5.256 2.056L24.2 4.831C21.819 2.612 18.706 1.25 15 1.25c-5.375 0-10.025 3.081-12.288 7.575l4.594 3.563c1.081-3.25 4.113-5.67 7.694-5.67"
           ></path>
         </svg>
-        <span className="font-mono tracking-tighter text-grey-100">
+        <span
+          className="font-mono tracking-tighter text-grey-100"
+          onClick={login}
+        >
           Continue with Google
         </span>
       </button>

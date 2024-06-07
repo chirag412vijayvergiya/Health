@@ -5,6 +5,13 @@ function DoctorAuth() {
   // const toggleMode = () => {
   //   setLogin((prevState) => !prevState);
   // };
+  const login = () => {
+    // window.open(
+    //   'http://localhost:8000/api/v1/patient/auth/google/callback',
+    //   '_self',
+    // );
+    window.open('http://localhost:8000/api/v1/doctor/auth/google', '_self');
+  };
 
   return (
     <div className="flex max-w-lg  flex-col items-start gap-5 rounded-md  border-b-[5px]  border-indigo-900  bg-slate-900 bg-gradient-to-t from-slate-900 to-grey-800 px-10 py-6 shadow ">
@@ -16,7 +23,10 @@ function DoctorAuth() {
           Provide Expert Medical Health Services to Patients.
         </p>
       </div>
-      <button className="mx-auto flex w-full items-center justify-center gap-2 rounded-md border border-grey-600 p-2 px-4 text-sm hover:bg-slate-900 lg:text-base">
+      <button
+        className="mx-auto flex w-full items-center justify-center gap-2 rounded-md border border-grey-600 p-2 px-4 text-sm hover:bg-slate-900 lg:text-base"
+        onClick={login}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22"

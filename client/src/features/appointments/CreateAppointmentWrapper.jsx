@@ -103,7 +103,7 @@ function CreateAppointmentForm({
       </h5>
       <FormRow label="Doctor Name" error={errors?.doctorName?.message}>
         <input
-          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:bg-slate-900 dark:text-grey-300"
+          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:bg-slate-900 dark:text-grey-400"
           type="text"
           id="doctorName"
           defaultValue={doctorName}
@@ -113,7 +113,7 @@ function CreateAppointmentForm({
 
       <FormRow label="Amount" error={errors?.amount?.message}>
         <input
-          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:bg-slate-900 dark:text-grey-300"
+          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:bg-slate-900 dark:text-grey-400"
           type="number"
           id="amount"
           defaultValue={price}
@@ -125,7 +125,7 @@ function CreateAppointmentForm({
         error={errors?.appointmentDate?.message}
       >
         <input
-          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-transparent p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:text-grey-200"
+          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-transparent p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:text-grey-400"
           type="date"
           id="appointmentDate"
           // onChange={(e) => {
@@ -151,7 +151,7 @@ function CreateAppointmentForm({
         error={errors?.appointmentTime?.message}
       >
         <select
-          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:bg-slate-900 dark:text-grey-300"
+          className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:bg-slate-900 dark:text-grey-400"
           id="appointmentTime"
           type="text"
           // onChange={(e) => setAppointmentTime(e.target.value)}
@@ -169,7 +169,7 @@ function CreateAppointmentForm({
       </FormRow>
       <FormRow label="Disease" error={errors?.disease?.message}>
         <textarea
-          className="h-[5rem] w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.8rem_1.2rem] text-sm tracking-wide shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-grey-300"
+          className="h-[5rem] w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.8rem_1.2rem] text-sm tracking-wide shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-grey-400"
           placeholder="Please describe your symptoms and concerns"
           disabled={isBooking}
           id="disease"

@@ -1,7 +1,7 @@
-// const fs = require('fs');
 const factory = require('./handleFactory');
 const Doctor = require('../models/doctorModel');
 const currentUserController = require('./currentUserController');
+// const catchAsync = require('../utils/catchAsync');
 // const Patient = require('../models/PatientModel');
 
 // const Doctor = JSON.parse(

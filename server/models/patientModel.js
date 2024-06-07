@@ -5,6 +5,7 @@ const crypto = require('crypto');
 
 const patientSchema = new mongoose.Schema(
   {
+    googleId: String,
     name: {
       type: String,
       required: [true, 'Please tell us your name!'],
@@ -29,13 +30,13 @@ const patientSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password'],
+      // required: [true, 'Please provide a password'],
       minlength: 8,
       select: false,
     },
     passwordConfirm: {
       type: String,
-      required: [true, 'Please confirm your password'],
+      // required: [true, 'Please confirm your password'],
       validate: {
         // This only works on CREATE and SAVE!!!
         validator: function (el) {
@@ -87,6 +88,14 @@ const patientSchema = new mongoose.Schema(
   },
 );
 
+// Set password-related fields as required only for manual signup
+patientSchema.path('password').required(function () {
+  return this.password !== undefined; // Check if password is defined
+}, 'Please provide a password');
+
+patientSchema.path('passwordConfirm').required(function () {
+  return this.password !== undefined; // Check if password is defined
+}, 'Please confirm your password');
 // ******************************************************************************* //
 
 // Virtual populate(Means this will not store in database for high quality)

@@ -9,10 +9,12 @@ const xss = require('xss-clean');
 const cors = require('cors');
 const path = require('path');
 const AppError = require('./utils/AppError');
-
+// const session = require('express-session');
+require('./utils/passport');
+// const cookieSession = require('cookie-session');
 // const session = require('express-session');
 
-//
+const passport = require('passport');
 //const userRoute = require('./Routes/userRoute');
 const doctorRouter = require('./Routes/doctorRoute');
 const patientRouter = require('./Routes/patientRoute');
@@ -81,7 +83,21 @@ app.post(
 //the parsed JSON data is converted into a JavaScript object
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
+
 app.use(express.urlencoded({ extended: false }));
+// setup session
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//   }),
+// );
+
+// setuppassport
+
+app.use(passport.initialize());
+// app.use(passport.session());
 // ******************************************************************************* //
 
 // Data sanitization against NoSQL query injection like $ or . malicious characters

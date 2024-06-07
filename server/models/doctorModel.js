@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 
 const doctorSchema = new mongoose.Schema(
   {
+    googleId: String,
     name: {
       type: String,
       required: [true, 'Please tell us your name!'],
@@ -47,13 +48,13 @@ const doctorSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password'],
+      // required: [true, 'Please provide a password'],
       minlength: 8,
       select: false,
     },
     passwordConfirm: {
       type: String,
-      required: [true, 'Please confirm your password'],
+      // required: [true, 'Please confirm your password'],
       validate: {
         // This only works on CREATE and SAVE!!!
         validator: function (el) {
@@ -96,6 +97,15 @@ const doctorSchema = new mongoose.Schema(
     toObject: { virtuals: true }, //convert a Mongoose document to either JSON or JavaScript object.
   },
 );
+
+// Set password-related fields as required only for manual signup
+doctorSchema.path('password').required(function () {
+  return this.password !== undefined; // Check if password is defined
+}, 'Please provide a password');
+
+doctorSchema.path('passwordConfirm').required(function () {
+  return this.password !== undefined; // Check if password is defined
+}, 'Please confirm your password');
 
 // ******************************************************************************* //
 

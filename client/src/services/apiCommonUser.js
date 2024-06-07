@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 export async function updateUserData({ fullName, Gender, photo }) {
   try {
     let role = Cookies.get('userRole');
+    console.log(role);
     if (role === 'admin') role = 'doctor';
     const formdata = new FormData();
     formdata.append('name', fullName);

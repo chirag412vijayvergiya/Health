@@ -30,23 +30,12 @@ const createSendToken = (model, statusCode, res) => {
 
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
-    sameSite: 'None', // Set sameSite attribute
+    // sameSite: 'None', // Set sameSite attribute
     // domain: 'ocalhost', // Set domain to localhost
     // domain: 'jeevan-frontend.vercel.app',
   };
 
   res.cookie('jwt', token, cookiesOptions);
-
-  // Optionally send user role in a non-HTTP-only cookie for client-side access
-  // res.cookie('userRole', model.role, {
-  //   expires: new Date(
-  //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-  //   ),
-  //   httpOnly: false,
-  //   secure: process.env.NODE_ENV === 'production',
-  //   // domain: 'jeevan-frontend.vercel.app',
-  //   sameSite: 'None',
-  // });
 
   model.password = undefined;
 
@@ -59,10 +48,97 @@ const createSendToken = (model, statusCode, res) => {
   });
 };
 
+// Optionally send user role in a non-HTTP-only cookie for client-side access
+// res.cookie('userRole', model.role, {
+//   expires: new Date(
+//     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+//   ),
+//   httpOnly: false,
+//   secure: process.env.NODE_ENV === 'production',
+//   // domain: 'jeevan-frontend.vercel.app',
+//   sameSite: 'None',
+// });
+
+// const loginSignUpWithGoogle = async (req, res, model, next) => {
+//   try {
+//     if (!req.body.googleAccessToken)
+//       return next(new AppError('Please provide google access token', 400));
+//     console.log(req.body);
+//     const { googleAccessToken } = req.body;
+
+//     // Fetch user information from Google API
+//     const response = await axios.get(
+//       'https://www.googleapis.com/oauth2/v3/userinfo',
+//       {
+//         headers: {
+//           Authorization: `Bearer ${googleAccessToken}`,
+//         },
+//       },
+//     );
+
+//     const { given_name: name, email, picture: photo } = response.data;
+
+//     // Check if user with the provided email exists in the database
+//     let existingUser = await model.findOne({ email });
+//     if (!existingUser) {
+//       // Create a new user if one does not exist
+//       existingUser = await model.create({
+//         name,
+//         email,
+//         photo,
+//         role: model,
+//       });
+//     }
+//     // Generate token and sign in
+//     createSendToken(existingUser, 200, res);
+//   } catch (error) {
+//     // Handle errors from the Google API request
+//     return next(error);
+//   }
+// };
+
+// For signup Patient
+// exports.loginSignUpWithGooglepatient = catchAsync(async (req, res, next) => {
+//   await loginSignUpWithGoogle(req, res, patient, next);
+// });
+
+// // For signup Doctor
+// exports.loginSignUpWithGoogledoctor = catchAsync(async (req, res, next) => {
+//   await loginSignUpWithGoogle(req, res, doctor, next);
+// });
+
 // ******************************************************************************* //
 
 // For new user
 const signup = async (req, res, model, next) => {
+  // if (req.body.googleAccessToken) {
+  //   const { googleAccessToken } = req.body;
+
+  //   // Fetch user information from Google API
+  //   const response = axios.get(
+  //     'https://www.googleapis.com/oauth2/v3/userinfo',
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${googleAccessToken}`,
+  //       },
+  //     },
+  //   );
+  //   const { given_name: name, email, picture: photo } = response.data;
+
+  //   // Check if user with the provided email exists in the database
+  //   let existingUser = await model.findOne({ email });
+  //   if (!existingUser) {
+  //     // Create a new user if one does not exist
+  //     existingUser = await model.create({
+  //       name,
+  //       email,
+  //       photo,
+  //       role: model,
+  //     });
+  //   }
+
+  //   createSendToken(existingUser, 201, res);
+  // } else {
   const newUser = await model.create({
     name: req.body.name,
     email: req.body.email,
@@ -73,6 +149,7 @@ const signup = async (req, res, model, next) => {
   });
   // console.log(newUser);
   createSendToken(newUser, 201, res);
+  // }
 };
 
 // For signup Patient
