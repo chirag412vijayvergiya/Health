@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit'); // Limit requests from same API
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
+const passport = require('passport');
 const cors = require('cors');
 const path = require('path');
 const AppError = require('./utils/AppError');
@@ -14,7 +15,6 @@ require('./utils/passport');
 // const cookieSession = require('cookie-session');
 // const session = require('express-session');
 
-const passport = require('passport');
 //const userRoute = require('./Routes/userRoute');
 const doctorRouter = require('./Routes/doctorRoute');
 const patientRouter = require('./Routes/patientRoute');

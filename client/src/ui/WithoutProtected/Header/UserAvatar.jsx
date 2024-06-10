@@ -5,7 +5,11 @@ import Menus from '../../Menus';
 import { useNavigate } from 'react-router-dom';
 import { MdSpaceDashboard } from 'react-icons/md';
 
-function UserAvatar({ name, photo }) {
+function UserAvatar({ name, photo, googleId }) {
+  const photoURL = googleId
+    ? photo
+    : `${import.meta.env.VITE_API_BASE_URL}/users/${photo}`;
+
   const navigate = useNavigate();
   function handleNavigation(route) {
     console.log(route);
@@ -16,7 +20,7 @@ function UserAvatar({ name, photo }) {
       <Menus>
         <div className="flex items-center gap-x-1">
           <img
-            src={`${import.meta.env.VITE_API_BASE_URL}/users/${photo}`}
+            src={photoURL}
             loading="lazy"
             width="35"
             height="35"
