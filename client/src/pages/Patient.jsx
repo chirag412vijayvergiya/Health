@@ -3,7 +3,8 @@ import DefaultSpinner from '../ui/DefaultSpinner';
 function Patient() {
   return (
     <div>
-      <DefaultSpinner />
+      {/* <DefaultSpinner /> */}
+      <p>On Working Progress</p>
     </div>
   );
 }
