@@ -1,4 +1,4 @@
-import DefaultSpinner from '../ui/DefaultSpinner';
+// import DefaultSpinner from '../ui/DefaultSpinner';
 
 function Patient() {
   return (

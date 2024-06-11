@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function AppointmentRow({ index, elements }) {
   const navigate = useNavigate();
   return (
-    <tr>
+    <tr className="tracking-medium items-center text-sm">
       <td className="whitespace-nowrap px-5 py-4">{index}</td>
       <td className="whitespace-nowrap px-5 py-4">{elements.patient.name}</td>
       <td className="whitespace-nowrap px-5 py-4">{elements.doctor.name}</td>
