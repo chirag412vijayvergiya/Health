@@ -1,9 +1,9 @@
 import Pagination from '../../ui/Pagination';
 
-function AppointmentTableFooter() {
+function AppointmentTableFooter({ count }) {
   return (
     <footer className="flex w-full justify-center bg-grey-300 px-6 py-[0.6rem] dark:bg-slate-900">
-      <Pagination count={10} />
+      <Pagination count={count} />
     </footer>
   );
 }

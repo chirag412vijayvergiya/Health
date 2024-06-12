@@ -1,12 +1,34 @@
 // import Cookies from 'js-cookie';
 import customFetch from '../utils/customFetch';
+import { PAGE_SIZE } from '../utils/constants';
 
 // Appointments only of authenitcated user
-// Done
-export async function getAppointments() {
+// Done;
+// export async function getAppointments() {
+//   try {
+//     const response = await customFetch.get('/appointment/my-appointments');
+//     // console.log(response.data.data.appointment);
+//     return response.data.data.appointment;
+//   } catch (error) {
+//     console.error('Error fetching appointments: ', error);
+//     throw new Error('Failed to fetch Appointments');
+//   }
+// }
+
+export async function getAppointments({ page }) {
   try {
     const response = await customFetch.get('/appointment/my-appointments');
-    return response.data.data.appointment;
+    let appointments = response.data.data.appointment;
+
+    // Step 4: Apply pagination
+    let paginatedAppointments = appointments;
+    if (page) {
+      const from = (page - 1) * PAGE_SIZE;
+      const to = from + PAGE_SIZE;
+      paginatedAppointments = appointments.slice(from, to);
+
+      return { data: paginatedAppointments, count: appointments.length };
+    }
   } catch (error) {
     console.error('Error fetching appointments: ', error);
     throw new Error('Failed to fetch Appointments');

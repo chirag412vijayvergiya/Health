@@ -26,7 +26,7 @@ function DoctorAuth() {
           Provide Expert Medical Health Services to Patients.
         </p>
       </div>
-      <button
+      {/* <button
         className="mx-auto flex w-full items-center justify-center gap-2 rounded-md border border-grey-600 p-2 px-4 text-sm hover:bg-slate-900 lg:text-base"
         onClick={login}
       >
@@ -53,10 +53,10 @@ function DoctorAuth() {
             d="M15 6.719c2.019 0 3.831.693 5.256 2.056L24.2 4.831C21.819 2.612 18.706 1.25 15 1.25c-5.375 0-10.025 3.081-12.288 7.575l4.594 3.563c1.081-3.25 4.113-5.67 7.694-5.67"
           ></path>
         </svg>
-        <span className="font-mono tracking-tighter text-grey-100">
+        <span className="font-mono tracking-wider  text-grey-100">
           Continue with Google
         </span>
-      </button>
+      </button> */}
       <div className="flex items-center gap-2 self-stretch">
         <span className="h-[1px] flex-1 bg-grey-300"></span>
         <p className="min-w-fit text-base text-grey-100 ">
@@ -74,14 +74,14 @@ function DoctorAuth() {
       </button> */}
       <LoginDoctor />
       <button
-        className=" focus-visible:ring-ring text-md mx-auto -mt-2 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-mono font-semibold tracking-tight text-blue-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-80"
+        className="focus-visible:ring-ring  text-md mx-auto -mt-2 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-mono font-semibold tracking-tight tracking-wider text-blue-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-80"
         type="button"
         disabled
       >
         {'For Registration, Contact Admin'}
       </button>
       <button
-        className=" focus-visible:ring-ring mx-auto -mt-2 mr-0 inline-flex h-10  whitespace-nowrap rounded-md py-1 pl-4 font-mono text-sm font-medium tracking-tight text-red-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+        className="focus-visible:ring-ring  mx-auto -mt-2 mr-0 inline-flex h-10 whitespace-nowrap  rounded-md py-1 pl-4 font-mono text-sm font-medium tracking-tight tracking-wider text-red-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
         type="button"
         // onClick={toggleMode}
       >

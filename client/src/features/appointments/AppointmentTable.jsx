@@ -5,6 +5,8 @@ import Empty from '../../ui/Empty';
 import AppointmentRow from './AppointmentRow';
 import Menus from '../../ui/Menus';
 import AppointmentTableFooter from './AppointmentTableFooter';
+import { useSearchParams } from 'react-router-dom';
+import { PAGE_SIZE } from '../../utils/constants';
 
 const headerContent = [
   'No.',
@@ -16,15 +18,19 @@ const headerContent = [
   'Date',
 ];
 function AppointmentTable() {
-  const { isLoading, appointments, error } = useAppointments();
+  const [searchParams] = useSearchParams();
+  const currentPage = !searchParams.get('page')
+    ? 1
+    : Number(searchParams.get('page'));
+  const { isLoading, appointments, error, count } = useAppointments();
   if (isLoading) return <DefaultSpinner />;
 
   if (!appointments?.length) return <Empty resourceName="Appointment" />;
   return (
     <Menus>
-      <div className="flex flex-col font-mono">
+      <div className=" mt-6 flex flex-col font-mono">
         <div className="my-2 overflow-x-auto  rounded-sm border-b  border-grey-100 shadow-2xl  shadow-slate-200 dark:border-gray-600 dark:shadow-slate-800 sm:mx-3 lg:mx-4">
-          <div className="inline-block min-w-full align-middle">
+          <div className="inline-block min-w-full align-middle ">
             <div className="overflow-hidden">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-grey-300 dark:bg-slate-900">
@@ -41,13 +47,14 @@ function AppointmentTable() {
                   {appointments.map((content, index) => (
                     <AppointmentRow
                       key={content._id}
-                      index={index + 1}
+                      index={index + (currentPage - 1) * PAGE_SIZE + 1}
+                      // index={index + 1}
                       elements={content}
                     />
                   ))}
                 </tbody>
               </table>
-              <AppointmentTableFooter />
+              <AppointmentTableFooter count={count} />
             </div>
           </div>
         </div>

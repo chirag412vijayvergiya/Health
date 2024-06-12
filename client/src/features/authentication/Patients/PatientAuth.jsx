@@ -21,7 +21,7 @@ function PatientAuth() {
   };
 
   return (
-    <div className="my-3 flex max-w-lg flex-col items-start gap-5 rounded-lg border-t-[5px]  border-indigo-900 bg-gradient-to-b from-slate-900 to-grey-800 px-10 py-6 shadow-md  ">
+    <div className="my-3 flex max-w-lg flex-col items-start gap-5 rounded-lg border-t-[5px]  border-indigo-900 bg-gradient-to-b from-slate-900 to-grey-800 px-10 py-6  shadow-md">
       <div className="flex flex-col items-center gap-y-1">
         <p className="text-3xl font-semibold text-grey-100 ">
           For<span className="text-indigo-700"> Patients</span>
@@ -55,7 +55,7 @@ function PatientAuth() {
           ></path>
         </svg>
         <span
-          className="font-mono tracking-tighter text-grey-100"
+          className="font-mono tracking-wider text-grey-100"
           onClick={login}
         >
           Continue with Google
@@ -70,7 +70,7 @@ function PatientAuth() {
       </div>
       {isLogin ? <LoginPatient /> : <SignUpPatient />}
       <button
-        className=" focus-visible:ring-ring mx-auto -mt-2 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-mono text-sm font-medium tracking-tight text-blue-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+        className="focus-visible:ring-ring  mx-auto -mt-2 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-mono text-sm font-medium tracking-wider  text-blue-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
         type="button"
         onClick={toggleMode}
       >
@@ -78,7 +78,7 @@ function PatientAuth() {
       </button>
       {isLogin && (
         <button
-          className=" focus-visible:ring-ring mx-auto -mt-2 mr-0 inline-flex h-10  whitespace-nowrap rounded-md py-1 pl-4 font-mono text-sm font-medium tracking-tight text-red-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+          className="focus-visible:ring-ring  mx-auto -mt-2 mr-0 inline-flex h-10 whitespace-nowrap  rounded-md py-1 pl-4 font-mono text-sm font-medium tracking-wider  text-red-400 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
           type="button"
           // onClick={toggleMode}
         >
