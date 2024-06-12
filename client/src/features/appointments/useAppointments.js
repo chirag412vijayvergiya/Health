@@ -7,6 +7,10 @@ export function useAppointments() {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
+  const sortByRaw = searchParams.get('sortBy') || 'Date-desc';
+  const [field, direction] = sortByRaw.split('-');
+  const sortBy = { field, direction };
+
   // PAGINATION
   const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
 
@@ -15,8 +19,8 @@ export function useAppointments() {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ['appointments', page],
-    queryFn: () => getAppointments({ page }),
+    queryKey: ['appointments', page, sortBy],
+    queryFn: () => getAppointments({ page, sortBy }),
   });
 
   // PRE-FETCHING
@@ -24,14 +28,14 @@ export function useAppointments() {
 
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ['appointments', page + 1],
-      queryFn: () => getAppointments({ page: page + 1 }),
+      queryKey: ['appointments', page + 1, sortBy],
+      queryFn: () => getAppointments({ page: page + 1, sortBy }),
     });
 
   if (page > 1)
     queryClient.prefetchQuery({
-      queryKey: ['appointments', page - 1],
-      queryFn: () => getAppointments({ page: page - 1 }),
+      queryKey: ['appointments', page - 1, sortBy],
+      queryFn: () => getAppointments({ page: page - 1, sortBy }),
     });
 
   return { appointments, error, isLoading, count };

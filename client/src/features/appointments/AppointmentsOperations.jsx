@@ -3,7 +3,7 @@ import SortBy from '../../ui/SortBy';
 
 function AppointmentsOperations() {
   return (
-    <div className="flex flex-col items-center gap-1 md:flex-row md:gap-7">
+    <div className="flex flex-col items-center gap-1 md:mr-4 md:flex-row md:gap-6">
       <Filter
         filterField="status"
         options={[
@@ -15,13 +15,13 @@ function AppointmentsOperations() {
       />
       <SortBy
         options={[
-          { value: 'startDate-desc', label: 'Sort by date (recent first)' },
-          { value: 'startDate-asc', label: 'Sort by date (earlier first)' },
+          { value: 'Date-desc', label: 'Sort by date (recent first)' },
+          { value: 'Date-asc', label: 'Sort by date (earlier first)' },
           {
-            value: 'totalPrice-desc',
-            label: 'Sort by amount (high first)',
+            value: 'payment-desc',
+            label: 'Sort by payment (high first)',
           },
-          { value: 'totalPrice-asc', label: 'Sort by amount (low first)' },
+          { value: 'payment-asc', label: 'Sort by payment (low first)' },
         ]}
       />
     </div>

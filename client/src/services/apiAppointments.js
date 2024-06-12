@@ -15,12 +15,32 @@ import { PAGE_SIZE } from '../utils/constants';
 //   }
 // }
 
-export async function getAppointments({ page }) {
+export async function getAppointments({ page, sortBy }) {
   try {
+    // console.log('from api :- ', page, sortBy);
     const response = await customFetch.get('/appointment/my-appointments');
     let appointments = response.data.data.appointment;
 
-    // Step 4: Apply pagination
+    // Apply sorting
+    if (sortBy) {
+      sortBy.field === 'payment'
+        ? (sortBy.field = 'doctor.fees')
+        : (sortBy.field = 'appointmentDate');
+      appointments.sort((a, b) => {
+        const fieldA = sortBy.field
+          .split('.')
+          .reduce((obj, key) => obj[key], a);
+        const fieldB = sortBy.field
+          .split('.')
+          .reduce((obj, key) => obj[key], b);
+        // console.log(fieldA, fieldB, sortBy.direction);
+        if (fieldA < fieldB) return sortBy.direction === 'asc' ? -1 : 1;
+        if (fieldA > fieldB) return sortBy.direction === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    //  Apply pagination
     let paginatedAppointments = appointments;
     if (page) {
       const from = (page - 1) * PAGE_SIZE;

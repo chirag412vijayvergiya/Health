@@ -1,7 +1,7 @@
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { formatDate } from '../../utils/helpers';
 import Menus from '../../ui/Menus';
-import { HiEye, HiPencil, HiSquare2Stack } from 'react-icons/hi2';
+import { HiEye } from 'react-icons/hi2';
 import Modal from '../../ui/Modal';
 import { useNavigate } from 'react-router-dom';
 
