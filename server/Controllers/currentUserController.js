@@ -63,20 +63,20 @@ const cloudinaryStorage = new CloudinaryStorage({
   },
 });
 
-const multerFilter = (req, file, cb) => {
-  // console.log(file.mimetype);
-  if (file.mimetype.startsWith('image')) {
-    console.log('file :- ', file);
-    cb(null, true);
-  } else {
-    console.log('Not an image! Please upload only image.');
-    cb(new AppError('Not an image! Please upload only image.', 404), false);
-  }
-};
+// const multerFilter = (req, file, cb) => {
+//   // console.log(file.mimetype);
+//   if (file.mimetype.startsWith('image')) {
+//     console.log('file :- ', file);
+//     cb(null, true);
+//   } else {
+//     console.log('Not an image! Please upload only image.');
+//     cb(new AppError('Not an image! Please upload only image.', 404), false);
+//   }
+// };
 
 // ******************************************************************************* //
 
-const upload = multer({ storage: cloudinaryStorage, fileFilter: multerFilter });
+const upload = multer({ storage: cloudinaryStorage });
 exports.uploadUserPhoto = upload.single('photo');
 
 // ******************************************************************************* //
