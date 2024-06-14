@@ -5,9 +5,8 @@ import { capitalizeFirstLetter } from '../../utils/helpers';
 
 function AppointmentDataBox({ appointment }) {
   const patientPhoto = appointment.patient.photo;
-  const photoURL = patientPhoto.startsWith('https')
-    ? patientPhoto
-    : `${import.meta.env.VITE_API_BASE_URL}/users/${patientPhoto}`;
+  const doctorPhoto = appointment.doctor.photo;
+
   return (
     <div className="mt-[3vh] overflow-hidden rounded-xl border-[1px] border-solid border-grey-200 bg-grey-100 dark:border-slate-800 dark:bg-slate-900">
       <header className="flex flex-col items-center justify-between bg-indigo-500 p-[0.7rem_0.1rem] text-2xl font-medium text-slate-300 md:flex-row md:p-[1rem_2rem] ">
@@ -34,7 +33,7 @@ function AppointmentDataBox({ appointment }) {
         <div className="flex flex-col justify-between md:flex-row">
           <div className="mb-6 flex flex-col items-center gap-[0.2rem] text-grey-600 dark:text-slate-200">
             <img
-              src={`${import.meta.env.VITE_API_BASE_URL}/users/${appointment.doctor.photo}`}
+              src={doctorPhoto}
               alt="avatar"
               className="aspect-square items-center rounded-full border object-cover md:mx-0"
               height="36"
@@ -54,7 +53,7 @@ function AppointmentDataBox({ appointment }) {
           </div>
           <div className="mb-6 flex flex-col items-center gap-[0.2rem] text-grey-600">
             <img
-              src={photoURL}
+              src={patientPhoto}
               alt="avatar"
               className="aspect-square items-center rounded-full border object-cover md:mx-0"
               height="36"

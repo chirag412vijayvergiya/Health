@@ -31,7 +31,7 @@ export function CardBod({
       <div className="flex flex-col items-center px-4 pb-10 pt-4">
         <img
           className="mb-2 h-24 w-24 rounded-full shadow-lg"
-          src={`${import.meta.env.VITE_API_BASE_URL}/users/${photo}`}
+          src={photo}
           alt={name + 's photo'}
         />
         <div className="flex items-center gap-x-2">

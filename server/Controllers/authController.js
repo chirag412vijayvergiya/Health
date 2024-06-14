@@ -196,7 +196,7 @@ exports.loginpatient = catchAsync(async (req, res, next) => {
 
 const protect = async (req, res, model, next) => {
   // 1) Getting token and check of it's there
-  console.log('Request :- ', req.cookies);
+  // console.log('Request :- ', req.cookies);
   // console.log('Request :- ', req.headers);
   // const { userRole } = req.cookies;
   // console.log('User Role :- ', userRole);

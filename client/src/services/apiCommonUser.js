@@ -11,9 +11,9 @@ export async function updateUserData({ fullName, Gender, photo }) {
     formdata.append('gender', Gender);
     formdata.append('photo', photo);
 
-    // for (let [key, value] of formdata.entries()) {
-    //   console.log(key, value);
-    // }
+    for (let [key, value] of formdata.entries()) {
+      console.log(key, value);
+    }
     const response = await customFetch.patch(`/${role}/updateMe`, formdata);
 
     console.log(response.data);

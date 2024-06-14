@@ -88,7 +88,6 @@ router.delete(
 router.patch(
   '/updateMe',
   currentUserController.uploadUserPhoto,
-  currentUserController.resizeUserPhoto,
   doctorController.updateMe,
 );
 

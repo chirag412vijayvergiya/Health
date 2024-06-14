@@ -22,7 +22,8 @@ const doctorSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      default: 'default.jpg',
+      default:
+        'https://res.cloudinary.com/dzhyyyxpv/image/upload/v1718378101/users/user-65c145c36311be26c72960ac-1718378099343.jpg',
     },
     role: {
       type: String,

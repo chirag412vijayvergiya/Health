@@ -25,7 +25,6 @@ function LoginSignup() {
           <>
             <li className="mr-2">
               <UserAvatar
-                googleId={user.data.data?.googleId}
                 name={user.data.data.name}
                 photo={user.data.data.photo}
               />

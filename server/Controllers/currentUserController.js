@@ -1,5 +1,4 @@
 const multer = require('multer');
-const sharp = require('sharp');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
@@ -14,104 +13,35 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// //Image will store as a buffer
-// const multerStorage = multer.memoryStorage();
-
-// const multerFilter = (req, file, cb) => {
-//   // console.log(file.mimetype);
-//   if (file.mimetype.startsWith('image')) {
-//     console.log('file :- ', file);
-//     cb(null, true);
-//   } else {
-//     console.log('Not an image! Please upload only image.');
-//     cb(new AppError('Not an image! Please upload only image.', 404), false);
-//   }
-// };
-
-// // ******************************************************************************* //
-
-// const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
-// exports.uploadUserPhoto = upload.single('photo');
-
-// console.log('uploadUserPhoto :- ', exports.uploadUserPhoto);
-// // ******************************************************************************* //
-
-// exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
-//   if (!req.file) {
-//     return next();
-//   }
-
-//   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
-
-//   console.log('req.file :- ', req.file.filename);
-//   const x = await sharp(req.file.buffer)
-//     .resize(500, 500)
-//     .toFormat('jpeg')
-//     .jpeg({ quality: 90 })
-//     .toFile(`public/users/${req.file.filename}`);
-//   console.log('x :- ', x);
-//   next();
-// });
-
 //Image will store as a buffer
 const cloudinaryStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'users',
-    // format: async (req, file) => 'jpeg',
-    // public_id: (req, file) => `user-${req.user.id}-${Date.now()}`,
+    format: async (req) => 'jpeg',
+    public_id: (req) => `user-${req.user.id}-${Date.now()}`,
+    transformation: [
+      { width: 500, height: 500, crop: 'limit', quality: 'auto' },
+    ],
   },
 });
 
-// const multerFilter = (req, file, cb) => {
-//   // console.log(file.mimetype);
-//   if (file.mimetype.startsWith('image')) {
-//     console.log('file :- ', file);
-//     cb(null, true);
-//   } else {
-//     console.log('Not an image! Please upload only image.');
-//     cb(new AppError('Not an image! Please upload only image.', 404), false);
-//   }
-// };
-
 // ******************************************************************************* //
 
-const upload = multer({ storage: cloudinaryStorage });
-exports.uploadUserPhoto = upload.single('photo');
-
-// ******************************************************************************* //
-
-exports.resizeUserPhoto = async (req, res, next) => {
-  console.log(req);
-  if (!req.file) return next(); // Skip if no file uploaded
-
-  try {
-    // Resize image using sharp (example: resize to 500x500 and convert to JPEG)
-    const resizedImageBuffer = await sharp(req.file.buffer)
-      .resize({ width: 500, height: 500 })
-      .toFormat('jpeg')
-      .jpeg({ quality: 90 })
-      .toBuffer(); // Get the resized image as a buffer
-
-    // Upload the resized image buffer to Cloudinary
-    const cloudinaryUploadResult = await cloudinary.uploader.upload(
-      resizedImageBuffer,
-      {
-        folder: 'users', // Optional: Specify the folder in Cloudinary where files will be stored
-        public_id: `user-${req.user.id}-${Date.now()}`, // Optional: Generate a unique public_id for the upload
-      },
-    );
-
-    // Update req.file.filename with the Cloudinary public_id or other relevant data
-    req.file.filename = cloudinaryUploadResult.public_id; // Example: Store Cloudinary public_id
-
-    // Continue to next middleware
-    next();
-  } catch (error) {
-    console.error('Error resizing and uploading photo:', error);
-    next(new AppError('Error resizing and uploading photo', 500)); // Internal server error
+const multerFilter = (req, file, cb) => {
+  // console.log(file.mimetype);
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    // console.log('Not an image! Please upload only image.');
+    cb(new AppError('Not an image! Please upload only image.', 404), false);
   }
 };
+
+// ******************************************************************************* //
+
+const upload = multer({ storage: cloudinaryStorage, fileFilter: multerFilter });
+exports.uploadUserPhoto = upload.single('photo');
 
 // ******************************************************************************* //
 
@@ -124,7 +54,7 @@ const filteredObj = (obj, ...allowedFields) => {
 };
 
 const updateMe = catchAsync(async (req, res, model, next) => {
-  console.log('req from update :- ', req);
+  // console.log('req from update :- ', req);
   // 1) Create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
     return next(
@@ -137,8 +67,8 @@ const updateMe = catchAsync(async (req, res, model, next) => {
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filteredObj(req.body, 'name', 'gender');
-  console.log(req.file.filename);
-  if (req.file) filteredBody.photo = req.file.filename;
+  // console.log(req.file);
+  if (req.file) filteredBody.photo = req.file.path;
   const updatedUser = await model.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
     runValidators: true,

@@ -11,7 +11,7 @@ function OneReview({ photo, name, ratings, review, date }) {
     <div className="flex w-full flex-col rounded-2xl border-b border-gray-300 bg-gray-50 p-6 tracking-wider shadow-sm shadow-grey-400 dark:border-slate-800 dark:bg-slate-900 dark:shadow-grey-900 ">
       <div className="flex flex-row">
         <img
-          src={`${import.meta.env.VITE_API_BASE_URL}/users/${photo}`}
+          src={photo}
           className="h-[3rem] w-[3rem] rounded-full shadow-xl shadow-slate-300 dark:shadow-gray-800"
           alt="Patient"
         />

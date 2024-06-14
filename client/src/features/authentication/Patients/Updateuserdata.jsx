@@ -8,11 +8,7 @@ function Updateuserdata({
   currentRole,
   currentGender,
   currentPhoto,
-  googleId,
 }) {
-  const photoURL = googleId
-    ? currentPhoto
-    : `${import.meta.env.VITE_API_BASE_URL}/users/${currentPhoto}`;
   const { updateUser, isUpdating } = useUpdateUserData();
   const [fullName, setFullName] = useState(currentFullName);
   const [avatar, setAvatar] = useState(null);
@@ -64,7 +60,7 @@ function Updateuserdata({
         <div className="ml-11 h-full w-full  md:ml-0 md:h-10 md:w-1/3">
           <span className="relative my-4 ml-10 flex shrink-0 overflow-hidden rounded-full hover:brightness-90 md:my-6">
             <img
-              src={preview || photoURL}
+              src={preview || currentPhoto}
               alt={`Avatar of ${currentFullName}`}
               className="aspect-square items-center rounded-full border object-cover md:mx-0"
               height="115"
