@@ -112,7 +112,7 @@ const updateMe = catchAsync(async (req, res, model, next) => {
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filteredObj(req.body, 'name', 'gender');
-  // console.log(req);
+  console.log(req.file.filename);
   if (req.file) filteredBody.photo = req.file.filename;
   const updatedUser = await model.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
