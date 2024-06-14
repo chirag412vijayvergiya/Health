@@ -13,7 +13,13 @@ function AppointmentRow({ index, elements }) {
       <td className="whitespace-nowrap px-5 py-4">{elements.patient.name}</td>
       <td className="whitespace-nowrap px-5 py-4">{elements.doctor.name}</td>
       <td className="whitespace-nowrap px-5 py-4">{elements.disease}</td>
-      <td className="whitespace-nowrap px-5 py-4">{elements.doctor.fees}</td>
+      <td className="whitespace-nowrap px-5 py-4">
+        {elements.doctor.fees}{' '}
+        <span className="pl-1 text-green-800 dark:text-green-200">
+          {' '}
+          &#8377;
+        </span>
+      </td>
       <td className="whitespace-nowrap px-5 py-4">{elements.status}</td>
       <td className="whitespace-nowrap px-5 py-4">
         {formatDate(elements.appointmentDate)}
