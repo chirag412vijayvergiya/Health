@@ -58,8 +58,8 @@ const cloudinaryStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'users',
-    format: async (req, file) => 'jpeg',
-    public_id: (req, file) => `user-${req.user.id}-${Date.now()}`,
+    // format: async (req, file) => 'jpeg',
+    // public_id: (req, file) => `user-${req.user.id}-${Date.now()}`,
   },
 });
 
