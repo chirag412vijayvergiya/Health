@@ -79,14 +79,38 @@ const multerFilter = (req, file, cb) => {
 const upload = multer({ storage: cloudinaryStorage, fileFilter: multerFilter });
 exports.uploadUserPhoto = upload.single('photo');
 
-console.log('uploadUserPhoto :- ', exports.uploadUserPhoto);
 // ******************************************************************************* //
 
-exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
-  if (!req.file) return next();
-  req.file.filename = req.file.path;
-  next();
-});
+exports.resizeUserPhoto = async (req, res, next) => {
+  if (!req.file) return next(); // Skip if no file uploaded
+
+  try {
+    // Resize image using sharp (example: resize to 500x500 and convert to JPEG)
+    const resizedImageBuffer = await sharp(req.file.buffer)
+      .resize({ width: 500, height: 500 })
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toBuffer(); // Get the resized image as a buffer
+
+    // Upload the resized image buffer to Cloudinary
+    const cloudinaryUploadResult = await cloudinary.uploader.upload(
+      resizedImageBuffer,
+      {
+        folder: 'users', // Optional: Specify the folder in Cloudinary where files will be stored
+        public_id: `user-${req.user.id}-${Date.now()}`, // Optional: Generate a unique public_id for the upload
+      },
+    );
+
+    // Update req.file.filename with the Cloudinary public_id or other relevant data
+    req.file.filename = cloudinaryUploadResult.public_id; // Example: Store Cloudinary public_id
+
+    // Continue to next middleware
+    next();
+  } catch (error) {
+    console.error('Error resizing and uploading photo:', error);
+    next(new AppError('Error resizing and uploading photo', 500)); // Internal server error
+  }
+};
 
 // ******************************************************************************* //
 
