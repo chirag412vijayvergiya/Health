@@ -5,6 +5,7 @@ import { useGetAllAppointments } from './useGetAllAppointments';
 import { useGetPatientsCount } from './useGetPatientsCount';
 import AgeChart from './AgeChart';
 import AppointmentsChart from './AppointmentsChart';
+import GenderChart from './GenderChart';
 
 function DashboardLayout() {
   const { isPending: isPending1, DoctorsCount } = useGetDoctorsCount();
@@ -24,7 +25,7 @@ function DashboardLayout() {
         <AgeChart Ages={PatientsCount?.data} />
       </div>
       <div className="md:col-span-2">
-        <AgeChart Ages={PatientsCount?.data} />
+        <GenderChart Genders={PatientsCount?.data} />
       </div>
       <div className="md:col-span-4">
         {/* <AgeChart Ages={PatientsCount.data} /> */}

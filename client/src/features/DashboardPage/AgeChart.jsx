@@ -88,11 +88,11 @@ function AgeChart({ Ages }) {
   const data = prepareData(startData, Ages);
 
   return (
-    <div className="flex flex-col items-center rounded-md border-[1px] border-solid border-grey-100 bg-grey-0 p-[1rem_0.4rem] shadow-2xl shadow-indigo-200 dark:border-slate-900 dark:bg-slate-900 dark:shadow-slate-800 md:p-[2.4rem_0.8rem]">
-      <h2 className="mx-auto text-xl font-semibold tracking-wider dark:text-grey-300">
+    <div className="flex flex-col items-center rounded-md border-[1px] border-solid border-grey-100 bg-grey-0 p-[1rem_0.4rem] shadow-2xl shadow-indigo-200 dark:border-slate-900 dark:bg-slate-900 dark:shadow-slate-800 md:p-[1.8rem_0.8rem]">
+      <h2 className="mx-auto mb-4 text-xl font-semibold tracking-wider dark:text-grey-300">
         Patient Age Summary
       </h2>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={310}>
         <PieChart>
           <Pie
             data={data}
