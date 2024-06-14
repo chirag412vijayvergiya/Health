@@ -82,6 +82,7 @@ exports.uploadUserPhoto = upload.single('photo');
 // ******************************************************************************* //
 
 exports.resizeUserPhoto = async (req, res, next) => {
+  console.log(req);
   if (!req.file) return next(); // Skip if no file uploaded
 
   try {
