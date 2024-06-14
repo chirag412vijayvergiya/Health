@@ -99,6 +99,7 @@ const filteredObj = (obj, ...allowedFields) => {
 };
 
 const updateMe = catchAsync(async (req, res, model, next) => {
+  console.log('req from update :- ', req);
   // 1) Create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
     return next(
