@@ -52,7 +52,7 @@ export async function getCurrentUser() {
 export async function Userlogout() {
   let role = Cookies.get('userRole');
   if (role === 'admin') role = 'doctor';
-  const res = await customFetch.get(`/${role}/logout`);
+  const res = await customFetch.post(`/${role}/logout`);
   console.log(res.data);
   Cookies.remove('userRole');
   return res.data;
