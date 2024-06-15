@@ -55,7 +55,6 @@ export async function Userlogout() {
   const res = await customFetch.get(`/${role}/logout`);
   console.log(res.data);
   Cookies.remove('userRole');
-  Cookies.remove('jwt');
   return res.data;
 }
 
