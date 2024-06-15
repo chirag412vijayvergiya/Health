@@ -92,7 +92,10 @@ function CreateAppointmentForm({
     '16:30 - 17:00',
   ];
 
-  const currentDate = new Date().toISOString().split('T')[0];
+  // const currentDate = new Date().toISOString().split('T')[0];
+  let currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
+  currentDate = currentDate.toISOString().split('T')[0];
   return (
     <form
       className="relative flex w-[310px] flex-col overflow-hidden rounded-lg border-[1px] border-solid border-grey-100 bg-grey-0 p-[1rem_2rem] text-xl  dark:border-slate-800 dark:bg-slate-900 md:w-full md:p-[2.4rem_3rem]"
@@ -140,7 +143,7 @@ function CreateAppointmentForm({
             },
             min: {
               value: currentDate,
-              message: 'Please select a date on or after today.',
+              message: 'Please select a date after today.',
             },
           })}
           disabled={isBooking}

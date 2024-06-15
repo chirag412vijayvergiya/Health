@@ -48,97 +48,10 @@ const createSendToken = (model, statusCode, res) => {
   });
 };
 
-// Optionally send user role in a non-HTTP-only cookie for client-side access
-// res.cookie('userRole', model.role, {
-//   expires: new Date(
-//     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-//   ),
-//   httpOnly: false,
-//   secure: process.env.NODE_ENV === 'production',
-//   // domain: 'jeevan-frontend.vercel.app',
-//   sameSite: 'None',
-// });
-
-// const loginSignUpWithGoogle = async (req, res, model, next) => {
-//   try {
-//     if (!req.body.googleAccessToken)
-//       return next(new AppError('Please provide google access token', 400));
-//     console.log(req.body);
-//     const { googleAccessToken } = req.body;
-
-//     // Fetch user information from Google API
-//     const response = await axios.get(
-//       'https://www.googleapis.com/oauth2/v3/userinfo',
-//       {
-//         headers: {
-//           Authorization: `Bearer ${googleAccessToken}`,
-//         },
-//       },
-//     );
-
-//     const { given_name: name, email, picture: photo } = response.data;
-
-//     // Check if user with the provided email exists in the database
-//     let existingUser = await model.findOne({ email });
-//     if (!existingUser) {
-//       // Create a new user if one does not exist
-//       existingUser = await model.create({
-//         name,
-//         email,
-//         photo,
-//         role: model,
-//       });
-//     }
-//     // Generate token and sign in
-//     createSendToken(existingUser, 200, res);
-//   } catch (error) {
-//     // Handle errors from the Google API request
-//     return next(error);
-//   }
-// };
-
-// For signup Patient
-// exports.loginSignUpWithGooglepatient = catchAsync(async (req, res, next) => {
-//   await loginSignUpWithGoogle(req, res, patient, next);
-// });
-
-// // For signup Doctor
-// exports.loginSignUpWithGoogledoctor = catchAsync(async (req, res, next) => {
-//   await loginSignUpWithGoogle(req, res, doctor, next);
-// });
-
 // ******************************************************************************* //
 
 // For new user
 const signup = async (req, res, model, next) => {
-  // if (req.body.googleAccessToken) {
-  //   const { googleAccessToken } = req.body;
-
-  //   // Fetch user information from Google API
-  //   const response = axios.get(
-  //     'https://www.googleapis.com/oauth2/v3/userinfo',
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${googleAccessToken}`,
-  //       },
-  //     },
-  //   );
-  //   const { given_name: name, email, picture: photo } = response.data;
-
-  //   // Check if user with the provided email exists in the database
-  //   let existingUser = await model.findOne({ email });
-  //   if (!existingUser) {
-  //     // Create a new user if one does not exist
-  //     existingUser = await model.create({
-  //       name,
-  //       email,
-  //       photo,
-  //       role: model,
-  //     });
-  //   }
-
-  //   createSendToken(existingUser, 201, res);
-  // } else {
   const newUser = await model.create({
     name: req.body.name,
     email: req.body.email,
@@ -147,9 +60,8 @@ const signup = async (req, res, model, next) => {
     // phone: req.body.phone,
     // BloodGroup: req.body.BloodGroup,
   });
-  // console.log(newUser);
+
   createSendToken(newUser, 201, res);
-  // }
 };
 
 // For signup Patient
@@ -254,63 +166,7 @@ const protect = async (req, res, model, next) => {
   req.user = currentUser;
   next();
 };
-/*
-const protect = async (req, res, model, next) => {
-  // 1) Getting token and check if it's there
-  let token;
-  console.log(req.headers);
-  console.log(req.cookies);
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1];
-    console.log('Token from headers:', token);
-  } else if (req.cookies.jwt) {
-    // If token is not present in headers, check if it's present in cookies
-    token = req.cookies.jwt;
-    console.log('Token from cookies:', token);
-  }
 
-  if (!token) {
-    return next(
-      new AppError('You are not logged in! Please log in to get access.', 401),
-    );
-  }
-
-  try {
-    // Verification token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded Token:', decoded);
-    // Check if user still exists
-    const currentUser = await model.findById(decoded.id);
-    if (!currentUser) {
-      return next(
-        new AppError(
-          'The user belonging to this token does no longer exist.',
-          401,
-        ),
-      );
-    }
-
-    // Check if user changed password after the token was issued
-    if (currentUser.changedPasswordAfter(decoded.iat)) {
-      return next(
-        new AppError(
-          'User recently changed password! Please log in again.',
-          401,
-        ),
-      );
-    }
-
-    // Attach the user object to the request object for further processing
-    req.user = currentUser;
-    next();
-  } catch (err) {
-    return next(new AppError('Invalid token! Please log in again.', 401));
-  }
-};
-*/
 // For protect Doctor
 exports.protectdoctor = catchAsync(async (req, res, next) => {
   await protect(req, res, doctor, next);
@@ -471,6 +327,66 @@ exports.logout = (req, res) => {
   });
   res.status(200).json({ status: 'success' });
 };
+
+// ******************************************************************************* //
+/*
+const protect = async (req, res, model, next) => {
+  // 1) Getting token and check if it's there
+  let token;
+  console.log(req.headers);
+  console.log(req.cookies);
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+    console.log('Token from headers:', token);
+  } else if (req.cookies.jwt) {
+    // If token is not present in headers, check if it's present in cookies
+    token = req.cookies.jwt;
+    console.log('Token from cookies:', token);
+  }
+
+  if (!token) {
+    return next(
+      new AppError('You are not logged in! Please log in to get access.', 401),
+    );
+  }
+
+  try {
+    // Verification token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Decoded Token:', decoded);
+    // Check if user still exists
+    const currentUser = await model.findById(decoded.id);
+    if (!currentUser) {
+      return next(
+        new AppError(
+          'The user belonging to this token does no longer exist.',
+          401,
+        ),
+      );
+    }
+
+    // Check if user changed password after the token was issued
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return next(
+        new AppError(
+          'User recently changed password! Please log in again.',
+          401,
+        ),
+      );
+    }
+
+    // Attach the user object to the request object for further processing
+    req.user = currentUser;
+    next();
+  } catch (err) {
+    return next(new AppError('Invalid token! Please log in again.', 401));
+  }
+};
+*/
+
 // res.clearCookie('jwt');
 // res.status(200).json('User has been logged out!');
 

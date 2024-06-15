@@ -8,66 +8,46 @@ import {
   YAxis,
 } from 'recharts';
 import { useDarkMode } from '../../Context/DarkModeContext';
+import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
+import AppointmentsFilter from './AppointmentsFilter';
 
-function AppointmentsChart() {
+function AppointmentsChart({ Appointments, numDays }) {
   const { isDarkMode } = useDarkMode();
-  const data = [
-    {
-      label: 'Mon',
-      totalSales: 4000,
-      extrasSales: 2400,
-    },
-    {
-      label: 'Tue',
-      totalSales: 3000,
-      extrasSales: 1398,
-    },
-    {
-      label: 'Wed',
-      totalSales: 2000,
-      extrasSales: 9800,
-    },
-    {
-      label: 'Thu',
-      totalSales: 2780,
-      extrasSales: 3908,
-    },
-    {
-      label: 'Fri',
-      totalSales: 1890,
-      extrasSales: 4800,
-    },
-    {
-      label: 'Sat',
-      totalSales: 2390,
-      extrasSales: 3800,
-    },
-    {
-      label: 'Sun',
-      totalSales: 3490,
-      extrasSales: 4300,
-    },
-  ];
+  const allDates = eachDayOfInterval({
+    start: subDays(new Date(), numDays - 1),
+    end: new Date(),
+  });
+
+  const data = allDates.map((date) => {
+    return {
+      label: format(date, 'MMM dd'),
+      totalAppointments: Appointments.filter((appointment) =>
+        isSameDay(date, new Date(appointment.appointmentDate)),
+      ).reduce((acc, cur) => acc + 1, 0),
+    };
+  });
 
   const colors = isDarkMode
     ? {
-        totalSales: { stroke: '#4f46e5', fill: '#4f46e5' },
-        extrasSales: { stroke: '#22c55e', fill: '#22c55e' },
+        totalAppointments: { stroke: '#4f46e5', fill: '#574ff0' },
         text: '#e5e7eb',
         background: '#18212f',
       }
     : {
-        totalSales: { stroke: '#4f46e5', fill: '#c7d2fe' },
-        extrasSales: { stroke: '#16a34a', fill: '#dcfce7' },
+        totalAppointments: { stroke: '#4f46e5', fill: '#c7d2fe' },
         text: '#374151',
         background: '#fff',
       };
 
   return (
-    <div className="flex flex-col rounded-md border-[1px] border-solid border-grey-100 bg-grey-0 p-[1rem_0.4rem] shadow-2xl shadow-indigo-200 dark:border-slate-900 dark:bg-slate-900 dark:shadow-slate-800 md:p-[2.4rem_0.8rem]">
-      <h2 className="mx-auto mb-4 text-xl font-semibold tracking-wider dark:text-grey-300">
-        Appointments from last week
-      </h2>
+    <div className="flex flex-col rounded-md border-[1px] border-solid border-grey-100 bg-grey-0 p-[1rem_0.4rem] font-mono shadow-2xl shadow-indigo-200 dark:border-slate-900 dark:bg-slate-900 dark:shadow-slate-800 md:p-[1rem_1rem]">
+      <div className="mb-4 flex flex-col items-center justify-between md:flex-row">
+        <h2 className="mx-2 text-lg font-semibold dark:text-grey-300">
+          Appointments from {format(allDates.at(0), 'MMM dd yyyy')} &mdash;{' '}
+          {format(allDates.at(-1), 'MMM dd yyyy')}
+        </h2>
+        <AppointmentsFilter />
+      </div>
       <ResponsiveContainer height={300} width="100%">
         <AreaChart data={data}>
           <XAxis
@@ -76,29 +56,20 @@ function AppointmentsChart() {
             tickLine={{ stroke: colors.text }}
           />
           <YAxis
-            unit="$"
             tick={{ fill: colors.text }}
             tickLine={{ stroke: colors.text }}
+            domain={[0, 'dataMax + 1']}
+            type="number"
           />
           <CartesianGrid strokeDasharray="4" />
           <Tooltip contentStyle={{ backgroundColor: colors.background }} />
           <Area
-            dataKey="totalSales"
+            dataKey="totalAppointments"
             type="monotone"
-            stroke={colors.totalSales.stroke}
-            fill={colors.totalSales.fill}
+            stroke={colors.totalAppointments.stroke}
+            fill={colors.totalAppointments.fill}
             strokeWidth={2}
-            name="Total sales"
-            unit="$"
-          />
-          <Area
-            dataKey="extrasSales"
-            type="monotone"
-            stroke={colors.extrasSales.stroke}
-            fill={colors.extrasSales.fill}
-            strokeWidth={2}
-            name="Extras sales"
-            unit="$"
+            name="Total Appointments"
           />
         </AreaChart>
       </ResponsiveContainer>

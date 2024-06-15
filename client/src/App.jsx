@@ -1,28 +1,48 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 // import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Suspense, lazy } from 'react';
 import { DarkModeProvider } from './Context/DarkModeContext';
-import HomePage from './pages/HomePage';
-import Login from './pages/Login';
-import Issues from './pages/Issues';
+
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AppLayout from './ui/AppLayout';
-import Dashboard from './pages/Dashboard';
-import Appointment from './pages/Appointment';
-import Patient from './pages/Patient';
-import Doctor from './pages/Doctors';
-import Payments from './pages/Payments';
-import Reviews from './pages/Reviews';
-import PageNotFound from './pages/PageNotFound';
-import Settings from './pages/Settings';
+// import Dashboard from './pages/Dashboard';
+// import Appointment from './pages/Appointment';
+// import Patient from './pages/Patient';
+// import Doctor from './pages/Doctors';
+// import Payments from './pages/Payments';
+// import Reviews from './pages/Reviews';
+// import PageNotFound from './pages/PageNotFound';
+// import Settings from './pages/Settings';
+// import Profile from './pages/Profile';
+// import DoctorProfile from './pages/DoctorProfile';
+// import Appointments from './pages/Appointments';
+// import Success from './pages/Success';
+// import Cancel from './pages/Cancel';
+// import HomePage from './pages/HomePage';
+// import Login from './pages/Login';
+// import Issues from './pages/Issues';
 import ProtectedRoute from './ui/ProtectedRoute';
-import Profile from './pages/Profile';
-import DoctorProfile from './pages/DoctorProfile';
 import MainHeader from './ui/WithoutProtected/Header/MainHeader';
-import Appointments from './pages/Appointments';
-import Success from './pages/Success';
-import Cancel from './pages/Cancel';
+import DefaultSpinner from './ui/DefaultSpinner';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const Login = lazy(() => import('./pages/Login'));
+const Issues = lazy(() => import('./pages/Issues'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Appointment = lazy(() => import('./pages/Appointment'));
+const Patient = lazy(() => import('./pages/Patient'));
+const Doctor = lazy(() => import('./pages/Doctors'));
+const Payments = lazy(() => import('./pages/Payments'));
+const Reviews = lazy(() => import('./pages/Reviews'));
+const PageNotFound = lazy(() => import('./pages/PageNotFound'));
+const Settings = lazy(() => import('./pages/Settings'));
+const Profile = lazy(() => import('./pages/Profile'));
+const DoctorProfile = lazy(() => import('./pages/DoctorProfile'));
+const Appointments = lazy(() => import('./pages/Appointments'));
+const Success = lazy(() => import('./pages/Success'));
+const Cancel = lazy(() => import('./pages/Cancel'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,36 +59,38 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
         <BrowserRouter>
           <MainHeader />
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="success" element={<Success />} />
-              <Route path="cancel" element={<Cancel />} />
-              <Route path="appointments" element={<Appointments />} />
+          <Suspense fallback={<DefaultSpinner />}>
+            <Routes>
               <Route
-                path="appointments/:appointmentId"
-                element={<Appointment />}
-              />
-              <Route path="patients" element={<Patient />} />
-              <Route path="doctors" element={<Doctor />} />
-              <Route path="doctors/:doctorId" element={<DoctorProfile />} />
-              <Route path="payments" element={<Payments />} />
-              <Route path="reviews" element={<Reviews />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="account" element={<Profile />} />
-            </Route>
-            <Route index element={<Navigate replace to="home" />} />
-            <Route path="home" element={<HomePage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="issues" element={<Issues />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="success" element={<Success />} />
+                <Route path="cancel" element={<Cancel />} />
+                <Route path="appointments" element={<Appointments />} />
+                <Route
+                  path="appointments/:appointmentId"
+                  element={<Appointment />}
+                />
+                <Route path="patients" element={<Patient />} />
+                <Route path="doctors" element={<Doctor />} />
+                <Route path="doctors/:doctorId" element={<DoctorProfile />} />
+                <Route path="payments" element={<Payments />} />
+                <Route path="reviews" element={<Reviews />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="account" element={<Profile />} />
+              </Route>
+              <Route index element={<Navigate replace to="home" />} />
+              <Route path="home" element={<HomePage />} />
+              <Route path="login" element={<Login />} />
+              <Route path="issues" element={<Issues />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
         <Toaster
           position="top-center"

@@ -1,19 +1,7 @@
 // import Cookies from 'js-cookie';
 import customFetch from '../utils/customFetch';
 import { PAGE_SIZE } from '../utils/constants';
-
-// Appointments only of authenitcated user
-// Done;
-// export async function getAppointments() {
-//   try {
-//     const response = await customFetch.get('/appointment/my-appointments');
-//     // console.log(response.data.data.appointment);
-//     return response.data.data.appointment;
-//   } catch (error) {
-//     console.error('Error fetching appointments: ', error);
-//     throw new Error('Failed to fetch Appointments');
-//   }
-// }
+import { isAfter } from 'date-fns';
 
 export async function getAppointments({ page, sortBy }) {
   try {
@@ -70,16 +58,28 @@ export async function getOneAppointmentPatient(appointmentId) {
 
 // Appointments of all users for Dashboard
 // Done
-export async function getAllAppointments() {
+export async function getappointmentsAfterDate(date) {
   try {
     const response = await customFetch.get('/appointment');
-    return response.data;
+    const allAppointments = response.data;
+    // console.log(allAppointments);
+    const result = allAppointments.result;
+    console.log(result);
+    const filterDate = new Date(date);
+    // // Filter appointments that have appointmentDate after the provided date
+    const filteredAppointments = allAppointments.data.data.filter(
+      (appointment) => {
+        const appointmentDate = new Date(appointment.appointmentDate);
+        return isAfter(appointmentDate, filterDate);
+      },
+    );
+    // console.log({ data: filteredAppointments });
+    return { data: { filteredAppointments, result } };
   } catch (error) {
-    console.error('Error fetching appointments: ', error);
+    // console.error('Error fetching appointments: ', error);
     throw new Error('Failed to fetch Appointments');
   }
 }
-
 // Done
 export async function createAppointment({ data }) {
   try {

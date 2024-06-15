@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-function FilterButton({ active, disabled, onClick, key, label }) {
+function FilterButton({ active, disabled, onClick, label }) {
   const buttonClasses = classNames(
     ' border-none rounded-sm font-semibold tracking widest text-xs md:text-sm px-2 py-1 transition duration-300',
     {
@@ -10,12 +10,7 @@ function FilterButton({ active, disabled, onClick, key, label }) {
   );
 
   return (
-    <button
-      className={buttonClasses}
-      key={key}
-      disabled={disabled}
-      onClick={onClick}
-    >
+    <button className={buttonClasses} disabled={disabled} onClick={onClick}>
       {label}
     </button>
   );
