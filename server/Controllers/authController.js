@@ -466,13 +466,13 @@ exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
     sameSite: 'None',
-    secure: process.env.NODE_ENV === 'production',
   });
   res.status(200).json({ status: 'success' });
-  // res.clearCookie('jwt');
-  // res.status(200).json('User has been logged out!');
 };
+// res.clearCookie('jwt');
+// res.status(200).json('User has been logged out!');
 
 // ******************************************************************************* //
 
