@@ -3,7 +3,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, useStripe, useElements } from '@stripe/react-stripe-js';
 import FormRow from '../../ui/FormRow';
 import Button from '../../ui/Button';
-import { useCallback, useState } from 'react';
 import { useCreateAppointment } from './useCreateAppointment';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -157,7 +156,6 @@ function CreateAppointmentForm({
           className="w-[12rem] rounded-md border-[1px] border-solid border-grey-300 bg-grey-0 p-[0.4rem_0.8rem] text-sm tracking-wider shadow-sm dark:border-slate-600 dark:bg-slate-900 dark:text-grey-400"
           id="appointmentTime"
           type="text"
-          // onChange={(e) => setAppointmentTime(e.target.value)}
           disabled={isBooking}
           {...register('appointmentTime', {
             required: 'This field is required',

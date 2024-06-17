@@ -8,7 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const passport = require('passport');
 const cors = require('cors');
-const path = require('path');
+// const path = require('path');
 const AppError = require('./utils/AppError');
 // const session = require('express-session');
 require('./utils/passport');
@@ -29,7 +29,7 @@ app.set('trust proxy', 1);
 app.use(cookieParser());
 // Use express-session middleware
 
-app.use('/users', express.static(path.join(__dirname, 'public/users')));
+// app.use('/users', express.static(path.join(__dirname, 'public/users')));
 
 app.use(
   cors({
@@ -73,6 +73,7 @@ app.use('/api', limiter);
 
 // ******************************************************************************* //
 
+// Body parsers
 app.post(
   '/webhook-checkout',
   bodyParser.raw({ type: 'application/json' }),
@@ -83,21 +84,10 @@ app.post(
 //the parsed JSON data is converted into a JavaScript object
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
-
 app.use(express.urlencoded({ extended: false }));
-// setup session
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//   }),
-// );
 
-// setuppassport
-
+// Passport initialization
 app.use(passport.initialize());
-// app.use(passport.session());
 // ******************************************************************************* //
 
 // Data sanitization against NoSQL query injection like $ or . malicious characters
@@ -131,4 +121,5 @@ app.all('*', (req, res, next) => {
 });
 
 app.use(GlobalErrorHandler);
+
 module.exports = app;
