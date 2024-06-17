@@ -23,7 +23,7 @@ function Sidebar() {
         <h1 className="ml-[2vw] font-semibold uppercase text-grey-500">
           medicine
         </h1>
-        <div className="ml-[4vw] mt-3 flex max-w-max flex-col space-y-5 pb-12 pr-8">
+        <div className="ml-[2vw] mt-3 flex max-w-max flex-col space-y-5 pb-12 pr-8">
           <NavLink
             to="/dashboard"
             className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
