@@ -2,53 +2,98 @@ import { useForm } from 'react-hook-form';
 import FormRow from '../../ui/FormRow';
 import Button from '../../ui/Button';
 import { useState } from 'react';
-import { useForgotPassword } from './useForgotPassword';
-import { useResetPassword } from './useResetPassword';
+import { useForgotPasswordPatient } from './Patients/useForgotPasswordPatient';
+import { useResetPasswordPatient } from './Patients/useResetPasswordPatient';
+import { useForgotPasswordDoctor } from './Doctors/useForgotPasswordDoctor';
+import { useResetPasswordDoctor } from './Doctors/useResetPasswordDoctor';
 
-function Forgotpasswordform({ onCloseModal }) {
+function Forgotpasswordform({ onCloseModal, patient = '' }) {
   const [resetPasswordForm, setResetPasswordForm] = useState(false);
-  const { isSending, forgotPassword } = useForgotPassword();
-  const { isReseting, resetPassword } = useResetPassword();
+  const { isSending1, forgotPasswordPatient } = useForgotPasswordPatient();
+  const { isReseting1, resetPasswordPatient } = useResetPasswordPatient();
+  const { isSending2, forgotPasswordDoctor } = useForgotPasswordDoctor();
+  const { isReseting2, resetPasswordDoctor } = useResetPasswordDoctor();
   const { register, handleSubmit, reset, formState, watch } = useForm();
   const { errors } = formState;
 
+  const isSending = isSending1 || isSending2;
+  const isReseting = isReseting1 || isReseting2;
+
   function onSubmit(data) {
     if (!resetPasswordForm) {
-      console.log(data);
-      forgotPassword(
-        { email: data.emailId },
-        {
-          onSuccess: () => {
-            reset();
-            setResetPasswordForm(true);
+      if (patient) {
+        forgotPasswordPatient(
+          { email: data.emailId },
+          {
+            onSuccess: () => {
+              reset();
+              setResetPasswordForm(true);
+            },
           },
-        },
-        {
-          onError: () => {
-            reset();
+          {
+            onError: () => {
+              reset();
+              onCloseModal?.();
+            },
           },
-        },
-      );
+        );
+      } else {
+        forgotPasswordDoctor(
+          { email: data.emailId },
+          {
+            onSuccess: () => {
+              reset();
+              setResetPasswordForm(true);
+            },
+          },
+          {
+            onError: () => {
+              reset();
+              onCloseModal?.();
+            },
+          },
+        );
+      }
     } else {
-      resetPassword(
-        {
-          token: data.token,
-          password: data.newpassword,
-          passwordConfirm: data.ConfirmPassword,
-        },
-        {
-          onSuccess: () => {
-            reset();
-
-            onCloseModal?.();
+      if (patient) {
+        resetPasswordPatient(
+          {
+            token: data.token,
+            password: data.newpassword,
+            passwordConfirm: data.ConfirmPassword,
           },
-        },
-        {
-          onError: () => {
-            reset();
+          {
+            onSuccess: () => {
+              reset();
+              onCloseModal?.();
+            },
           },
-        },
-      );
+          {
+            onError: () => {
+              reset();
+            },
+          },
+        );
+      } else {
+        resetPasswordDoctor(
+          {
+            token: data.token,
+            password: data.newpassword,
+            passwordConfirm: data.ConfirmPassword,
+          },
+          {
+            onSuccess: () => {
+              reset();
+              onCloseModal?.();
+            },
+          },
+          {
+            onError: () => {
+              reset();
+            },
+          },
+        );
+      }
     }
   }
 

@@ -41,3 +41,39 @@ export async function patientLogin({ email, password }) {
     throw new Error('Failed to login');
   }
 }
+
+export async function resetPasswordPatient({
+  password,
+  passwordConfirm,
+  token,
+}) {
+  try {
+    console.log('email from api Patient:- ', password, passwordConfirm, token);
+    const response = await customFetch.patch(
+      `/patient/resetPassword/${token}`,
+      {
+        password,
+        passwordConfirm,
+      },
+    );
+    Cookies.set('userRole', 'patient', { expires: 90 });
+    return response.data;
+  } catch (error) {
+    console.error('Error: ', error);
+    throw new Error('Failed to Reset Password');
+  }
+}
+
+export async function forgotPasswordPatient({ email }) {
+  try {
+    console.log('email from api Patient:- ', email);
+    const response = await customFetch.post('/patient/forgotPassword', {
+      email,
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error: ', error);
+    throw new Error('Failed to Send Reset token to Email Address');
+  }
+}

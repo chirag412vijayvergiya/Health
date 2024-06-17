@@ -204,6 +204,7 @@ const forgotPassword = async (req, res, model, UserUrl, next) => {
   }
 
   // 2) Generate the random reset token
+  console.log('User :- ', user);
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 

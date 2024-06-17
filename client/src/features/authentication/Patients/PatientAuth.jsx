@@ -90,7 +90,7 @@ function PatientAuth() {
             </button>
           </Modal.Open>
           <Modal.Window name="forgotPassword-form">
-            <Forgotpasswordform />
+            <Forgotpasswordform patient="patient" />
           </Modal.Window>
         </Modal>
       )}

@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { forgotPassword as forgotPasswordApi } from '../../services/apiCommonUser';
+import { forgotPasswordPatient as forgotPasswordApi } from '../../../services/apiAuthPatient';
 import toast from 'react-hot-toast';
 
-export function useForgotPassword() {
-  const { mutate: forgotPassword, isPending: isSending } = useMutation({
+export function useForgotPasswordPatient() {
+  const { mutate: forgotPasswordPatient, isPending: isSending1 } = useMutation({
     mutationFn: forgotPasswordApi,
     onSuccess: (data) => {
       toast.success('Reset token sent to your email address!');
@@ -12,5 +12,5 @@ export function useForgotPassword() {
       toast.error(error.message);
     },
   });
-  return { forgotPassword, isSending };
+  return { isSending1, forgotPasswordPatient };
 }

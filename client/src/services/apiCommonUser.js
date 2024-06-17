@@ -84,36 +84,3 @@ export async function UpdateUserPassword({
     throw new Error('Failed to update user password');
   }
 }
-
-export async function forgotPassword({ email }) {
-  try {
-    console.log('email from api :- ', email);
-    const response = await customFetch.post('/patient/forgotPassword', {
-      email,
-    });
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error: ', error);
-    throw new Error('Failed to Send Reset token to Email Address');
-  }
-}
-
-export async function resetPassword({ password, passwordConfirm, token }) {
-  try {
-    const response = await customFetch.patch(
-      `/patient/resetPassword/${token}`,
-      {
-        password,
-        passwordConfirm,
-      },
-    );
-    console.log(response.data);
-    const userRole = response.data.data.model.role;
-    Cookies.set('userRole', userRole, { expires: 90 });
-    return response.data;
-  } catch (error) {
-    console.error('Error: ', error);
-    throw new Error('Failed to Reset Password');
-  }
-}

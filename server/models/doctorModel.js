@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 // const slugify = require('slugify');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 const doctorSchema = new mongoose.Schema(
   {

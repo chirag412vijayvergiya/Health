@@ -2,22 +2,6 @@ import Modal from '../../../ui/Modal';
 import Forgotpasswordform from '../Forgotpasswordform';
 import LoginDoctor from './LoginDoctor';
 function DoctorAuth() {
-  // const [isLogin, setLogin] = useState(true);
-
-  // const toggleMode = () => {
-  //   setLogin((prevState) => !prevState);
-  // };
-  const login = () => {
-    // window.open(
-    //   'http://localhost:8000/api/v1/patient/auth/google/callback',
-    //   '_self',
-    // );
-    window.open(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/doctor/auth/google`,
-      '_self',
-    );
-  };
-
   return (
     <div className="flex max-w-lg  flex-col items-start gap-5 rounded-md  border-b-[5px]  border-indigo-900  bg-slate-900 bg-gradient-to-t from-slate-900 to-grey-800 px-10 py-6 shadow ">
       <div className="flex flex-col items-center gap-y-1">
