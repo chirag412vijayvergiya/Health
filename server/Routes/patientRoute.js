@@ -59,7 +59,7 @@ router.get(
     // Generate token and send as a cookie
     // console.log('Authenticated Patient:', req.user);
     // createSendToken(req.user.user, 200, res);
-    console.log('Authenticated Patient:', req);
+    // console.log('Authenticated Patient:', req);
     const { user, role } = req.user;
     createSendToken(user, 200, res);
     res.redirect(`${process.env.CLIENT_URL}/home?userRole=${role}`);
