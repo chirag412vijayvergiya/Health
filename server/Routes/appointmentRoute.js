@@ -23,7 +23,7 @@ router.get(
 
 router.get(
   '/',
-  authController.protectpatient,
+  // authController.protectpatient,
   appointmentController.getAllAppointments,
 );
 
