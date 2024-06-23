@@ -106,6 +106,12 @@ patientSchema.virtual('appointment', {
   localField: '_id', // In this schema id is store as _id by monoose (so both must be equal for connecting)
 });
 
+patientSchema.virtual('chat', {
+  ref: 'Chat', // Name of Schema
+  foreignField: 'users.user', // In foreign feild (Appointments Schema) the id is store in patient attribute
+  localField: '_id', // In this schema id is store as _id by monoose (so both must be equal for connecting)
+});
+
 // ******************************************************************************* //
 
 // Set the Password when password will actually modified
@@ -184,6 +190,6 @@ patientSchema.methods.createPasswordResetToken = function () {
 };
 
 // ******************************************************************************* //
-//Will make virtual fees, option
+
 const Patient = mongoose.model('Patient', patientSchema);
 module.exports = Patient;

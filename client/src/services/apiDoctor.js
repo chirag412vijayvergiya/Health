@@ -4,6 +4,7 @@ import customFetch from '../utils/customFetch';
 export async function getDoctors() {
   try {
     const response = await customFetch.get('/doctor/all-doctors');
+    console.log('Response from getDoctors:', response.data);
     return response.data.data.data;
   } catch (error) {
     console.error('Error fetching doctors: ', error);

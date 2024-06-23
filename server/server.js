@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
@@ -26,6 +27,46 @@ const server = app.listen(port, () => {
 });
 
 // This approach is commonly used to gracefully handle unhandled promise rejection which is not handle by .catch() handler
+process.on('unhandledRejection', (err) => {
+  console.log('UNHANDLED REJECTION 💥 Shutting down...');
+  console.log(err.name, err.message);
+  server.close(() => process.exit(1));
+});
+*/
+
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION 💥 Shutting down...');
+  console.log(err);
+  process.exit(1);
+});
+
+dotenv.config({ path: './config.env' });
+
+const { app, server } = require('./app'); // Destructure to get both app and server
+
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD,
+);
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('DB connection successful!'))
+  .catch((err) => console.error('DB connection error:', err));
+
+const port = process.env.PORT || 4000;
+
+server.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
+
+// Gracefully handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLED REJECTION 💥 Shutting down...');
   console.log(err.name, err.message);

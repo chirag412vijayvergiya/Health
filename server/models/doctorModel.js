@@ -124,6 +124,12 @@ doctorSchema.virtual('reviews', {
   localField: '_id',
 });
 
+doctorSchema.virtual('chats', {
+  ref: 'Chat',
+  foreignField: 'doctor',
+  localField: '_id',
+});
+
 // ******************************************************************************* //
 
 // Set the Password when password will actually modified

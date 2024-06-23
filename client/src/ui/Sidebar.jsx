@@ -42,7 +42,17 @@ function Sidebar() {
               <span>Appointments</span>
             </Button>
           </NavLink>
-
+          <NavLink
+            to="/chat"
+            className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
+          >
+            <Button type="sidebar">
+              <MdOutlinePayments />
+              <span>
+                {currentRole === 'patient' ? 'Consult Chat' : 'Care Chat'}
+              </span>
+            </Button>
+          </NavLink>
           <NavLink
             to="/patients"
             className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
@@ -95,11 +105,6 @@ function Sidebar() {
             <span>Settings</span>
           </Button>
         </NavLink>
-
-        {/* <Button type="sidebar">
-          <HiArrowRightOnRectangle className="h-5 w-5 text-red-500" />
-          <span className="font-semibold text-red-500">Logout</span>
-        </Button> */}
       </div>
     </div>
   );

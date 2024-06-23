@@ -118,11 +118,12 @@ router.patch(
 // So i am using protectdoctor here
 
 router.use(authController.protectdoctor);
+router.get('/', patientController.getAllUsers);
 router.use(authController.restrictTo('admin'));
 
 router
   .route('/')
-  .get(patientController.getAllUsers)
+  // .get(patientController.getAllUsers)
   .post(patientController.createUser);
 
 router

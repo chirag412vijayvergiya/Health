@@ -6,6 +6,7 @@ import Testimonials from '../ui/WithoutProtected/HomePage/Testimonials/Testimoni
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
+import SEO from '../ui/SEO.jsx';
 function HomePage() {
   const navigate = useNavigate();
 
@@ -25,6 +26,12 @@ function HomePage() {
   }, [navigate]);
   return (
     <div className="overflow-x: auto; overflow-y: unset;">
+      <SEO
+        title="Home"
+        description="This is the home page of the website."
+        keywords="home, page, keywords"
+        author="Chirag Vijayvergiya"
+      />
       <Header />
       <Features />
       <Testimonials />

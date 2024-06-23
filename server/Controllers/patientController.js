@@ -62,6 +62,8 @@ exports.getLengthPatients = catchAsync(async (req, res, next) => {
   });
 });
 
+// ******************************************************************************* //
+
 // passport.use(
 //   new OAuth2Stratergy(
 //     {

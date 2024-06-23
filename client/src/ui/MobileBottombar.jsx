@@ -8,6 +8,7 @@ import { HiOutlineUsers } from 'react-icons/hi2';
 import { HiOutlineCog6Tooth } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
 import { useUser } from '../features/authentication/Patients/useUser';
+import { IoChatboxEllipses } from 'react-icons/io5';
 
 function MobileBottombar() {
   const {
@@ -34,7 +35,12 @@ function MobileBottombar() {
         <GiTechnoHeart size={22} />
         {/* <span className="text-xs font-thin tracking-tighter">Appointments</span> */}
       </NavLink>
-
+      <NavLink
+        to="/chat"
+        className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
+      >
+        <IoChatboxEllipses size={22} />
+      </NavLink>
       <NavLink
         to="/patients"
         className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
@@ -56,15 +62,14 @@ function MobileBottombar() {
         className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
       >
         <MdOutlinePayments size={22} />
-        {/* <span className="text-xs font-thin tracking-tighter">Payments</span> */}
       </NavLink>
+
       {currentRole === 'patient' && (
         <NavLink
           to="/reviews"
           className="relative flex flex-1 flex-col items-center text-grey-800  aria-[current=page]:text-indigo-500 dark:text-gray-400  dark:aria-[current=page]:text-indigo-400"
         >
           <HiOutlineUsers size={22} />
-          {/* <span className="text-xs font-thin tracking-tighter">Reviews</span> */}
         </NavLink>
       )}
 
