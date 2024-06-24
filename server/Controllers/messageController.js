@@ -53,12 +53,17 @@ exports.getMessages = catchAsync(async (req, res, next) => {
       .limit(limit)
       .populate('sender', 'name')
       .populate('recipient', 'name')
-      .sort({ createdAt: 1 }); // Sort messages by creation time in ascending order
+      .sort({ createdAt: -1 }); // Sort messages by creation time in ascending order
 
     const totalMessages = await Message.countDocuments({ chat: chatId });
     const hasMore = skip + limit < totalMessages;
     // res.status(200).json(messages);
-    res.status(200).json({ messages, hasMore, totalMessages });
+    // Reverse the messages array so the latest message appears last
+    const reversedMessages = messages.reverse();
+
+    res
+      .status(200)
+      .json({ messages: reversedMessages, hasMore, totalMessages });
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve messages', error });
   }
