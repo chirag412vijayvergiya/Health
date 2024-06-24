@@ -9,16 +9,17 @@
   "routes": [
     {
       "src": "/socket.io/(.*)",
-      "dest": "/server.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Authorization"
-      }
+      "dest": "/server.js"
     },
     {
       "src": "/(.*)",
       "dest": "/server.js"
     }
-  ]
+  ],
+  "functions": {
+    "server.js": {
+      "memory": 3008,
+      "maxDuration": 60
+    }
+  }
 }
