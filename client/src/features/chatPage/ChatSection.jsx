@@ -9,6 +9,7 @@ import DefaultSpinner from '../../ui/DefaultSpinner';
 import SpinnerMini from '../../ui/SpinnerMini';
 
 const ENDPOINT = `${import.meta.env.VITE_API_BASE_URL}`; // Adjust this as needed
+// const ENDPOINT = 'http://localhost:8000';
 let socket, selectedChatCompare;
 
 function ChatSection({ user, onBack }) {
@@ -28,7 +29,10 @@ function ChatSection({ user, onBack }) {
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT, {
+      transports: ['websocket', 'polling'],
+      withCredentials: true,
+    });
     socket.emit('setup', user.data.data);
     socket.on('connected', () => setSocketConnected(true));
     socket.on('typing', () => setIsTyping(true));
@@ -147,7 +151,7 @@ function ChatSection({ user, onBack }) {
   };
 
   return (
-    <div className="relative m-1 mt-0 flex h-[74vh] flex-col rounded-xl border border-gray-200 bg-gray-300 bg-[url('/Wplight.png')] font-mono dark:border-gray-800 dark:bg-slate-900 dark:bg-[url('/wp.jpg')] sm:w-9/12">
+    <div className="relative mt-0 flex h-[74vh] flex-col rounded-xl border border-gray-200 bg-gray-300 bg-[url('/Wplight.png')] font-mono dark:border-gray-800 dark:bg-slate-900 dark:bg-[url('/wp.jpg')] sm:m-1 sm:w-9/12">
       {selectedChatId ? (
         <>
           <div className="sticky top-0 z-10 flex items-center border-b border-slate-200 py-3 pl-5 dark:border-slate-800">
