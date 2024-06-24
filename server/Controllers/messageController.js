@@ -53,7 +53,7 @@ exports.getMessages = catchAsync(async (req, res, next) => {
       .limit(limit)
       .populate('sender', 'name')
       .populate('recipient', 'name')
-      .sort({ createdAt: -1 }); // Sort messages by creation time in ascending order
+      .sort({ createdAt: 1 }); // Sort messages by creation time in ascending order
 
     const totalMessages = await Message.countDocuments({ chat: chatId });
     const hasMore = skip + limit < totalMessages;
