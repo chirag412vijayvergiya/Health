@@ -8,7 +8,7 @@ import { useChat } from '../../Context/ChatContext';
 import DefaultSpinner from '../../ui/DefaultSpinner';
 import SpinnerMini from '../../ui/SpinnerMini';
 
-const ENDPOINT = `${import.meta.env.VITE_API_BASE_URL}`; // Adjust this as needed
+const ENDPOINT = `${import.meta.env.VITE_BACKEND_API_BASE_URL}`; // Adjust this as needed
 // const ENDPOINT = 'http://localhost:8000';
 let socket, selectedChatCompare;
 
