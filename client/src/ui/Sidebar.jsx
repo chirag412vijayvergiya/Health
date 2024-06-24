@@ -19,7 +19,7 @@ function Sidebar() {
   } = useUser();
   return (
     <div className="sticky m-[2vh] hidden min-h-[86vh] flex-col rounded-xl border-r border-r-grey-200 bg-gray-200 dark:border-r-grey-800 dark:bg-slate-800 lg:flex">
-      <div className="mb-20 mt-6 space-y-6 border-b border-b-grey-100 pb-8 dark:border-b-grey-800">
+      <div className="mb-20 mt-6 space-y-6 border-b border-b-grey-100 pb-1 dark:border-b-grey-800">
         <h1 className="ml-[2vw] font-semibold uppercase text-grey-500">
           medicine
         </h1>
@@ -95,10 +95,10 @@ function Sidebar() {
           )}
         </div>
       </div>
-      <div className="mt-19 ml-[4vw] flex max-w-max flex-col space-y-5 pr-8 pt-5">
+      <div className="ml-[2vw] flex max-w-max flex-col pr-8 pt-2 ">
         <NavLink
           to="/settings"
-          className="rounded-md p-1 px-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
+          className="rounded-md p-1 pl-3 text-grey-600  hover:text-indigo-600 aria-[current=page]:bg-gray-300 aria-[current=page]:text-indigo-800 dark:text-gray-400 dark:hover:text-indigo-400 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-indigo-400"
         >
           <Button type="sidebar">
             <HiOutlineCog6Tooth />
