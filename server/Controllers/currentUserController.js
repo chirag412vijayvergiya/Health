@@ -29,7 +29,7 @@ const cloudinaryStorage = new CloudinaryStorage({
 // ******************************************************************************* //
 
 const multerFilter = (req, file, cb) => {
-  // console.log(file.mimetype);
+  console.log(file.mimetype);
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
@@ -67,7 +67,7 @@ const updateMe = catchAsync(async (req, res, model, next) => {
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filteredObj(req.body, 'name', 'gender');
-  // console.log(req.file);
+  console.log(req.file);
   if (req.file) filteredBody.photo = req.file.path;
   const updatedUser = await model.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,

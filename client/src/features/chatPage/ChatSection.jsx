@@ -2,11 +2,11 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { io } from 'socket.io-client';
 import customFetch from '../../utils/customFetch';
 import { IoIosSend } from 'react-icons/io';
-import { TiAttachment } from 'react-icons/ti';
 import ScrollableChat from './ScrollableChat';
 import { useChat } from '../../Context/ChatContext';
-import DefaultSpinner from '../../ui/DefaultSpinner';
 import SpinnerMini from '../../ui/SpinnerMini';
+
+import Attachments from './Attachments';
 
 const ENDPOINT = `${import.meta.env.VITE_BACKEND_API_BASE_URL}`; // Adjust this as needed
 // const ENDPOINT = 'http://localhost:8000';
@@ -119,6 +119,18 @@ function ChatSection({ user, onBack }) {
     }
   };
 
+  // const setFile = (e) => {
+  //   const file = e.target.files[0];
+  //   console.log(file);
+  //   setAvatar(file);
+  // };
+
+  // const handleFileSelect = (files, type) => {
+  //   for (let i = 0; i < files.length; i++) {
+  //     sendFileMessage(files[i], type);
+  //   }
+  // };
+
   let lastTypingTime;
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
@@ -189,9 +201,16 @@ function ChatSection({ user, onBack }) {
           </div>
           <div className="sticky bottom-0 flex w-full items-center p-2">
             <div className="mr-2 flex flex-grow items-center rounded-3xl border border-gray-400 p-2 pl-2 dark:border-gray-600 dark:bg-slate-700 dark:text-white">
-              <button className="rounded-full p-[1px] hover:bg-slate-800">
+              {/* <button className="rounded-full p-[1px] hover:bg-slate-800">
                 <TiAttachment className="h-[1.4rem] w-[1.4rem]" />
-              </button>
+              </button> */}
+              <Attachments
+                Role={Role}
+                selectedChatId={selectedChatId}
+                receiverId={receiverId}
+                setMessages={setMessages}
+                Socket={socket}
+              />
               <input
                 type="text"
                 className="flex-grow bg-transparent px-4 outline-none"

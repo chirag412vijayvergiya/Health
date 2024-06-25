@@ -29,13 +29,11 @@ const messageSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      required: true,
+      // required: true,
     },
-    attachments: [
-      {
-        type: String,
-      },
-    ],
+    attachments: {
+      type: String,
+    },
   },
   {
     timestamps: true,

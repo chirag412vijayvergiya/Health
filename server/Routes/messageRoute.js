@@ -1,6 +1,7 @@
 const express = require('express');
 const messageController = require('../Controllers/messageController');
 const authController = require('../Controllers/authController');
+const currentUserController = require('../Controllers/currentUserController');
 
 const router = express.Router();
 
@@ -27,4 +28,19 @@ router.get(
   authController.protectdoctor,
   messageController.getMessages,
 );
+
+router.post(
+  '/send-file-patient',
+  authController.protectpatient,
+  messageController.uploadChatImages,
+  messageController.createMessageFiles,
+);
+
+router.post(
+  '/send-file-doctor',
+  authController.protectdoctor,
+  messageController.uploadChatImages,
+  messageController.createMessageFiles,
+);
+
 module.exports = router;

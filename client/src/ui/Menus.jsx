@@ -44,7 +44,7 @@ function Toggle({ id, icon: Icon, className }) {
   }
   return (
     <button onClick={handleClick} className={className}>
-      <Icon />
+      <Icon className="h-[1.4rem] w-[1.4rem]" />
     </button>
   );
 }
@@ -89,8 +89,44 @@ function Button({ children, icon, onClick }) {
   );
 }
 
+function Input({ children, icon, type, accept, onChange }) {
+  const { close } = useContext(MenusContext);
+
+  function handleClick(event) {
+    onChange?.(event);
+    close();
+  }
+
+  return (
+    <li>
+      <div
+        className="flex w-full items-center gap-[1rem] border-none bg-none p-[0.6rem_1.2rem] text-left text-sm tracking-widest transition-all hover:bg-grey-300 hover:text-indigo-600 dark:hover:bg-slate-900 dark:hover:text-indigo-100"
+        style={{ position: 'relative', cursor: 'pointer' }}
+      >
+        <input
+          type={type}
+          accept={accept}
+          onChange={handleClick}
+          // style={{
+          //   position: 'absolute',
+          //   opacity: 0,
+          //   width: '100%',
+          //   height: '100%',
+          //   top: 0,
+          //   left: 0,
+          //   cursor: 'pointer',
+          // }}
+        />
+        {icon && <span>{icon}</span>}
+        <span>{children}</span>
+      </div>
+    </li>
+  );
+}
+
 Menus.Toggle = Toggle;
 Menus.List = List;
 Menus.Button = Button;
+Menus.Input = Input;
 
 export default Menus;
