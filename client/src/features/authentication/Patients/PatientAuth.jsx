@@ -17,7 +17,7 @@ function PatientAuth() {
     //   '_self',
     // );
     window.open(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/patient/auth/google`,
+      `${import.meta.env.VITE_BACKEND_API_BASE_URL}/api/v1/patient/auth/google`,
       '_self',
     );
   };

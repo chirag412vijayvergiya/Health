@@ -49,7 +49,7 @@ const passport = require('passport');
 const OAuth2Strategy = require('passport-google-oauth2').Strategy;
 const Patient = require('../models/patientModel');
 const Doctor = require('../models/doctorModel');
-const { signToken } = require('../utils/jwt');
+const { signToken } = require('./jwt');
 
 // Patient Google OAuth2 Strategy
 passport.use(
