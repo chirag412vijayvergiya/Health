@@ -6,11 +6,13 @@ This is an Online Hospital Management System, where we have two types of users: 
 ## Features
 
 <br>
-- Appointment booking
-- Appointments Related things for patients
-- User profile updates
-- Create, update, get, and delete reviews
-- Real-time chat between patients and doctors
+
+- **Appointment booking**
+- **Appointments Related things for patients**
+- **User profile updates**
+- **Create, update, get, and delete reviews**
+- **Real-time chat between patients and doctors**
+
 <br>
 
 ## Built Using Modern Technologies
@@ -20,6 +22,7 @@ This is an Online Hospital Management System, where we have two types of users: 
 ### Backend
 
 <br>
+
 - **Node.js**
 - **Express**
 - **MongoDB**
