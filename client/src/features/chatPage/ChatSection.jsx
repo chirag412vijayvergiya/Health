@@ -253,8 +253,8 @@ import { useGetMessages } from './useGetMessages';
 import { useSendMessage } from './useSendMessage';
 import { useSendFileMessage } from './useSendFileMessages';
 
-// const ENDPOINT = `${import.meta.env.VITE_BACKEND_API_BASE_URL}`; // Adjust this as needed
-const ENDPOINT = 'http://localhost:8000';
+const ENDPOINT = `${import.meta.env.VITE_BACKEND_API_BASE_URL}`; // Adjust this as needed
+// const ENDPOINT = 'http://localhost:8000';
 let socket, selectedChatCompare;
 
 function ChatSection({ user, onBack }) {
