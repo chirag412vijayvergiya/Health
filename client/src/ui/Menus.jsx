@@ -24,7 +24,7 @@ function Menus({ children }) {
   );
 }
 
-function Toggle({ id, icon: Icon, className }) {
+function Toggle({ id, icon: Icon, className, disabled }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
   // console.log('openId :- ', openId);
   function handleClick(e) {
@@ -43,8 +43,8 @@ function Toggle({ id, icon: Icon, className }) {
     // }
   }
   return (
-    <button onClick={handleClick} className={className}>
-      <Icon className="h-[1.4rem] w-[1.4rem]" />
+    <button onClick={handleClick} className={className} disabled={disabled}>
+      <Icon className="h-[1.4rem] w-[1.4rem] disabled:cursor-not-allowed" />
     </button>
   );
 }
@@ -89,7 +89,7 @@ function Button({ children, icon, onClick }) {
   );
 }
 
-function Input({ children, icon, type, accept, onChange }) {
+function Input({ children, icon, type, accept, onChange, disabled }) {
   const { close } = useContext(MenusContext);
 
   function handleClick(event) {
@@ -107,15 +107,16 @@ function Input({ children, icon, type, accept, onChange }) {
           type={type}
           accept={accept}
           onChange={handleClick}
-          // style={{
-          //   position: 'absolute',
-          //   opacity: 0,
-          //   width: '100%',
-          //   height: '100%',
-          //   top: 0,
-          //   left: 0,
-          //   cursor: 'pointer',
-          // }}
+          disabled={disabled}
+          style={{
+            position: 'absolute',
+            opacity: 0,
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            cursor: 'pointer',
+          }}
         />
         {icon && <span>{icon}</span>}
         <span>{children}</span>

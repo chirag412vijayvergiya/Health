@@ -30,7 +30,7 @@ const createSendToken = (model, statusCode, res) => {
 
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Set secure attribute based on environment
-    sameSite: 'None', // Set sameSite attribute
+    // sameSite: 'None', // Set sameSite attribute
     // domain: 'ocalhost', // Set domain to localhost
     // domain: 'jeevan-frontend.vercel.app',
   };

@@ -71,13 +71,13 @@ const ScrollableChat = ({ messages }) => {
                     <Page pageNumber={1} width={160} />
                   </Document>
                 </a>
-                <a
+                {/* <a
                   href={m.attachments}
                   download
                   className="absolute bottom-0 right-0 m-2 text-xs text-blue-100 underline"
                 >
                   Download PDF
-                </a>
+                </a> */}
               </div>
             ) : (
               <div className="relative">

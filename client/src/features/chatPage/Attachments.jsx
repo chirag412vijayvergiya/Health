@@ -4,7 +4,7 @@ import { FaFileArrowUp, FaImages, FaVideo } from 'react-icons/fa6';
 // import { MdAudiotrack } from 'react-icons/md';
 import { TiAttachment } from 'react-icons/ti';
 import { useState } from 'react';
-import customFetch from '../../utils/customFetch';
+import { useSendFileMessage } from './useSendFileMessages';
 
 function Attachments({
   Role,
@@ -12,34 +12,33 @@ function Attachments({
   receiverId,
   setMessages,
   Socket,
+  isSending1,
 }) {
   const [file, setFile] = useState(null);
+  const { isSending, sendFile } = useSendFileMessage();
   const sendFileMessage = async (selectedFile) => {
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-      formData.append('chatId', selectedChatId._id);
-      formData.append('recipientId', receiverId._id);
-      formData.append('recipientRole', receiverId.role);
-
-      for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
-
-      try {
-        const { data } = await customFetch.post(
-          `/messages/send-file-${Role}`,
-          formData,
-        );
-        console.log('/messages/send-file :- ', data);
-        Socket.emit('new message', data);
-        setMessages((prevMessages) => [...prevMessages, data]);
-      } catch (err) {
-        console.error('Error sending file:', err);
-      } finally {
-        setFile(null); // Reset file state after sending
-      }
-    }
+    sendFile(
+      {
+        Role,
+        file: selectedFile,
+        chatId: selectedChatId._id,
+        recipientId: receiverId._id,
+        recipientRole: receiverId.role,
+      },
+      {
+        onSuccess: (data) => {
+          console.log('/messages/send-file :- ', data);
+          Socket.emit('new message', data);
+          setMessages((prevMessages) => [...prevMessages, data]);
+        },
+        onError: (err) => {
+          console.error('Error sending file:', err);
+        },
+        onSettled: () => {
+          setFile(null); // Reset file state after sending
+        },
+      },
+    );
   };
 
   const handleFileChange = (event) => {
@@ -47,7 +46,6 @@ function Attachments({
     if (selectedFile) {
       setFile(selectedFile);
       sendFileMessage(selectedFile);
-      // Reset the input value to ensure the same file can be selected again
       event.target.value = null;
     }
   };
@@ -57,6 +55,7 @@ function Attachments({
         <Menus.Toggle
           icon={TiAttachment}
           className="rounded-full p-[1px] hover:bg-slate-200 dark:hover:bg-slate-800"
+          disabled={isSending || isSending1}
         />
 
         <Menus.List positionX={100} positionY={-123}>
@@ -65,6 +64,7 @@ function Attachments({
             type="file"
             accept="image/*"
             onChange={handleFileChange}
+            disabled={isSending || isSending1}
           >
             Images
           </Menus.Input>
@@ -73,25 +73,10 @@ function Attachments({
             type="file"
             accept="application/pdf"
             onChange={handleFileChange}
+            disabled={isSending || isSending1}
           >
             File
           </Menus.Input>
-          {/* <Menus.Input
-            icon={<MdAudiotrack />}
-            type="file"
-            accept="audio/mpeg, audio/wav"
-            onChange={(e) => console.log('Audio')}
-          >
-            Audio
-          </Menus.Input> */}
-          {/* <Menus.Input
-            icon={<FaVideo />}
-            type="file"
-            accept="video/mp4, video/webm, video/ogg"
-            onChange={() => console.log('Files')}
-          >
-            Video
-          </Menus.Input> */}
         </Menus.List>
       </Menus>
     </Modal>
